@@ -10,6 +10,7 @@ public class GUI extends JPanel implements ActionListener {
 	JLabel blank1 = new JLabel("");
 	JLabel blank2 = new JLabel("");
 	JLabel blank3 = new JLabel("");
+	User user = new User();
 
 		public GUI() {
 			JFrame frame = new JFrame("GVSU Maps");
@@ -34,7 +35,6 @@ public class GUI extends JPanel implements ActionListener {
 		public static void main(String[] args) {
 			GUI gui = new GUI();
 			gui.setVisible(true);
-			
 			
 		}
 		/************************************************************
@@ -98,7 +98,8 @@ public class GUI extends JPanel implements ActionListener {
 					String c1 = Class1.getText();
 					String c2 = Class2.getText();
 					if (c1.length() > 0){
-						//update class 1
+						Location first = new Location(c1, 1, 1);
+						user.setClass1(first);
 					}
 					if (c2.length() > 0){
 						//update class 2

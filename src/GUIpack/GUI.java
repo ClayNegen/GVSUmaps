@@ -2,6 +2,7 @@ package GUIpack;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.text.*;
 public class GUI extends JPanel implements ActionListener {
 	JButton one = new JButton("Classes");
 	JButton two = new JButton("Bus Stops");
@@ -33,6 +34,7 @@ public class GUI extends JPanel implements ActionListener {
 		public static void main(String[] args) {
 			GUI gui = new GUI();
 			gui.setVisible(true);
+			
 			
 		}
 		/************************************************************
@@ -102,6 +104,12 @@ public class GUI extends JPanel implements ActionListener {
 						//update class 2
 					}
 					System.exit(0);
+					//This closes everything. Idk how to make it only close
+					//the information window. I think you have to use 
+					//what i wrote above: info.setVisible(false)
+					//but i can't call info from this class
+					
+					//GUI.info.setVisible(false);
 				}
 			}
 		}

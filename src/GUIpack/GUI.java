@@ -102,7 +102,8 @@ public class GUI extends JPanel implements ActionListener {
 						user.setClass1(first);
 					}
 					if (c2.length() > 0){
-						//update class 2
+						Location second = new Location(c2, 1, 1);
+						user.setClass1(second);
 					}
 					System.exit(0);
 					//This closes everything. Idk how to make it only close

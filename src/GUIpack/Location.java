@@ -40,5 +40,4 @@ public class Location {
 	public void setLatitude(int latitude) {
 		this.latitude = latitude;
 	}
-
 }

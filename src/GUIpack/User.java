@@ -84,4 +84,5 @@ public class User {
 	public void setClass6(Location class6) {
 		this.class6 = class6;
 	}
+	//
 }

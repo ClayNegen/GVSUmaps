@@ -95,8 +95,8 @@ public class GUI extends JPanel implements ActionListener {
 				Object source = e.getSource();
 				
 				if (source == submit){
-					String c1 = Class1.getText();
-					String c2 = Class2.getText();
+					String c1 = Class01.getText();
+					String c2 = Class02.getText();
 					if (c1.length() > 0){
 						Location first = new Location(c1, 1, 1);
 						user.setClass1(first);

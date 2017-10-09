@@ -12,10 +12,10 @@ public class GVSUMap {
 		this.edgeList = edgeList;
 	}
 	
-	public ArrayList<Edge> shortestPath(MapNode pos1, MapNode pos2){
-		ArrayList<Edge> solution;
+	//public ArrayList<Edge> shortestPath(MapNode pos1, MapNode pos2){
+	//	ArrayList<Edge> solution;
 		
 		
-		return solution;
-	}
+		//return solution;
+//	}
 }

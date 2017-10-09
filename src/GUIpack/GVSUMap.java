@@ -19,6 +19,7 @@ public class GVSUMap {
 		this.edgeList = edgeList;
 	}
 	
+<<<<<<< HEAD
 	public List<MapNode> getNodeList(){
 		return nodeList;
 	}
@@ -26,4 +27,12 @@ public class GVSUMap {
 	public List<Edge> getEdgeList(){
 		return edgeList;
 	}
+=======
+	//public ArrayList<Edge> shortestPath(MapNode pos1, MapNode pos2){
+	//	ArrayList<Edge> solution;
+		
+		
+		//return solution;
+//	}
+>>>>>>> branch 'master' of https://github.com/ClayNegen/GVSUmaps.git
 }

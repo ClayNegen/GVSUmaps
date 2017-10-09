@@ -1,5 +1,5 @@
 package GUIpack;
-//Louis Sullivan Gui
+//Louis Sullivan Gui 2
 
 import java.awt.EventQueue;
 

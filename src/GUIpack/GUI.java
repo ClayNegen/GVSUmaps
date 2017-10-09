@@ -3,6 +3,11 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.text.*;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 public class GUI extends JPanel implements ActionListener {
 	JButton one = new JButton("Classes");
 	JButton two = new JButton("Bus Stops");
@@ -11,6 +16,10 @@ public class GUI extends JPanel implements ActionListener {
 	JLabel blank2 = new JLabel("");
 	JLabel blank3 = new JLabel("");
 	User user = new User();
+	
+	//Test Variables for testing djikstras algorithim before coding and 
+	//loading the graph
+
 
 		public GUI() {
 			JFrame frame = new JFrame("GVSU Maps");
@@ -36,6 +45,11 @@ public class GUI extends JPanel implements ActionListener {
 			GUI gui = new GUI();
 			gui.setVisible(true);
 			
+			//Some preliminary code to test the algorithim
+			//ignore for now
+			//List<MapNode> nodes = new ArrayList<MapNode>();
+			//List<Edge> edges = new ArrayList<Edge>();
+			//GVSUMap testMap = new GVSUMap(nodes, edges);
 		}
 		/************************************************************
 		Action performed Method

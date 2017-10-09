@@ -1,45 +1,39 @@
 package GUIpack;
 
 public class Edge {
-	double edgeWeight;
-	int pos1;
-	int pos2;
+	private final String id;
+	private final int edgeWeight;
+	private final MapNode source;
+	private final MapNode destination;
 	
 	
-	public Edge(int pos1, int pos2, double edgeWeight){
-		this.pos1 = pos1;
-		this.pos2 = pos2;
+	public Edge(MapNode source, MapNode destination, int edgeWeight){
+		this.source = source;
+		this.destination = destination;
 		this.edgeWeight = edgeWeight;
+		id = null;
+	}
+	
+	public Edge(MapNode source, MapNode destination, int edgeWeight, String id){
+		this.source = source;
+		this.destination = destination;
+		this.edgeWeight = edgeWeight;
+		this.id  = id;
 	}
 
-
-	public double getEdgeWeight() {
+	public String getId(){
+		return id;
+	}
+	
+	public int getEdgeWeight() {
 		return edgeWeight;
 	}
 
+	public MapNode getDestination() {
+        return destination;
+    }
 
-	public void setEdgeWeight(double edgeWeight) {
-		this.edgeWeight = edgeWeight;
-	}
-
-
-	public int getPos1() {
-		return pos1;
-	}
-
-
-	public void setPos1(int pos1) {
-		this.pos1 = pos1;
-	}
-
-
-	public int getPos2() {
-		return pos2;
-	}
-
-
-	public void setPos2(int pos2) {
-		this.pos2 = pos2;
-	}
-	
+    public MapNode getSource() {
+        return source;
+    }
 }

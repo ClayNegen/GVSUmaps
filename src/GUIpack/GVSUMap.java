@@ -10,8 +10,8 @@ import java.util.Map;
 import java.util.Set;
 
 public class GVSUMap {
-	private final List<MapNode> nodeList;
-	private final List<Edge> edgeList;
+	private  List<MapNode> nodeList;
+	private  List<Edge> edgeList;
 	
 	
 	public GVSUMap(List<MapNode> nodeList, List<Edge> edgeList){
@@ -19,7 +19,11 @@ public class GVSUMap {
 		this.edgeList = edgeList;
 	}
 	
-<<<<<<< HEAD
+	public GVSUMap(List<MapNode> nodeList){
+		this.nodeList = nodeList;
+		edgeList = new ArrayList<Edge>();
+	}
+
 	public List<MapNode> getNodeList(){
 		return nodeList;
 	}
@@ -27,12 +31,29 @@ public class GVSUMap {
 	public List<Edge> getEdgeList(){
 		return edgeList;
 	}
-=======
-	//public ArrayList<Edge> shortestPath(MapNode pos1, MapNode pos2){
-	//	ArrayList<Edge> solution;
+	
+	public void addLane(String sourceLocId, String destLocId) {
+        MapNode sourceNode = null;
+        MapNode destinationNode = null;
+		for(MapNode node: nodeList){
+        	if (node.getNodeId().equals(sourceLocId)){
+        		sourceNode = node;
+        	}
+        }
 		
-		
-		//return solution;
-//	}
->>>>>>> branch 'master' of https://github.com/ClayNegen/GVSUmaps.git
+		for(MapNode node: nodeList){
+        	if (node.getNodeId().equals(destLocId)){
+        		destinationNode = node;
+        	}
+        }
+
+		if(sourceNode != null && destinationNode != null){
+			Edge lane = new Edge(sourceNode, destinationNode);
+			edgeList.add(lane);
+			lane = new Edge(destinationNode, sourceNode);
+			edgeList.add(lane);
+			return;
+		}
+		throw new NullPointerException();
+    }
 }

@@ -16,7 +16,7 @@ public class DijkstraAlgorithm {
     private Set<MapNode> settledNodes;
     private Set<MapNode> unSettledNodes;
     private Map<MapNode, MapNode> predecessors;
-    private Map<MapNode, Integer> distance;
+    private Map<MapNode, Double> distance;
 
     public DijkstraAlgorithm(GVSUMap graph) {
         // create a copy of the array so that we can operate on this array
@@ -27,9 +27,9 @@ public class DijkstraAlgorithm {
     public void execute(MapNode source) {
         settledNodes = new HashSet<MapNode>();
         unSettledNodes = new HashSet<MapNode>();
-        distance = new HashMap<MapNode, Integer>();
+        distance = new HashMap<MapNode, Double>();
         predecessors = new HashMap<MapNode, MapNode>();
-        distance.put(source, 0);
+        distance.put(source, 0.0);
         unSettledNodes.add(source);
         while (unSettledNodes.size() > 0) {
             MapNode node = getMinimum(unSettledNodes);
@@ -53,7 +53,7 @@ public class DijkstraAlgorithm {
 
     }
 
-    private int getDistance(MapNode node, MapNode target) {
+    private double getDistance(MapNode node, MapNode target) {
         for (Edge edge : edges) {
             if (edge.getSource().equals(node)
                     && edge.getDestination().equals(target)) {
@@ -92,11 +92,12 @@ public class DijkstraAlgorithm {
         return settledNodes.contains(MapNode);
     }
 
-    private int getShortestDistance(MapNode destination) {
-        Integer d = distance.get(destination);
+    private double getShortestDistance(MapNode destination) {
+        Double d = distance.get(destination);
         if (d == null) {
             return Integer.MAX_VALUE;
-        } else {
+        } 
+        else {
             return d;
         }
     }

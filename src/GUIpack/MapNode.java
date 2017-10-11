@@ -9,29 +9,21 @@ import java.util.LinkedList;
 
 
 public class MapNode {
-	private String locationName;
 	private int x;
 	private int y;
+	private final String nodeId;
 	
 	
 	
 	
-	public MapNode(int x, int y, String locationName){
-		this.x = x;
-		this.y = y;
-		this.locationName = locationName;
-	}
 	public MapNode(int x, int y){
 		this.x = x;
 		this.y = y;
+		nodeId = Integer.toString(x) + Integer.toString(y);
 	}
 	
-	public String getLocationName() {
-		return locationName;
-	}
-
-	public void setLocationName(String locationName) {
-		this.locationName = locationName;
+	public String getNodeId(){
+		return nodeId;
 	}
 
 	public int getX() {
@@ -57,7 +49,7 @@ public class MapNode {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((locationName == null) ? 0 : locationName.hashCode());
+        result = prime * result + ((nodeId == null) ? 0 : nodeId.hashCode());
         return result;
     }
 
@@ -70,17 +62,17 @@ public class MapNode {
         if (getClass() != obj.getClass())
             return false;
         MapNode other = (MapNode) obj;
-        if (locationName == null) {
-            if (other.locationName != null)
+        if (nodeId == null) {
+            if (other.nodeId != null)
                 return false;
-        } else if (!locationName.equals(other.locationName))
+        } else if (!nodeId.equals(other.nodeId))
             return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return locationName;
+        return nodeId;
     }
 
 }

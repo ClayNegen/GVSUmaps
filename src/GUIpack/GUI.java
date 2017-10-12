@@ -1,8 +1,14 @@
 package GUIpack;
 import java.awt.*;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.text.*;
+
 public class GUI extends JPanel implements ActionListener {
 	JButton one = new JButton("Classes");
 	JButton two = new JButton("Bus Stops");
@@ -11,28 +17,52 @@ public class GUI extends JPanel implements ActionListener {
 	JLabel blank2 = new JLabel("");
 	JLabel blank3 = new JLabel("");
 	User user = new User();
-
-		public GUI() {
-			JFrame frame = new JFrame("GVSU Maps");
-			frame.setVisible(true);
+	
+	public static String IMG_PATH = "src/gvsuMaps.jpg";
+	public static String IMG_PATH1 = "src/GVmaps.png";
+	
+		public GUI() throws IOException {
+			BufferedImage img = ImageIO.read(new File(IMG_PATH));
+	        ImageIcon icon = new ImageIcon(img);
+	        BufferedImage logo = ImageIO.read(new File(IMG_PATH1));
+	        ImageIcon logoIcon = new ImageIcon(logo);
+			
+	        JFrame frame = new JFrame("GVSU Maps");
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.setSize(300, 400);
+			frame.setSize(680, 600);
+			frame.setVisible(true);
+			
 			JPanel panel = new JPanel();
-			panel.setLayout(new GridLayout(3, 2, 5, 10));
-			panel.add(blank1);
-			panel.add(one);
-			panel.add(blank2);
-			panel.add(two);
-			panel.add(blank3);
-			panel.add(three);
-			frame.add(panel);
+			panel.setLayout(new BorderLayout());
+			panel.setOpaque(true);
+			panel.setBackground(Color.blue);
+			
+			JPanel items = new JPanel();
+			items.setLayout(new GridLayout(4, 1, 5, 5));
+			items.setOpaque(true);
+			items.setBackground(Color.blue);
+			JTextPane logoPicture = new JTextPane();
+			logoPicture.insertIcon ( new ImageIcon ( getScaledImage(logo, 245, 126) ) );
+			items.add(logoPicture);
+			items.add(one);
+			items.add(two);
+			items.add(three);
+			panel.add(items, BorderLayout.EAST);
+			
+			JTextPane txtpnPicture = new JTextPane();
+			txtpnPicture.insertIcon ( new ImageIcon ( IMG_PATH ) );
+			panel.add(txtpnPicture, BorderLayout.WEST);
+			
 			three.addActionListener(this);
+			frame.add(panel);
 		}
+
 		/************************************************************
 		Main Method
 		initializes and runs GUI
+		 * @throws IOException 
 		************************************************************/
-		public static void main(String[] args) {
+		public static void main(String[] args) throws IOException {
 			GUI gui = new GUI();
 			gui.setVisible(true);
 			
@@ -44,6 +74,7 @@ public class GUI extends JPanel implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			Object source = e.getSource();
 			Info info = new Info();
+			info.setVisible(false);
 			
 			if (source == three){
 				info.setVisible(true);
@@ -75,7 +106,7 @@ public class GUI extends JPanel implements ActionListener {
 			public Info(){
 				JFrame frame = new JFrame("Your Information");
 				frame.setVisible(true);
-				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				frame.setSize(300, 400);
 				JPanel panel = new JPanel();
 				panel.setLayout(new GridLayout(4, 2, 5, 10));
@@ -105,14 +136,17 @@ public class GUI extends JPanel implements ActionListener {
 						Location second = new Location(c2, 1, 1);
 						user.setClass1(second);
 					}
-					System.exit(0);
-					//This closes everything. Idk how to make it only close
-					//the information window. I think you have to use 
-					//what i wrote above: info.setVisible(false)
-					//but i can't call info from this class
-					
-					//GUI.info.setVisible(false);
 				}
 			}
+		}
+		Image getScaledImage(Image Img, int wt, int ht) {
+		    BufferedImage resizedImg = new BufferedImage(wt, ht, BufferedImage.TYPE_INT_ARGB);
+		    Graphics2D g2 = resizedImg.createGraphics();
+
+		    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+		    g2.drawImage(Img, 0, 0, wt, ht, null);
+		    g2.dispose();
+
+		    return resizedImg;
 		}
 		}

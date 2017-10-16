@@ -71,8 +71,8 @@ public class GUI extends JPanel implements ActionListener {
 			testMap.addLane("11", "10");
 			testMap.addLane("04", "12");
 			
-			//testMap.addLane("00", "01");
-			//testMap.addLane("01", "11");
+			testMap.addLane("00", "01");
+			testMap.addLane("01", "11");
 			
 			DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(testMap);
 	        dijkstra.execute(nodes.get(0));

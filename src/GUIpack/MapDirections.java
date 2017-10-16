@@ -2,6 +2,7 @@ package GUIpack;
 //Louis Sullivan Gui 2
 
 import java.awt.EventQueue;
+import java.awt.*;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
@@ -9,6 +10,7 @@ import javax.swing.JList;
 import java.awt.FlowLayout;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.awt.Component;
 
 import javax.imageio.ImageIO;
@@ -24,7 +26,7 @@ import javax.swing.JTextPane;
 public class MapDirections {
 
 	private JFrame frame;
-	public static String IMG_PATH = "src/pictures/GVSU.jpg";
+	public static String IMG_PATH = "src/gvsuMaps.jpg";
 
 	/**
 	 * Launch the application.
@@ -44,8 +46,9 @@ public class MapDirections {
 
 	/**
 	 * Create the application.
+	 * @throws IOException 
 	 */
-	public MapDirections() {
+	public MapDirections() throws IOException {
 		
 		initialize();
 		//Build google map 
@@ -60,18 +63,19 @@ public class MapDirections {
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws IOException 
 	 */
-	private void initialize() {
+	private void initialize() throws IOException {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(150, 150, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JList list = new JList();
 		
 		DefaultListModel listModel = new DefaultListModel();
 		
-		// BufferedImage img = ImageIO.read(new File(IMG_PATH));
-        // ImageIcon icon = new ImageIcon(img);
+		BufferedImage img = ImageIO.read(new File(IMG_PATH));
+        ImageIcon icon = new ImageIcon(img);
 		
 		//while (resultSet.next()) {
 		String Defualt = ("Default");

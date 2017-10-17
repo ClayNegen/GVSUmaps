@@ -12,6 +12,7 @@ public class MapNode {
 	private int x;
 	private int y;
 	private final String nodeId;
+	private String nodeInfo;
 	
 	
 	
@@ -19,9 +20,20 @@ public class MapNode {
 	public MapNode(int x, int y){
 		this.x = x;
 		this.y = y;
-		nodeId = Integer.toString(x) + Integer.toString(y);
+		nodeId = Integer.toString(x) + "," + Integer.toString(y);
+		nodeInfo = null;
 	}
 	
+	public MapNode(int x, int y, String nodeInfo){
+		this.x = x;
+		this.y = y;
+		nodeId = Integer.toString(x) + "," + Integer.toString(y);
+		this.nodeInfo = nodeInfo;
+	}
+	
+	public String getNodeInfo(){
+		return nodeInfo;
+	}
 	public String getNodeId(){
 		return nodeId;
 	}

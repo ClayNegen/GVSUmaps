@@ -4,15 +4,17 @@ public class Location {
 	String name;
 	int longitude;
 	int latitude;
+	MapNode node;
 	
 	public Location(){
 		String name;
+		MapNode node;
 		int longitude;
 		int latitude;
 	}
 	
-	public Location (String name, int longitude, int latitude){
-		this.name = name;
+	public Location (MapNode node, int longitude, int latitude){
+		this.node = node;
 		this.longitude = longitude;
 		this.latitude = latitude;
 	}

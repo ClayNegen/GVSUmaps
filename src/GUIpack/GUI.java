@@ -34,7 +34,7 @@ public class GUI extends JPanel implements ActionListener {
 			
 	        JFrame frame = new JFrame("GVSU Maps");
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.setSize(680, 600);
+			frame.setSize(688, 600);
 			frame.setVisible(true);
 			
 			JPanel panel = new JPanel();
@@ -52,6 +52,9 @@ public class GUI extends JPanel implements ActionListener {
 			items.add(one);
 			items.add(two);
 			items.add(three);
+			one.setFont(new Font("Sans Serrif", Font.BOLD, 25));
+			two.setFont(new Font("Sans Serrif", Font.BOLD, 25));
+			three.setFont(new Font("Sans Serrif", Font.BOLD, 25));
 			panel.add(items, BorderLayout.EAST);
 			
 			JTextPane txtpnPicture = new JTextPane();
@@ -121,17 +124,6 @@ public class GUI extends JPanel implements ActionListener {
 			if (source == three){
 				info.setVisible(true);
 			}
-			/*if (source == Info.submit){
-				String c1 = Info.Class1.getText();
-				String c2 = Info.Class2.getText();
-				if (c1.length() > 0){
-					//update class 1
-				}
-				if (c2.length() > 0){
-					//update class 2
-				}
-				info.setVisible(false);
-			} */
 		} 
 		
 		public class Info extends JPanel implements ActionListener{
@@ -141,8 +133,14 @@ public class GUI extends JPanel implements ActionListener {
 			JTextArea Class02 = new JTextArea("");
 			JLabel Class3 = new JLabel("Class Three:");
 			JTextArea Class03 = new JTextArea("");
+			JLabel Class4 = new JLabel("Class Four:");
+			JTextArea Class04 = new JTextArea("");
+			JLabel Class5 = new JLabel("Class Five:");
+			JTextArea Class05 = new JTextArea("");
+			JLabel Class6 = new JLabel("Class Six:");
+			JTextArea Class06 = new JTextArea("");
 			JButton submit = new JButton("Submit");
-			JLabel blank1 = new JLabel();
+			JLabel blank1 = new JLabel("Please Enter 3 Letter" + "\n Building abbreviation");
 			
 			
 			public Info(){
@@ -151,13 +149,19 @@ public class GUI extends JPanel implements ActionListener {
 				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				frame.setSize(300, 400);
 				JPanel panel = new JPanel();
-				panel.setLayout(new GridLayout(4, 2, 5, 10));
+				panel.setLayout(new GridLayout(7, 2, 5, 10));
 				panel.add(Class1);
 				panel.add(Class01);
 				panel.add(Class2);
 				panel.add(Class02);
 				panel.add(Class3);
 				panel.add(Class03);
+				panel.add(Class4);
+				panel.add(Class04);
+				panel.add(Class5);
+				panel.add(Class05);
+				panel.add(Class6);
+				panel.add(Class06);
 				panel.add(submit);
 				panel.add(blank1);
 				frame.add(panel);
@@ -170,12 +174,16 @@ public class GUI extends JPanel implements ActionListener {
 				if (source == submit){
 					String c1 = Class01.getText();
 					String c2 = Class02.getText();
+					MapNode location = new MapNode(0, 1);
+					MapNode location2 = new MapNode(1, 2);
+					MapNode location3 = new MapNode(2, 3);
+					
 					if (c1.length() > 0){
-						Location first = new Location(c1, 1, 1);
+						Location first = new Location(location, location.getX(), location.getY());
 						user.setClass1(first);
 					}
 					if (c2.length() > 0){
-						Location second = new Location(c2, 1, 1);
+						Location second = new Location(location2, location2.getX(), location2.getY());
 						user.setClass1(second);
 					}
 				}

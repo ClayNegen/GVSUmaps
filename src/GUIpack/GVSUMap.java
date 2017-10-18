@@ -24,8 +24,18 @@ public class GVSUMap {
 		edgeList = new ArrayList<Edge>();
 	}
 	
-	private void addNode(int x, int y){
+	public GVSUMap(){
+		nodeList = new ArrayList<MapNode>();
+		edgeList = new ArrayList<Edge>();
+	}
+	
+	public void addNode(int x, int y){
 		MapNode temp = new MapNode(x, y);
+		nodeList.add(temp);
+	}
+	
+	public void addNode(int x, int y, String id){
+		MapNode temp = new MapNode(x, y, id);
 		nodeList.add(temp);
 	}
 
@@ -35,10 +45,6 @@ public class GVSUMap {
 	
 	public List<Edge> getEdgeList(){
 		return edgeList;
-	}
-	
-	public void initialize(){
-		
 	}
 	
 	public void addLane(String sourceLocId, String destLocId) {
@@ -65,4 +71,26 @@ public class GVSUMap {
 		}
 		throw new NullPointerException();
     }
+	
+	public void initialize(){
+		this.addNode(388, 62);
+		this.addNode(390, 101);
+		this.addNode(402, 123);
+		this.addNode(414, 136);
+		this.addLane("388,62", "390,101");
+		this.addLane("390,101", "402,123");
+		this.addLane("402,123", "414,136");
+		this.addNode(428, 124);
+		this.addLane("414,136", "428,124");
+		this.addNode(445, 133);
+		this.addLane("428,124", "445,133");
+		this.addNode(457, 118);
+		this.addLane("445,133", "457,118");
+		
+		//End of Unamed nodes
+		//todo: Go back and assign numbers to these nodes, will make debugging later on much easier
+		
+		this.addNode(472, 121, "3");
+		
+	}
 }

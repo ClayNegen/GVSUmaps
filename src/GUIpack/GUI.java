@@ -23,7 +23,7 @@ public class GUI extends JPanel implements ActionListener {
 	JLabel blank3 = new JLabel("");
 	User user = new User();
 	
-	public static String IMG_PATH = "src/gvsuMaps.jpg";
+	public static String IMG_PATH = "C:/Users/Douglas Wallin/workspace/butts/src/gvsuMaps.jpg";
 	public static String IMG_PATH1 = "src/GVmaps.png";
 	
 		public GUI() throws IOException {
@@ -71,33 +71,9 @@ public class GUI extends JPanel implements ActionListener {
 			GUI gui = new GUI();
 			gui.setVisible(true);
 			
-			//Some preliminary code to test the algorithim
-			//ignore for now
-			List<MapNode> nodes = new ArrayList<MapNode>();
+			GVSUMap testMap = new GVSUMap();
 			
-//			for(int b = 0; b < 5; b++){
-//				MapNode location = new MapNode(0, b);
-//				MapNode location2 = new MapNode(1, b);
-//				MapNode location3 = new MapNode(2, b);
-//				nodes.add(location);
-//				nodes.add(location2);
-//				nodes.add(location3);
-//			}
-//			
-//			
-//			GVSUMap testMap = new GVSUMap(nodes);
-//			testMap.addLane("00", "12");
-//			testMap.addLane("00", "03");
-//			testMap.addLane("00", "22");
-//			testMap.addLane("00", "02");
-//			testMap.addLane("03", "24");
-//			testMap.addLane("11", "24");
-//			testMap.addLane("12", "21");
-//			testMap.addLane("11", "10");
-//			testMap.addLane("04", "12");
-//			
-//			testMap.addLane("00", "01");
-//			testMap.addLane("01", "11");
+			testMap.initialize();
 //			
 //			DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(testMap);
 //	        dijkstra.execute(nodes.get(0));
@@ -107,8 +83,8 @@ public class GUI extends JPanel implements ActionListener {
 //	            System.out.println(node);
 //	        }
 //			
-//			System.out.println("Got this far");
-//		}
+			System.out.println("Doing good Captain");
+		}
 		/************************************************************
 		Action performed Method
 		Declares what happens upon button presses

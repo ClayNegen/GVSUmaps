@@ -24,11 +24,14 @@ public class DijkstraAlgorithm {
         this.edges = new ArrayList<Edge>(graph.getEdgeList());
     }
 
-    public void execute(MapNode source) {
+    public void execute(String name) {
         settledNodes = new HashSet<MapNode>();
         unSettledNodes = new HashSet<MapNode>();
         distance = new HashMap<MapNode, Double>();
         predecessors = new HashMap<MapNode, MapNode>();
+        
+        MapNode source = findByNodeInfo(name);
+        
         distance.put(source, 0.0);
         unSettledNodes.add(source);
         while (unSettledNodes.size() > 0) {
@@ -121,5 +124,14 @@ public class DijkstraAlgorithm {
         // Put it into the correct order
         Collections.reverse(path);
         return path;
+    }
+    
+    private MapNode findByNodeInfo(String input){
+    	for (MapNode node : nodes) {
+    		if (node.getNodeInfo().equals(input))
+    			return node;
+        }
+    	return null;
+    	//check for errors here, maybe
     }
 }

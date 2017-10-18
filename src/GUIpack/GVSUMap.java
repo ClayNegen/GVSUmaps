@@ -23,6 +23,11 @@ public class GVSUMap {
 		this.nodeList = nodeList;
 		edgeList = new ArrayList<Edge>();
 	}
+	
+	private void addNode(int x, int y){
+		MapNode temp = new MapNode(x, y);
+		nodeList.add(temp);
+	}
 
 	public List<MapNode> getNodeList(){
 		return nodeList;
@@ -30,6 +35,10 @@ public class GVSUMap {
 	
 	public List<Edge> getEdgeList(){
 		return edgeList;
+	}
+	
+	public void initialize(){
+		
 	}
 	
 	public void addLane(String sourceLocId, String destLocId) {

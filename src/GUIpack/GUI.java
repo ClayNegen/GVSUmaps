@@ -78,40 +78,40 @@ public class GUI extends JPanel implements ActionListener {
 			//ignore for now
 			List<MapNode> nodes = new ArrayList<MapNode>();
 			
-			for(int b = 0; b < 5; b++){
-				MapNode location = new MapNode(0, b);
-				MapNode location2 = new MapNode(1, b);
-				MapNode location3 = new MapNode(2, b);
-				nodes.add(location);
-				nodes.add(location2);
-				nodes.add(location3);
-			}
-			
-			
-			GVSUMap testMap = new GVSUMap(nodes);
-			testMap.addLane("00", "12");
-			testMap.addLane("00", "03");
-			testMap.addLane("00", "22");
-			testMap.addLane("00", "02");
-			testMap.addLane("03", "24");
-			testMap.addLane("11", "24");
-			testMap.addLane("12", "21");
-			testMap.addLane("11", "10");
-			testMap.addLane("04", "12");
-			
-			//testMap.addLane("00", "01");
-			//testMap.addLane("01", "11");
-			
-			DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(testMap);
-	        dijkstra.execute(nodes.get(0));
-	        LinkedList<MapNode> path = dijkstra.getPath(nodes.get(4));
-
-	        for (MapNode node : path) {
-	            System.out.println(node);
-	        }
-			
-			System.out.println("Got this far");
-		}
+//			for(int b = 0; b < 5; b++){
+//				MapNode location = new MapNode(0, b);
+//				MapNode location2 = new MapNode(1, b);
+//				MapNode location3 = new MapNode(2, b);
+//				nodes.add(location);
+//				nodes.add(location2);
+//				nodes.add(location3);
+//			}
+//			
+//			
+//			GVSUMap testMap = new GVSUMap(nodes);
+//			testMap.addLane("00", "12");
+//			testMap.addLane("00", "03");
+//			testMap.addLane("00", "22");
+//			testMap.addLane("00", "02");
+//			testMap.addLane("03", "24");
+//			testMap.addLane("11", "24");
+//			testMap.addLane("12", "21");
+//			testMap.addLane("11", "10");
+//			testMap.addLane("04", "12");
+//			
+//			testMap.addLane("00", "01");
+//			testMap.addLane("01", "11");
+//			
+//			DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(testMap);
+//	        dijkstra.execute(nodes.get(0));
+//	        LinkedList<MapNode> path = dijkstra.getPath(nodes.get(4));
+//
+//	        for (MapNode node : path) {
+//	            System.out.println(node);
+//	        }
+//			
+//			System.out.println("Got this far");
+//		}
 		/************************************************************
 		Action performed Method
 		Declares what happens upon button presses

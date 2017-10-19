@@ -77,14 +77,14 @@ public class DijkstraAlgorithm {
         return neighbors;
     }
 
-    private MapNode getMinimum(Set<MapNode> MapNodees) {
+    private MapNode getMinimum(Set<MapNode> MapNodes) {
         MapNode minimum = null;
-        for (MapNode MapNode : MapNodees) {
+        for (MapNode node : MapNodes) {
             if (minimum == null) {
-                minimum = MapNode;
+                minimum = node;
             } else {
-                if (getShortestDistance(MapNode) < getShortestDistance(minimum)) {
-                    minimum = MapNode;
+                if (getShortestDistance(node) < getShortestDistance(minimum)) {
+                    minimum = node;
                 }
             }
         }

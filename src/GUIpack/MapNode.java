@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 
 
+
 public class MapNode {
 	private int x;
 	private int y;
@@ -17,14 +18,14 @@ public class MapNode {
 	
 	
 	
-	public MapNode(int x, int y){
+	public MapNode(final int x, final int y) {
 		this.x = x;
 		this.y = y;
 		nodeId = Integer.toString(x) + "," + Integer.toString(y);
 		nodeInfo = null;
 	}
 	
-	public MapNode(int x, int y, String nodeInfo){
+	public MapNode(final int x, final int y, final String nodeInfo){
 		this.x = x;
 		this.y = y;
 		nodeId = Integer.toString(x) + "," + Integer.toString(y);

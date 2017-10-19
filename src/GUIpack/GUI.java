@@ -13,7 +13,12 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-
+/**
+ * 
+ * @author Louis Sullivan
+ * @author Clay Negen
+ * @author Douglas Wallim
+ */
 public class GUI extends JPanel implements ActionListener {
 	JButton one = new JButton("Classes");
 	JButton two = new JButton("Bus Stops");
@@ -23,9 +28,13 @@ public class GUI extends JPanel implements ActionListener {
 	JLabel blank3 = new JLabel("");
 	User user = new User();
 	
-	public static String IMG_PATH = "C:/Users/Douglas Wallin/workspace/butts/src/gvsuMaps.jpg";
+	public static String IMG_PATH = "src/GVSU.jpg";
 	public static String IMG_PATH1 = "src/GVmaps.png";
 	
+	/**
+	 * @see GUI creates an interactive user experiance that allows user to click between menu, classes, buss stops and update information
+	 * @throws IOException
+	 */
 		public GUI() throws IOException {
 			BufferedImage img = ImageIO.read(new File(IMG_PATH));
 	        ImageIcon icon = new ImageIcon(img);
@@ -63,9 +72,9 @@ public class GUI extends JPanel implements ActionListener {
 		}
 
 		/************************************************************
-		Main Method
-		initializes and runs GUI
-		 * @throws IOException 
+		@category Main Method
+		@see initializes and runs GUI
+		 @throws IOException 
 		************************************************************/
 		public static void main(String[] args) throws IOException {
 			GUI gui = new GUI();
@@ -86,8 +95,7 @@ public class GUI extends JPanel implements ActionListener {
 			System.out.println("Doing good Captain");
 		}
 		/************************************************************
-		Action performed Method
-		Declares what happens upon button presses
+		@see Action performed Method; Declares what happens upon button presses
 		************************************************************/
 		public void actionPerformed(ActionEvent e) {
 			Object source = e.getSource();
@@ -109,7 +117,11 @@ public class GUI extends JPanel implements ActionListener {
 				info.setVisible(false);
 			} */
 		} 
-		
+		/**
+		 * 
+		 * Creates the classes Jframe 
+		 *
+		 */
 		public class Info extends JPanel implements ActionListener{
 			JLabel Class1 = new JLabel("Class One:");
 			JTextArea Class01 = new JTextArea("");
@@ -120,7 +132,9 @@ public class GUI extends JPanel implements ActionListener {
 			JButton submit = new JButton("Submit");
 			JLabel blank1 = new JLabel();
 			
-			
+			/**
+			 * Creates update information Jframe 
+			 */
 			public Info(){
 				JFrame frame = new JFrame("Your Information");
 				frame.setVisible(true);
@@ -140,6 +154,10 @@ public class GUI extends JPanel implements ActionListener {
 				
 				submit.addActionListener(this);
 			}
+			
+			/**
+			 * @param ActionEvent sets the location of classes in the class menu
+			 */
 			public void actionPerformed(ActionEvent e) {
 				Object source = e.getSource();
 				
@@ -157,6 +175,13 @@ public class GUI extends JPanel implements ActionListener {
 				}
 			}
 		}
+		/**
+		 * 
+		 * @param Img
+		 * @param wt
+		 * @param ht
+		 * @return Image 
+		 */
 		Image getScaledImage(Image Img, int wt, int ht) {
 		    BufferedImage resizedImg = new BufferedImage(wt, ht, BufferedImage.TYPE_INT_ARGB);
 		    Graphics2D g2 = resizedImg.createGraphics();

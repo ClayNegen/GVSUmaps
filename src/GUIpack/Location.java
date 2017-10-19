@@ -1,5 +1,12 @@
 package GUIpack;
 
+/**
+ * 
+ * @author Louis Sullivan
+ * @author Clay Negen
+ * @author Douglas Wallim
+ *
+ */
 public class Location {
 	String name;
 	int longitude;

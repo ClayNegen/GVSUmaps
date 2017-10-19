@@ -9,44 +9,79 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * 
+ * @author Louis Sullivan
+ * @author Clay Negen
+ * @author Douglas Wallim
+ *
+ */
 public class GVSUMap {
 	private  List<MapNode> nodeList;
 	private  List<Edge> edgeList;
 	
-	
+	/**
+	 * 
+	 * @param nodeList
+	 * @param edgeList
+	 */
 	public GVSUMap(List<MapNode> nodeList, List<Edge> edgeList){
 		this.nodeList = nodeList;
 		this.edgeList = edgeList;
 	}
-	
+	/**
+	 * 
+	 * @param nodeList
+	 */
 	public GVSUMap(List<MapNode> nodeList){
 		this.nodeList = nodeList;
 		edgeList = new ArrayList<Edge>();
 	}
-	
+	/**
+	 * 
+	 */
 	public GVSUMap(){
 		nodeList = new ArrayList<MapNode>();
 		edgeList = new ArrayList<Edge>();
 	}
-	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	public void addNode(int x, int y){
 		MapNode temp = new MapNode(x, y);
 		nodeList.add(temp);
 	}
-	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param id
+	 */
 	public void addNode(int x, int y, String id){
 		MapNode temp = new MapNode(x, y, id);
 		nodeList.add(temp);
 	}
-
+	/**
+	 * 
+	 * @return
+	 */
 	public List<MapNode> getNodeList(){
 		return nodeList;
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public List<Edge> getEdgeList(){
 		return edgeList;
 	}
-	
+	/**
+	 * 
+	 * @param sourceLocId
+	 * @param destLocId
+	 */
 	public void addLane(String sourceLocId, String destLocId) {
         MapNode sourceNode = null;
         MapNode destinationNode = null;

@@ -7,7 +7,13 @@ import java.util.Map;
 import java.util.HashSet;
 import java.util.LinkedList;
 
-
+/**
+ * 
+ * @author Louis Sullivan
+ * @author Clay Negen
+ * @author Douglas Wallim
+ *
+ */
 public class MapNode {
 	private int x;
 	private int y;
@@ -16,40 +22,68 @@ public class MapNode {
 	
 	
 	
-	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	public MapNode(int x, int y){
 		this.x = x;
 		this.y = y;
 		nodeId = Integer.toString(x) + "," + Integer.toString(y);
 		nodeInfo = null;
 	}
-	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param nodeInfo
+	 */
 	public MapNode(int x, int y, String nodeInfo){
 		this.x = x;
 		this.y = y;
 		nodeId = Integer.toString(x) + "," + Integer.toString(y);
 		this.nodeInfo = nodeInfo;
 	}
-	
+	/**
+	 * 
+	 * @return nodeInfoID
+	 */
 	public String getNodeInfo(){
 		return nodeInfo;
 	}
+	/**
+	 * 
+	 * @return NodeID
+	 */
 	public String getNodeId(){
 		return nodeId;
 	}
-
+	/**
+	 * 
+	 * @return x
+	 */
 	public int getX() {
 		return x;
 	}
-
+	/**
+	 * 
+	 * @param x
+	 */
 	public void setX(int x) {
 		this.x = x;
 	}
-
+	/**
+	 * 
+	 * @return y
+	 */
 	public int getY() {
 		return y;
 	}
-
+	/**
+	 * 
+	 * @param y
+	 */
 	public void setY(int y) {
 		this.y = y;
 	}

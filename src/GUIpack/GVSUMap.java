@@ -12,6 +12,7 @@ import java.util.Set;
 public class GVSUMap {
 	private  List<MapNode> nodeList;
 	private  List<Edge> edgeList;
+	String code;
 	
 	
 	public GVSUMap(List<MapNode> nodeList, List<Edge> edgeList){
@@ -38,7 +39,90 @@ public class GVSUMap {
 	}
 	
 	public void initialize(){
-		
+		if (code.equals("ASH")){
+			addNode(1,1);
+		}
+		if (code.equals("BH")){
+			addNode(1,1);
+		}
+		if (code.equals("CAC")){
+			addNode(1,1);
+		}
+		if (code.equals("CDC")){
+			addNode(1,1);
+		}
+		if (code.equals("COM")){
+			addNode(1,1);
+		}
+		if (code.equals("CON")){
+			addNode(1,1);
+		}
+		if (code.equals("FH")){
+			addNode(1,1);
+		}
+		if (code.equals("HHLC")){
+			addNode(1,1);
+		}
+		if (code.equals("HON")){
+			addNode(1,1);
+		}
+		if (code.equals("HRY")){
+			addNode(1,1);
+		}
+		if (code.equals("JHZ")){
+			addNode(1,1);
+		}
+		if (code.equals("KC")){
+			addNode(1,1);
+		}
+		if (code.equals("KHS")){
+			addNode(1,1);
+		}
+		if (code.equals("KTB")){
+			addNode(1,1);
+		}
+		if (code.equals("LHH")){
+			addNode(1,1);
+		}
+		if (code.equals("LIB")){
+			addNode(1,1);
+		}
+		if (code.equals("LMH")){
+			addNode(1,1);
+		}
+		if (code.equals("LOH")){
+			addNode(1,1);
+		}
+		if (code.equals("LSH")){
+			addNode(1,1);
+		}
+		if (code.equals("LTT")){
+			addNode(1,1);
+		}
+		if (code.equals("MAK")){
+			addNode(1,1);
+		}
+		if (code.equals("MAN")){
+			addNode(1,1);
+		}
+		if (code.equals("MUR")){
+			addNode(1,1);
+		}
+		if (code.equals("NMR")){
+			addNode(1,1);
+		}
+		if (code.equals("PAC")){
+			addNode(1,1);
+		}
+		if (code.equals("PAD")){
+			addNode(1,1);
+		}
+		if (code.equals("SH")){
+			addNode(1,1);
+		}
+		if (code.equals("STU")){
+			addNode(1,1);
+		}
 	}
 	
 	public void addLane(String sourceLocId, String destLocId) {

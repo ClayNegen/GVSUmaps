@@ -111,7 +111,7 @@ public class GUI extends JPanel implements ActionListener {
 //	        }
 //			
 //			System.out.println("Got this far");
-//		}
+		}
 		/************************************************************
 		Action performed Method
 		Declares what happens upon button presses

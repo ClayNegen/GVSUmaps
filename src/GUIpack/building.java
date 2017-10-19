@@ -2,6 +2,7 @@ package GUIpack;
 
 public class building {
 	String code;
+	//GVSUMap map = new GVSUMap();
 	
 	public building (String code) {
 		this.code = code;
@@ -56,37 +57,37 @@ public class building {
 			if (code.equals("LMH")){
 				MapNode node = new MapNode(1,1);
 			}
-			if (code.equals("ASH")){
+			if (code.equals("LOH")){
 				MapNode node = new MapNode(1,1);
 			}
-			if (code.equals("ASH")){
+			if (code.equals("LSH")){
 				MapNode node = new MapNode(1,1);
 			}
-			if (code.equals("ASH")){
+			if (code.equals("LTT")){
 				MapNode node = new MapNode(1,1);
 			}
-			if (code.equals("ASH")){
+			if (code.equals("MAK")){
 				MapNode node = new MapNode(1,1);
 			}
-			if (code.equals("ASH")){
+			if (code.equals("MAN")){
 				MapNode node = new MapNode(1,1);
 			}
-			if (code.equals("ASH")){
+			if (code.equals("MUR")){
 				MapNode node = new MapNode(1,1);
 			}
-			if (code.equals("ASH")){
+			if (code.equals("NMR")){
 				MapNode node = new MapNode(1,1);
 			}
-			if (code.equals("ASH")){
+			if (code.equals("PAC")){
 				MapNode node = new MapNode(1,1);
 			}
-			if (code.equals("ASH")){
+			if (code.equals("PAD")){
 				MapNode node = new MapNode(1,1);
 			}
-			if (code.equals("ASH")){
+			if (code.equals("SH")){
 				MapNode node = new MapNode(1,1);
 			}
-			if (code.equals("ASH")){
+			if (code.equals("STU")){
 				MapNode node = new MapNode(1,1);
 			}
 			

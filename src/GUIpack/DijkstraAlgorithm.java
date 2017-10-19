@@ -10,29 +10,54 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * This class creates an object called DjikstraAlgorithim to perform Djikstras famous algorithim to
+ * solve the shortest path problem. In this case it is being applied to a GVSUMap object with nodes
+ * and edges.
  * 
- * @author louis sullivan
+ * @author Louis Sullivan
  *  @author Clay Negen
  * @author Douglas Wallim
  */
 public class DijkstraAlgorithm {
-
-    private final List<MapNode> nodes;
-    private final List<Edge> edges;
+	
+	/** Instance variable to hold all the nodes in the graph. */
+    private List<MapNode> nodes;
+    
+    /** Instance variable to hold all the edges in the graph. */
+    private  List<Edge> edges;
+    
+    /** Instance variable to keep track of which nodes have already been checked
+     * in the algorithim. */
     private Set<MapNode> settledNodes;
+    
+    /** Instance variable to keep track of all nodes which have not been used yet
+     * in the algorithim. */
     private Set<MapNode> unSettledNodes;
+    
+    /** Instance variable to hold all nodes that have edges to the current node being
+     * evaluated. */
     private Map<MapNode, MapNode> predecessors;
+    
+    /**Instance variable to hold all the distances corresponding from each node in
+     * predecessors to the current node being evaluated. */
     private Map<MapNode, Double> distance;
 
+    /**
+     * Constructor for a DijkstraAlgorithm object that initializes nodes and edges
+     * with a copy of the information held in the graph object passed in
+     * @param graph
+     */
     public DijkstraAlgorithm(GVSUMap graph) {
         // create a copy of the array so that we can operate on this array
         this.nodes = new ArrayList<MapNode>(graph.getNodeList());
         this.edges = new ArrayList<Edge>(graph.getEdgeList());
     }
-/**
- * 
- * @param name
- */
+    
+    /**
+     * Primary command to run the Djikstras on the current node storing its shortest path
+     * to every other node in the graph
+     * @param name
+     */
     public void execute(String name) {
         settledNodes = new HashSet<MapNode>();
         unSettledNodes = new HashSet<MapNode>();

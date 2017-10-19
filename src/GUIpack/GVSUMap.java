@@ -9,26 +9,56 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * 
+ * @author Louis Sullivan
+ * @author Clay Negen
+ * @author Douglas Wallim
+ *
+ */
 public class GVSUMap {
 	private List<MapNode> nodeList;
 	private List<Edge> edgeList;
 
-	public GVSUMap(List<MapNode> nodeList, List<Edge> edgeList) {
+
+	
+	/**
+	 * 
+	 * @param nodeList
+	 * @param edgeList
+	 */
+	public GVSUMap(List<MapNode> nodeList, List<Edge> edgeList){
 		this.nodeList = nodeList;
 		this.edgeList = edgeList;
 	}
 
-	public GVSUMap(List<MapNode> nodeList) {
+	/**
+	 * 
+	 * @param nodeList
+	 */
+	public GVSUMap(List<MapNode> nodeList){
 		this.nodeList = nodeList;
 		edgeList = new ArrayList<Edge>();
 	}
 
-	public GVSUMap() {
+
+
+	/**
+	 * 
+	 */
+	public GVSUMap(){
 		nodeList = new ArrayList<MapNode>();
 		edgeList = new ArrayList<Edge>();
 	}
 
-	private void addNode(int x, int y, String id) {
+
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param id
+	 */
+	public void addNode(int x, int y, String id){
 		MapNode temp = new MapNode(x, y, id);
 		nodeList.add(temp);
 	}
@@ -38,13 +68,27 @@ public class GVSUMap {
 		nodeList.add(temp);
 	}
 
-	public List<MapNode> getNodeList() {
+	/**
+	 * 
+	 * @return
+	 */
+	public List<MapNode> getNodeList(){
 		return nodeList;
 	}
 
-	public List<Edge> getEdgeList() {
+	/**
+	 * 
+	 * @return
+	 */
+	public List<Edge> getEdgeList(){
 		return edgeList;
 	}
+
+	/**
+	 * 
+	 * @param sourceLocId
+	 * @param destLocId
+	 */
 
 	public void addLane(String sourceLocId, String destLocId) {
 		MapNode sourceNode = null;

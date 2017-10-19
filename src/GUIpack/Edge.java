@@ -1,5 +1,11 @@
 package GUIpack;
-
+/**
+ * 
+ *  @author Louis Sullivan
+ * @author Clay Negen
+ * @author Douglas Wallim
+ * 
+ */
 public class Edge {
 	private final String id;
 	private final double edgeWeight;

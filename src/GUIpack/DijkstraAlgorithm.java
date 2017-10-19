@@ -9,6 +9,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * 
+ * @author louis sullivan
+ *  @author Clay Negen
+ * @author Douglas Wallim
+ */
 public class DijkstraAlgorithm {
 
     private final List<MapNode> nodes;
@@ -23,7 +29,10 @@ public class DijkstraAlgorithm {
         this.nodes = new ArrayList<MapNode>(graph.getNodeList());
         this.edges = new ArrayList<Edge>(graph.getEdgeList());
     }
-
+/**
+ * 
+ * @param name
+ */
     public void execute(String name) {
         settledNodes = new HashSet<MapNode>();
         unSettledNodes = new HashSet<MapNode>();
@@ -41,7 +50,10 @@ public class DijkstraAlgorithm {
             findMinimalDistances(node);
         }
     }
-
+/**
+ * 
+ * @param node
+ */
     private void findMinimalDistances(MapNode node) {
         List<MapNode> adjacentNodes = getNeighbors(node);
         for (MapNode target : adjacentNodes) {
@@ -55,7 +67,12 @@ public class DijkstraAlgorithm {
         }
 
     }
-
+/**
+ * 
+ * @param node
+ * @param target
+ * @return
+ */
     private double getDistance(MapNode node, MapNode target) {
         for (Edge edge : edges) {
             if (edge.getSource().equals(node)
@@ -65,7 +82,11 @@ public class DijkstraAlgorithm {
         }
         throw new RuntimeException("Should not happen");
     }
-
+/**
+ * 
+ * @param node
+ * @return
+ */
     private List<MapNode> getNeighbors(MapNode node) {
         List<MapNode> neighbors = new ArrayList<MapNode>();
         for (Edge edge : edges) {
@@ -77,9 +98,14 @@ public class DijkstraAlgorithm {
         return neighbors;
     }
 
-    private MapNode getMinimum(Set<MapNode> MapNodes) {
+/**
+ * 
+ * @param MapNodees
+ * @return
+ */
+    private MapNode getMinimum(Set<MapNode> MapNodees) {
         MapNode minimum = null;
-        for (MapNode node : MapNodes) {
+        for (MapNode node : MapNodees) {
             if (minimum == null) {
                 minimum = node;
             } else {
@@ -90,11 +116,19 @@ public class DijkstraAlgorithm {
         }
         return minimum;
     }
-
+/**
+ * 
+ * @param MapNode
+ * @return
+ */
     private boolean isSettled(MapNode MapNode) {
         return settledNodes.contains(MapNode);
     }
-
+/**
+ * 
+ * @param destination
+ * @return
+ */
     private double getShortestDistance(MapNode destination) {
         Double d = distance.get(destination);
         if (d == null) {
@@ -105,9 +139,12 @@ public class DijkstraAlgorithm {
         }
     }
 
-    /*
+    
+    /**
      * This method returns the path from the source to the selected target and
      * NULL if no path exists
+     * @param target
+     * @return
      */
     public LinkedList<MapNode> getPath(MapNode target) {
         LinkedList<MapNode> path = new LinkedList<MapNode>();
@@ -125,7 +162,11 @@ public class DijkstraAlgorithm {
         Collections.reverse(path);
         return path;
     }
-    
+    /**
+     * 
+     * @param input
+     * @return
+     */
     private MapNode findByNodeInfo(String input){
     	for (MapNode node : nodes) {
     		if (node.getNodeInfo().equals(input))

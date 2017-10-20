@@ -199,5 +199,25 @@ public class GVSUMap {
 		this.addLane(11, 14);
 		this.addNode(440, 119, "Alumni House");
 		this.addLane("428,124",	"440,119");
+		this.addNode(520, 201, 16);
+		this.addNode(514, 129, 17);
+		this.addLane(6, 17);
+		this.addNode(534, 152, 18);
+		this.addLane(13, 18);
+		this.addNode(558, 167, 19);
+		this.addLane(18, 19);
+		this.addNode(544, 180, 20);
+		this.addLane(13, 20);
+		this.addNode(557, 177, 21);
+		this.addLane(20, 21);
+		this.addLane(20, 19);
+		this.addLane(19, 21);
+		this.addNode(564, 175, 22);
+		this.addLane(19, 22);
+		this.addLane(22, 21);
+		this.addNode(566, 190, 23);
+		this.addLane(22, 23);
+		this.addNode(573, 176, 24);
+		this.addLane(22, 24);
 	}
 }

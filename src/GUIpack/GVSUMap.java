@@ -202,7 +202,7 @@ public class GVSUMap {
 
 		
 		/**
-		 * Louis Nodes 12 through 60
+		 * Louis Nodes 
 		 */
 		
 		this.addNode(558, 167, "19");
@@ -215,10 +215,7 @@ public class GVSUMap {
 		
 		this.addNode(588, 174, "25");
 		this.addNode(594, 165, "26");
-		
-		this.addNode(577, 190, "29");
-		this.addNode(599, 199, "30");
-		
+			
 
 		this.addNode(520, 201, 16);
 		this.addNode(514, 129, 17);
@@ -241,5 +238,36 @@ public class GVSUMap {
 		this.addNode(573, 176, 24);
 		this.addLane(22, 24);
 
+		/**
+		 * @author Louis Sullivan
+		 * Add nodes 25 through 38
+		 */
+		  this.addNode(588, 174, "25");
+		  this.addNode(594, 165, "26");
+		  //add node 27
+		  this.addNode(582, 187, "27");
+		  //add node 28
+		  this.addNode(591, 198, "28");
+		  //add node 29
+		  this.addNode(577, 190, "29");
+		  //add node 30
+		  this.addNode(599, 199, "30");
+		  //add node 31
+		  this.addNode(607, 197, "31");
+		  //add node 32
+		  this.addNode(607, 154, "32");
+		  //add node 33
+		  this.addNode(567, 128, "33");
+		  //add node 34
+		  this.addNode(597, 122, "34");
+		  //add node 35
+		  this.addNode(603, 138, "35");
+		  //add node 36
+		  this.addNode(631, 196, "36");
+		  //add node 37
+		  this.addNode(632, 168, "37");
+		  //add node 38
+		  this.addNode(624, 161, "38");
+			
 	}
 }

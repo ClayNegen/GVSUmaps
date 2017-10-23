@@ -268,6 +268,86 @@ public class GVSUMap {
 		  this.addNode(632, 168, "37");
 		  //add node 38
 		  this.addNode(624, 161, "38");
+		  
+
+		  /**
+		   * Add nodes 39 through 75
+		   */
+		  //add node 39
+		  this.addNode(651, 166, "39");
+		  //add node 40
+		  this.addNode(656, 176, "Edward J. Frey LC");
+		  //add node 41
+		  this.addNode(663, 184, "41");
+		  //add node 42
+		  this.addNode(655, 191, "42");
+		  //add node 43
+		  this.addNode(669, 200, "43");
+		  //add node 44
+		  this.addNode(678, 192, "Grace O. Kisler LC");
+		  //add node 45
+		  this.addNode(670, 216, "45");
+		  //add node 46
+		  this.addNode(656, 211, "North C. LC");
+		  //add node 47
+		  this.addNode(680, 223, "Robert C. Pew LC");
+		  //add node 48
+		  this.addNode(666, 230, "48");
+		  //add node 49
+		  this.addNode(685, 242, "49");
+		  //add node 50
+		  this.addNode(688, 255, "50");
+		  //add node 51
+		  this.addNode(706, 258, "51");
+		  //add node 52
+		  this.addNode(742, 262, "52");
+		  //add node 53
+		  this.addNode(702, 246, "William Kill Patrick LC");
+		  //add node 54
+		  this.addNode(746, 252, "Dale Stafford LC");
+		  //add node 55
+		  this.addNode(742, 276, "Max Swansin LC");
+		  //add node 56
+		  this.addNode(702, 270, "Seedman LC");
+		  //add node 57
+		  this.addNode(662, 255, "57");
+		  //add node 58
+		  this.addNode(663, 244, "Auther Hills LC");
+		  //add node 59
+		  this.addNode(665, 266, "William Packard LC");
+		  //add node 60
+		  this.addNode(653, 253, "60");
+		  //add node 61
+		  this.addNode(634, 236, "61");
+		  //add node 62
+		  this.addNode(620, 230, "62");
+		  //add node 63
+		  this.addNode(617, 218, "Robert Kliener Commons");
+		  //add node 64
+		  this.addNode(602, 229, "64");
+		  //add node 65
+		  this.addNode(577, 231, "65");
+		  //add node 66
+		  this.addNode(592, 255, "66");
+		  //add node 67
+		  this.addNode(620, 254, "Greg Olsin Kisler LC");
+		  //add node 68
+		  this.addNode(583, 279, "68");
+		  //add node 69
+		  this.addNode(592, 279, "69");
+		  //add node 70
+		  this.addNode(587, 320, "70");
+		  //add node 71
+		  this.addNode(610, 320, "71");
+		  //add node 72
+		  this.addNode(598, 376, "72");
+		  //add node 73
+		  this.addNode(612, 378, "73");
+		  //add node 74
+		  this.addNode(614, 390, "74");
+		  //add node 75
+		  this.addNode(641, 376, "69");
+		  
 			
 	}
 }

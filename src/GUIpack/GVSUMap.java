@@ -27,6 +27,26 @@ public class GVSUMap {
 	
 	private void addNode(int x, int y){
 		MapNode temp = new MapNode(x, y);
+	}
+
+
+	/**
+	 * 
+	 */
+	public GVSUMap(){
+		nodeList = new ArrayList<MapNode>();
+		edgeList = new ArrayList<Edge>();
+	}
+
+
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param id
+	 */
+	public void addNode(int x, int y, String id){
+		MapNode temp = new MapNode(x, y, id);
 		nodeList.add(temp);
 	}
 

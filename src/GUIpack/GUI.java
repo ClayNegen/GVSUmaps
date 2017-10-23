@@ -23,7 +23,7 @@ public class GUI extends JPanel implements ActionListener {
 	JLabel blank3 = new JLabel("");
 	User user = new User();
 	
-	public static String IMG_PATH = "src/gvsuMaps.jpg";
+	public static String IMG_PATH = "src/GVSU.jpg";
 	public static String IMG_PATH1 = "src/GVmaps.png";
 	
 		public GUI() throws IOException {
@@ -112,8 +112,7 @@ public class GUI extends JPanel implements ActionListener {
 //			
 //			System.out.println("Got this far");
 		}
-			System.out.println("Doing good Captain");
-		}
+
 		/************************************************************
 		Action performed Method
 		Declares what happens upon button presses

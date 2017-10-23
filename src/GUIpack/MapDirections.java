@@ -1,6 +1,9 @@
 package GUIpack;
-//Louis Sullivan Gui 2
-
+/**
+ * @author Louis Sullivan
+ * @author Clay Negen
+ * @author Douglas Wallim
+ */
 import java.awt.EventQueue;
 import java.awt.*;
 

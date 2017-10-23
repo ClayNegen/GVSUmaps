@@ -199,5 +199,24 @@ public class GVSUMap {
 		this.addLane(11, 14);
 		this.addNode(440, 119, "Alumni House");
 		this.addLane("428,124",	"440,119");
+		
+		/**
+		 * Louis Nodes 12 through 60
+		 */
+		
+		this.addNode(558, 167, "19");
+		this.addNode(544, 180, "20");
+		this.addNode(557, 177, "21");
+		
+		this.addNode(564, 175, "22");
+		this.addNode(566, 190, "23");
+		this.addNode(573, 176, "24");
+		
+		this.addNode(588, 174, "25");
+		this.addNode(594, 165, "26");
+		
+		this.addNode(577, 190, "29");
+		this.addNode(599, 199, "30");
+		
 	}
 }

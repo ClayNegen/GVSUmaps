@@ -347,6 +347,84 @@ public class GVSUMap {
 		  this.addNode(614, 390, "74");
 		  //add node 75
 		  this.addNode(641, 376, "69");
+		
+		 /*Continued: go back and rewrite with node numbers instead of coordinates to increase*readability by louis
+		  */
+		  
+		  this.lane(19,20);
+		  this.lane(19,21);
+		  this.lane(19,22);
+		  this.lane(22,23);
+		  this.lane(22,24);
+		  this.lane(24,25);
+		  this.lane(25,26);
+
+		  this.lane(25,27);
+		  this.lane(24, 27);
+		  this.lane(25,28);
+		  this.lane(27, 28);
+		  this.lane(24,29);
+		  this.lane(24,29);
+		  this.lane(29, 28);
+		  this.lane(30, 28);
+		  this.lane(31, 30);
+
+		  this.lane(32, 31);
+		  this.lane(32, 19);
+		  this.lane(33, 34);
+		  this.lane(35, 34);
+		  this.lane(35, 32);
+
+		  this.lane(36, 31);
+		  this.lane(37, 36);
+		  this.lane(38, 37);
+		  this.lane(39,37);
+		  this.lane(40, 39);
+
+		  this.lane(41, 42);
+		  this.lane(42, 36);
+		  this.lane(43, 41);
+		  this.lane(43, 42);
+		  this.lane(44, 43);
+
+		  this.lane(45, 43);
+		  this.lane(46, 43);
+		  this.lane(46, 45);
+		  this.lane(47, 45);
+		  this.lane(48, 45);
+
+		  this.lane(49, 48);
+		  this.lane(50, 49);
+		  this.lane(52, 51);
+		  this.lane(53, 51);
+		  this.lane(54, 52);
+
+		  this.lane(55, 52);
+		  this.lane(56, 51);
+		  this.lane(57, 50);
+		  this.lane(58, 57);
+		  this.lane(59, 57);
+
+		  this.lane(60, 57);
+		  this.lane(64, 62);
+		  this.lane(66, 62);
+		  this.lane(66, 62);
+		  this.lane(66, 65);
+
+		  this.lane(65, 64);
+		  this.lane(63, 62);
+		  this.lane(67, 62);
+		  this.lane(68, 66);
+		  this.lane(69, 66);
+
+		  this.lane(69,68);
+		  this.lane(70, 68);
+		  this.lane(71, 70);
+		  this.lane(72, 70);
+		  this.lane(73, 72);
+
+		  this.lane(74, 73);
+		  this.lane(75, 73);
 		  
 			
 	}

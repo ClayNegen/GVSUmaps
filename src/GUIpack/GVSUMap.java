@@ -351,80 +351,80 @@ public class GVSUMap {
 		 /*Continued: go back and rewrite with node numbers instead of coordinates to increase*readability by louis
 		  */
 		  
-		  this.lane(19,20);
-		  this.lane(19,21);
-		  this.lane(19,22);
-		  this.lane(22,23);
-		  this.lane(22,24);
-		  this.lane(24,25);
-		  this.lane(25,26);
-
-		  this.lane(25,27);
-		  this.lane(24, 27);
-		  this.lane(25,28);
-		  this.lane(27, 28);
-		  this.lane(24,29);
-		  this.lane(24,29);
-		  this.lane(29, 28);
-		  this.lane(30, 28);
-		  this.lane(31, 30);
-
-		  this.lane(32, 31);
-		  this.lane(32, 19);
-		  this.lane(33, 34);
-		  this.lane(35, 34);
-		  this.lane(35, 32);
-
-		  this.lane(36, 31);
-		  this.lane(37, 36);
-		  this.lane(38, 37);
-		  this.lane(39,37);
-		  this.lane(40, 39);
-
-		  this.lane(41, 42);
-		  this.lane(42, 36);
-		  this.lane(43, 41);
-		  this.lane(43, 42);
-		  this.lane(44, 43);
-
-		  this.lane(45, 43);
-		  this.lane(46, 43);
-		  this.lane(46, 45);
-		  this.lane(47, 45);
-		  this.lane(48, 45);
-
-		  this.lane(49, 48);
-		  this.lane(50, 49);
-		  this.lane(52, 51);
-		  this.lane(53, 51);
-		  this.lane(54, 52);
-
-		  this.lane(55, 52);
-		  this.lane(56, 51);
-		  this.lane(57, 50);
-		  this.lane(58, 57);
-		  this.lane(59, 57);
-
-		  this.lane(60, 57);
-		  this.lane(64, 62);
-		  this.lane(66, 62);
-		  this.lane(66, 62);
-		  this.lane(66, 65);
-
-		  this.lane(65, 64);
-		  this.lane(63, 62);
-		  this.lane(67, 62);
-		  this.lane(68, 66);
-		  this.lane(69, 66);
-
-		  this.lane(69,68);
-		  this.lane(70, 68);
-		  this.lane(71, 70);
-		  this.lane(72, 70);
-		  this.lane(73, 72);
-
-		  this.lane(74, 73);
-		  this.lane(75, 73);
+		  this.addLane(19,20);
+		  this.addLane(19,21);
+		  this.addLane(19,22);
+	      this.addLane(22,23);
+	      this.addLane(22,24);
+	      this.addLane(24,25);
+	      this.addLane(25,26);
+	      
+	      this.addLane(25,27);
+	      this.addLane(24, 27);
+	      this.addLane(25,28);
+	      this.addLane(27, 28);
+	      this.addLane(24,29);
+	      this.addLane(24,29);
+	      this.addLane(29, 28);
+	      this.addLane(30, 28);
+	      this.addLane(31, 30);
+	      
+	      this.addLane(32, 31);
+	      this.addLane(32, 19);
+	      this.addLane(33, 34);
+	      this.addLane(35, 34);
+	      this.addLane(35, 32);
+	      
+	      this.addLane(36, 31);
+	      this.addLane(37, 36);
+	      this.addLane(38, 37);
+	      this.addLane(39,37);
+	      this.addLane(40, 39);
+	      
+	      this.addLane(41, 42);
+	      this.addLane(42, 36);
+	      this.addLane(43, 41);
+	      this.addLane(43, 42);
+	      this.addLane(44, 43);
+	      
+	      this.addLane(45, 43);
+	      this.addLane(46, 43);
+	      this.addLane(46, 45);
+	      this.addLane(47, 45);
+	      this.addLane(48, 45);
+	      
+	      this.addLane(49, 48);
+	      this.addLane(50, 49);
+	      this.addLane(52, 51);
+	      this.addLane(53, 51);
+	      this.addLane(54, 52);
+	      
+	      this.addLane(55, 52);
+	      this.addLane(56, 51);
+	      this.addLane(57, 50);
+	      this.addLane(58, 57);
+	      this.addLane(59, 57);
+	      
+	      this.addLane(60, 57);
+	      this.addLane(64, 62);
+	      this.addLane(66, 62);
+	      this.addLane(66, 62);
+	      this.addLane(66, 65);
+	      
+	      this.addLane(65, 64);
+	      this.addLane(63, 62);
+	      this.addLane(67, 62);
+	      this.addLane(68, 66);
+	      this.addLane(69, 66);
+			  
+			  this.addLane(69,68);
+	      this.addLane(70, 68);
+	      this.addLane(71, 70);
+	      this.addLane(72, 70);
+	      this.addLane(73, 72);
+	      
+	      this.addLane(74, 73);
+	      this.addLane(75, 73);
 		  
 			
 	}

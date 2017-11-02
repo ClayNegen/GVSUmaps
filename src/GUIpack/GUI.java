@@ -28,7 +28,7 @@ public class GUI extends JPanel implements ActionListener {
 	JLabel blank3 = new JLabel("");
 	User user = new User();
 	
-	public static String IMG_PATH = "src/GVSU.jpg";
+	public static String IMG_PATH = "src/gvsuMaps.jpg";
 	public static String IMG_PATH1 = "src/GVmaps.png";
 	
 	/**
@@ -66,6 +66,19 @@ public class GUI extends JPanel implements ActionListener {
 			JTextPane txtpnPicture = new JTextPane();
 			txtpnPicture.insertIcon ( new ImageIcon ( IMG_PATH ) );
 			panel.add(txtpnPicture, BorderLayout.WEST);
+			
+			//testing early implementations of the grid system to draw directions
+			
+			
+			//final DirectionLines comp = new DirectionLines();
+		    //comp.setPreferredSize(new Dimension(798, 751));
+		    //frame.getContentPane().add(comp, BorderLayout.WEST);
+			
+			
+			
+			
+			
+			//end testing segments
 			
 			three.addActionListener(this);
 			frame.add(panel);

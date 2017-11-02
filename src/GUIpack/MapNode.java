@@ -7,31 +7,35 @@ import java.util.Map;
 import java.util.HashSet;
 import java.util.LinkedList;
 
-
-/**
+/*******************************************************************************
+ * A MapNode based on a node in graph theory. A MapNode can be a point along the
+ * path or a building depending on how nodeInfo is assigned.
  * 
- * @author Louis Sullivan
- * @author Clay Negen
- * @author Douglas Wallim
- *
- */
-
+ * @author Douglas Wallin
+ ******************************************************************************/
 public class MapNode {
+	
+	/** The x coordinate (pixel) */
 	private int x;
+	
+	/**	The y coordinate (pixel) */
 	private int y;
+	
+	/**	This stores information which will be used to lookup nodes with null
+	 * nodeInfo. It will be of the format "xcoordinate,ycoordinate"	*/
 	private final String nodeId;
+	
+	/**	A string to describe what a MapNode is. Will be typically used to
+	 * distinguish a building from a point along the path */
 	private String nodeInfo;
 	
-	
-	
-
-	
-
-	/**
+	/***************************************************************************
+	 * Constructs a MapNode taking the x and y coordinates as parameters. Will
+	 * automatically build the String nodeId using this information
 	 * 
-	 * @param x
-	 * @param y
-	 */
+	 * @param x int: The x coordinate of the node
+	 * @param y int: The y coordinate of the node
+	 **************************************************************************/
 	public MapNode(int x, int y){
 		this.x = x;
 		this.y = y;
@@ -39,57 +43,60 @@ public class MapNode {
 		nodeInfo = null;
 	}
 
-	/**
+	/***************************************************************************
+	 * Alternate constructor used primarily for MapNodes that designate a
+	 * building or important point. Requires nodeInfo (usually the building
+	 * name or a short description, i.e. "Police HQ").
 	 * 
-	 * @param x
-	 * @param y
-	 * @param nodeInfo
-	 */
+	 * @param x int: The x coordinate of the node
+	 * @param y int: The y coordinate of the node
+	 * @param nodeInfo String: Short describing information about the node
+	 **************************************************************************/
 	public MapNode(int x, int y, String nodeInfo){
 		this.x = x;
 		this.y = y;
 		nodeId = Integer.toString(x) + "," + Integer.toString(y);
 		this.nodeInfo = nodeInfo;
 	}
-	/**
-	 * 
-	 * @return nodeInfoID
-	 */
+
+	/***************************************************************************
+	 * @return String: nodeInfo
+	 **************************************************************************/
 	public String getNodeInfo(){
 		return nodeInfo;
 	}
-	/**
-	 * 
-	 * @return NodeID
-	 */
+
+	/***************************************************************************
+	 * @return String: nodeId
+	 **************************************************************************/
 	public String getNodeId(){
 		return nodeId;
 	}
-	/**
-	 * 
-	 * @return x
-	 */
+
+	/***************************************************************************
+	 * @return int: x
+	 **************************************************************************/
 	public int getX() {
 		return x;
 	}
-	/**
-	 * 
-	 * @param x
-	 */
+
+	/***************************************************************************
+	 * @param x int
+	 **************************************************************************/
 	public void setX(int x) {
 		this.x = x;
 	}
-	/**
-	 * 
-	 * @return y
-	 */
+
+	/***************************************************************************
+	 * @return y: int
+	 **************************************************************************/
 	public int getY() {
 		return y;
 	}
-	/**
-	 * 
-	 * @param y
-	 */
+
+	/***************************************************************************
+	 * @param y int
+	 **************************************************************************/
 	public void setY(int y) {
 		this.y = y;
 	}
@@ -97,6 +104,9 @@ public class MapNode {
 	
 	
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
     public int hashCode() {
         final int prime = 31;
@@ -105,6 +115,9 @@ public class MapNode {
         return result;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -122,6 +135,9 @@ public class MapNode {
         return true;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
         return nodeId;

@@ -19,8 +19,6 @@ import java.util.Set;
 public class GVSUMap {
 	private List<MapNode> nodeList;
 	private List<Edge> edgeList;
-
-
 	
 	/**
 	 * 
@@ -93,13 +91,15 @@ public class GVSUMap {
 	 * @param destLocId
 	 */
 
-	public void addLane(String sourceLocId, String destLocId) {
+	public void addLane(int sourceLocId, int destLocId) {
 		MapNode sourceNode = null;
 		MapNode destinationNode = null;
 		for (MapNode node : nodeList) {
 			if (node.getNodeId().equals(sourceLocId)) {
 				sourceNode = node;
 			}
+		}
+	}
 
 	
 	public void addLane(String sourceLocId, String destLocId) {

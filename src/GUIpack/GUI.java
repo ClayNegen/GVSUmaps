@@ -62,6 +62,7 @@ public class GUI extends JPanel implements ActionListener {
 			panel.add(txtpnPicture, BorderLayout.WEST);
 			
 			three.addActionListener(this);
+			two.addActionListener(this);
 			frame.add(panel);
 		}
 
@@ -121,9 +122,14 @@ public class GUI extends JPanel implements ActionListener {
 			Object source = e.getSource();
 			Info info = new Info();
 			info.setVisible(false);
+			BusStop busses = new BusStop();
+			busses.setVisible(false);
 			
 			if (source == three){
 				info.setVisible(true);
+			}
+			else if (source == two){
+				busses.setVisible(true);
 			}
 		} 
 		
@@ -199,5 +205,43 @@ public class GUI extends JPanel implements ActionListener {
 		    g2.dispose();
 
 		    return resizedImg;
+		}
+		
+		public class BusStop extends JPanel implements ActionListener{
+			JButton northCampus = new JButton("North Campus");
+			JButton southCampus = new JButton("South Campus");
+			JButton downtown = new JButton("Down Town");
+
+			public BusStop(){
+				JFrame frame = new JFrame("Bus Stops");
+				frame.setVisible(true);
+				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				frame.setSize(300, 400);
+				JPanel panel = new JPanel();
+				panel.setLayout(new GridLayout(3, 1, 5, 10));
+				panel.add(northCampus);
+				panel.add(southCampus);
+				panel.add(downtown);
+				frame.add(panel);
+				
+				northCampus.addActionListener(this);
+				southCampus.addActionListener(this);
+				downtown.addActionListener(this);
+			}
+			
+			public void northCampus(){
+				
+			}
+			public void southCampus(){
+				
+			}
+			public void downtown(){
+				
+			}
+			
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+			
 		}
 		}

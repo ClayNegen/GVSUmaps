@@ -64,21 +64,20 @@ public class GUI extends JPanel implements ActionListener {
 			panel.add(items, BorderLayout.EAST);
 			
 			JTextPane txtpnPicture = new JTextPane();
-			txtpnPicture.insertIcon ( new ImageIcon ( IMG_PATH ) );
-			panel.add(txtpnPicture, BorderLayout.WEST);
 			
+
 			//testing early implementations of the grid system to draw directions
 			
-			
-			//final DirectionLines comp = new DirectionLines();
-		    //comp.setPreferredSize(new Dimension(798, 751));
-		    //frame.getContentPane().add(comp, BorderLayout.WEST);
-			
-			
-			
-			
+			for(int vl = 0; vl < 315; vl++)
+			{
+			     img.setRGB(300, vl, Color.RED.getRGB() );
+			}
 			
 			//end testing segments
+			
+			
+			txtpnPicture.insertIcon ( new ImageIcon ( img ) );
+			panel.add(txtpnPicture, BorderLayout.WEST);
 			
 			three.addActionListener(this);
 			frame.add(panel);

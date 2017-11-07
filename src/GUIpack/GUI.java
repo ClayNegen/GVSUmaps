@@ -66,14 +66,20 @@ public class GUI extends JPanel implements ActionListener {
 			JTextPane txtpnPicture = new JTextPane();
 			
 
-			//testing early implementations of the grid system to draw directions
-			
-			//for(int vl = 0; vl < 315; vl++)
-			//{
-			//     img.setRGB(300, vl, Color.RED.getRGB() );
-			//}
+			//testing early implementations of the line controller
+			//to draw directions
 			
 			LineController controller = new LineController(img);
+			MapNode _21 = new MapNode(557, 177, "21");
+			MapNode _22 = new MapNode(564, 175, "22");
+			MapNode _23 = new MapNode(566, 190, "23");
+			MapNode _24 = new MapNode(573, 176, "24");
+			
+			controller.drawDiagonal(_21, _22);
+			controller.drawDiagonal(_22, _23);
+			controller.drawDiagonal(_22, _24);
+			
+			img = controller.getCanvas();
 			
 			//end testing segments
 			

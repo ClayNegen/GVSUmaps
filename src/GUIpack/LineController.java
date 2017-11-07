@@ -9,7 +9,7 @@ public class LineController {
 	
 	private BufferedImage canvas;
 	
-	private BufferedImage original;
+	private final BufferedImage original;
 	
 	private final int width;
 	
@@ -22,7 +22,7 @@ public class LineController {
 		height = canvas.getHeight();
 	}
 	
-	private void drawDiagonal (MapNode node1, MapNode node2){
+	public void drawDiagonal (MapNode node1, MapNode node2){
 		int x1 = node1.getX();
 		int x2 = node2.getX();
 		int y1 = node1.getY();
@@ -76,5 +76,9 @@ public class LineController {
 	
 	private void reset() {
 		canvas = original;
+	}
+	
+	public BufferedImage getCanvas() {
+		return canvas;
 	}
 }

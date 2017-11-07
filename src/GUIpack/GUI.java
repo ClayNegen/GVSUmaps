@@ -68,10 +68,12 @@ public class GUI extends JPanel implements ActionListener {
 
 			//testing early implementations of the grid system to draw directions
 			
-			for(int vl = 0; vl < 315; vl++)
-			{
-			     img.setRGB(300, vl, Color.RED.getRGB() );
-			}
+			//for(int vl = 0; vl < 315; vl++)
+			//{
+			//     img.setRGB(300, vl, Color.RED.getRGB() );
+			//}
+			
+			LineController controller = new LineController(img);
 			
 			//end testing segments
 			

@@ -9,87 +9,60 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * 
- * @author Louis Sullivan
- * @author Clay Negen
- * @author Douglas Wallim
- *
- */
 public class GVSUMap {
+	
 	private List<MapNode> nodeList;
+	
 	private List<Edge> edgeList;
 
-
-	
-	/**
-	 * 
-	 * @param nodeList
-	 * @param edgeList
-	 */
-	public GVSUMap(List<MapNode> nodeList, List<Edge> edgeList){
-		this.nodeList = nodeList;
-		this.edgeList = edgeList;
-	}
-
-	/**
-	 * 
-	 * @param nodeList
-	 */
-	public GVSUMap(List<MapNode> nodeList){
-		this.nodeList = nodeList;
-		edgeList = new ArrayList<Edge>();
-	}
-
-
-
-	/**
-	 * 
-	 */
 	public GVSUMap(){
 		nodeList = new ArrayList<MapNode>();
 		edgeList = new ArrayList<Edge>();
+		this.initialize();
 	}
 
 
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param id
-	 */
-	public void addNode(int x, int y, String id){
-		MapNode temp = new MapNode(x, y, id);
+	private void addNode(int x, int y, String info){
+		MapNode temp = new MapNode(x, y, info);
 		nodeList.add(temp);
 	}
 	
-	private void addNode(int x, int y, int id) {
-		MapNode temp = new MapNode(x, y, Integer.toString(id));
+	private void addNode(int x, int y, int info) {
+		MapNode temp = new MapNode(x, y, Integer.toString(info));
 		nodeList.add(temp);
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	public List<MapNode> getNodeList(){
 		return nodeList;
 	}
-
-	/**
-	 * 
-	 * @return
-	 */
+	
 	public List<Edge> getEdgeList(){
 		return edgeList;
 	}
-
-	/**
-	 * 
-	 * @param sourceLocId
-	 * @param destLocId
-	 */
-
+	
+	/***************************************************************************
+     * Looks up a node by id from the original map.
+     * 
+     * @param id String: The id of the node to be looked up
+     * 
+     * @return MapNode: The node desired
+     **************************************************************************/
+	//temporary testing solution
+	public MapNode getNode(final int info) {
+		for (MapNode node: nodeList) {
+			if (node.getNodeInfo().equals(Integer.toString(info))) {
+				return node;
+			}		
+		}
+		
+		return null;
+	}
+	
+	
+	//now error check here
+	// end temp solultion
+	
+	
 	public void addLane(String sourceLocId, String destLocId) {
 		MapNode sourceNode = null;
 		MapNode destinationNode = null;
@@ -139,7 +112,7 @@ public class GVSUMap {
 		}
 	}
 
-	public void initialize(){
+	private void initialize(){
 		this.addNode(388, 62, "");
 		this.addNode(390, 101, "");
 		this.addNode(402, 123, "");
@@ -157,34 +130,29 @@ public class GVSUMap {
 		//End of Unamed nodes
 		//todo: Go back and assign numbers to these nodes, will make debugging later on much easier
 
-		this.addNode(472, 121, "3");
+		this.addNode(472, 121, 3);
 		this.addLane("457,118", "472,121");
-		this.addNode(442, 153, "1");
+		this.addNode(442, 153, 1);
 		this.addLane("414,136", "442,153");
 		this.addLane("445,133", "442,153");
-		this.addNode(462, 162, "2");
-		this.addLane("442,153", "462,162");
-		this.addLane("462,162", "472,121");
-		this.addNode(490, 124, "4");
-		this.addLane("472,121", "490,124");
-		this.addNode(491, 141, "5");
-		this.addLane("490,124", "491,141");
-		this.addNode(503, 142, "6");
-		this.addLane("491,141", "503,142");
-		this.addNode(496, 150, "7");
-		this.addLane("496,150", "491,141");
-		this.addLane("496,150", "503,142");
-		this.addNode(497, 170, "8");
-		
-		//End of adding lanes by coordinates
-		//todo: go back and rewrite with node numbers instead of coordinates to increase readability
+		this.addNode(462, 162, 2);
+		this.addLane(1, 2);
+		this.addLane(2, 3);
+		this.addNode(490, 124, 4);
+		this.addLane(3, 4);
+		this.addNode(491, 141, 5);
+		this.addLane(4, 5);
+		this.addNode(503, 142, 6);
+		this.addLane(5, 6);
+		this.addNode(496, 150, 7);
+		this.addLane(7, 5);
+		this.addLane(7, 6);
+		this.addNode(497, 170, 8);
 		
 		this.addLane(7, 8);
-		this.addNode(492, 180, "9");
-		this.addNode(480, 174, "10");
-		this.addNode(483, 188, "11");
-		
-		//added overloaded addNode method to add by integer
+		this.addNode(492, 180, 9);
+		this.addNode(480, 174, 10);
+		this.addNode(483, 188, 11);
 		
 		this.addLane(2, 10);
 		this.addLane(10, 9);
@@ -199,24 +167,21 @@ public class GVSUMap {
 		this.addLane(11, 14);
 		this.addNode(440, 119, "Alumni House");
 		this.addLane("428,124",	"440,119");
+		
+		
+		
+		
+		
+		
+		
 
 		
-		/**
-		 * Louis Nodes 
-		 */
 		
-		this.addNode(558, 167, "19");
-		this.addNode(544, 180, "20");
-		this.addNode(557, 177, "21");
 		
-		this.addNode(564, 175, "22");
-		this.addNode(566, 190, "23");
-		this.addNode(573, 176, "24");
 		
-		this.addNode(588, 174, "25");
-		this.addNode(594, 165, "26");
-			
-
+		this.addNode(558, 167, 19);
+		this.addNode(544, 180, 20);
+		this.addNode(557, 177, 22);
 		this.addNode(520, 201, 16);
 		this.addNode(514, 129, 17);
 		this.addLane(6, 17);
@@ -239,24 +204,14 @@ public class GVSUMap {
 		this.addNode(573, 176, 24);
 		this.addLane(22, 24);
 
-		/**
-		 * @author Louis Sullivan
-		 * Add nodes 25 through 38
-		 */
-		  this.addNode(588, 174, "25");
-		  this.addNode(594, 165, "26");
-		  //add node 27
-		  this.addNode(582, 187, "27");
-		  //add node 28
-		  this.addNode(591, 198, "28");
-		  //add node 29
-		  this.addNode(577, 190, "29");
-		  //add node 30
-		  this.addNode(599, 199, "30");
-		  //add node 31
-		  this.addNode(607, 197, "31");
-		  //add node 32
-		  this.addNode(607, 154, "32");
+		this.addNode(588, 174, 25);
+		this.addNode(594, 165, 26);
+		this.addNode(582, 187, 27);
+		this.addNode(591, 198, 28);
+		this.addNode(577, 190, 29);
+		this.addNode(599, 199, 30);
+		this.addNode(607, 197, 31);
+		this.addNode(607, 154, "32");
 		  //add node 33
 		  this.addNode(567, 128, "33");
 		  //add node 34
@@ -269,11 +224,6 @@ public class GVSUMap {
 		  this.addNode(632, 168, "37");
 		  //add node 38
 		  this.addNode(624, 161, "38");
-		  
-
-		  /**
-		   * Add nodes 39 through 75
-		   */
 		  //add node 39
 		  this.addNode(651, 166, "39");
 		  //add node 40
@@ -418,7 +368,7 @@ public class GVSUMap {
 	      this.addLane(68, 66);
 	      this.addLane(69, 66);
 			  
-			  this.addLane(69,68);
+	      this.addLane(69,68);
 	      this.addLane(70, 68);
 	      this.addLane(71, 70);
 	      this.addLane(72, 70);

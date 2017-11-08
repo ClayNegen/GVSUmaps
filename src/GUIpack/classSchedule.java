@@ -193,7 +193,7 @@ public class classSchedule extends JFrame {
 		contentPane.add(panel_1);
 		
 
-		ImageIcon IMG_PATH1 = new ImageIcon("src/gvsuMaps.png");
+		ImageIcon IMG_PATH1 = new ImageIcon("src/gvsuMaps.jpg");
 		
 		JLabel label = new JLabel("", IMG_PATH1, JLabel.CENTER);
 		

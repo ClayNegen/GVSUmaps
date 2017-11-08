@@ -34,7 +34,7 @@ public class GUI extends JPanel {
 
 
 	//probably temporary//
-	public DijkstraAlgorithm djk;
+	public MapAlgorithmEngine djk;
 
 	public GVSUMap map;
 	//maybe not :P //
@@ -103,9 +103,9 @@ public class GUI extends JPanel {
 		//testing connection between djikstra and linecontroller
 
 //		map = new GVSUMap();
-//		djk = new DijkstraAlgorithm(map, img);
-//		djk.execute(65);
-//		LinkedList<MapNode> path = djk.getPath(map.getNode(48));
+//		djk = new MapAlgorithmEngine(map, img);
+//		djk.execute(3);
+//		LinkedList<MapNode> path = djk.getPath(map.getNode(50));
 //		
 //		djk.drawPath(path);
 //		

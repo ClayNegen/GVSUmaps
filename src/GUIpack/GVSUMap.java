@@ -41,27 +41,39 @@ public class GVSUMap {
 	}
 	
 	/***************************************************************************
-     * Looks up a node by id from the original map.
+     * Looks up a node by the nodeInfo member of MapNode from the original map.
      * 
-     * @param id String: The id of the node to be looked up
+     * @param info int: The nodeInfo of the node to be looked up
      * 
      * @return MapNode: The node desired
      **************************************************************************/
-	//temporary testing solution
 	public MapNode getNode(final int info) {
 		for (MapNode node: nodeList) {
 			if (node.getNodeInfo().equals(Integer.toString(info))) {
 				return node;
 			}		
 		}
-		
+		//error checking required
 		return null;
 	}
 	
-	
-	//now error check here
-	// end temp solultion
-	
+	/***************************************************************************
+     * Overload of getNode to take a string as parameter instead of integer.
+     * (functionally identical)
+     * 
+     * @param info String: The nodeInfo of the node to be looked up
+     * 
+     * @return MapNode: The node desired
+     **************************************************************************/
+	public MapNode getNode(final String info) {
+		for (MapNode node: nodeList) {
+			if (node.getNodeInfo().equals(info)) {
+				return node;
+			}		
+		}
+		//error checking required
+		return null;
+	}
 	
 	public void addLane(String sourceLocId, String destLocId) {
 		MapNode sourceNode = null;
@@ -98,7 +110,7 @@ public class GVSUMap {
 		}
 
 		for (MapNode node : nodeList) {
-			if (node.getNodeInfo().equals(Integer.toString(sourceLocNum))) {
+			if (node.getNodeInfo().equals(Integer.toString(destLocNum))) {
 				destinationNode = node;
 			}
 		}

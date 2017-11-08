@@ -9,15 +9,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * This class creates an object called DjikstraAlgorithim to perform Djikstras famous algorithim to
- * solve the shortest path problem. In this case it is being applied to a GVSUMap object with nodes
- * and edges.
+/*******************************************************************************
+ * This class creates an object called DjikstraAlgorithim to perform Djikstras 
+ * famous algorithm to solve the shortest path problem. In this case it is being
+ * applied to a GVSUMap object with nodes and edges.
  * 
  * @author Louis Sullivan
- *  @author Clay Negen
+ * @author Clay Negen
  * @author Douglas Wallim
- */
+ ******************************************************************************/
 public class DijkstraAlgorithm {
 	
 	/** Instance variable to hold all the nodes in the graph. */
@@ -27,38 +27,39 @@ public class DijkstraAlgorithm {
     private  List<Edge> edges;
     
     /** Instance variable to keep track of which nodes have already been checked
-     * in the algorithim. */
+     * in the algorithm. */
     private Set<MapNode> settledNodes;
     
-    /** Instance variable to keep track of all nodes which have not been used yet
-     * in the algorithim. */
+    /** Instance variable to keep track of all nodes which have not been used 
+     * yet in the algorithm. */
     private Set<MapNode> unSettledNodes;
     
-    /** Instance variable to hold all nodes that have edges to the current node being
-     * evaluated. */
+    /** Instance variable to hold all nodes that have edges to the current 
+     * node being evaluated. */
     private Map<MapNode, MapNode> predecessors;
     
-    /**Instance variable to hold all the distances corresponding from each node in
-     * predecessors to the current node being evaluated. */
+    /**Instance variable to hold all the distances corresponding from each 
+     * node in predecessors to the current node being evaluated. */
     private Map<MapNode, Double> distance;
 
-    /**
-     * Constructor for a DijkstraAlgorithm object that initializes nodes and edges
-     * with a copy of the information held in the graph object passed in
-     * @param graph
-     */
-    public DijkstraAlgorithm(GVSUMap graph) {
-        // create a copy of the array so that we can operate on this array
+    /***************************************************************************
+     * Constructor that creates a copy of the input map so that we can alter the
+     * arrays within.
+     * 
+     * @param graph GVSUMap: The map on which the algorithm is going to be run
+     **************************************************************************/
+    public DijkstraAlgorithm(final GVSUMap graph) {
         this.nodes = new ArrayList<MapNode>(graph.getNodeList());
         this.edges = new ArrayList<Edge>(graph.getEdgeList());
     }
     
-    /**
-     * Primary command to run the Djikstras on the current node storing its shortest path
-     * to every other node in the graph
-     * @param name
-     */
-    public void execute(String name) {
+    /***************************************************************************
+     * This method runs Djikstras algorithm from the source node to all other 
+     * nodes in the map loading the results into the predecessors HashMap.
+     * 
+     * @param name String: This string is ID of the source node desired
+     **************************************************************************/
+    public void execute(final String name) {
         settledNodes = new HashSet<MapNode>();
         unSettledNodes = new HashSet<MapNode>();
         distance = new HashMap<MapNode, Double>();
@@ -75,11 +76,14 @@ public class DijkstraAlgorithm {
             findMinimalDistances(node);
         }
     }
-/**
- * 
- * @param node
- */
-    private void findMinimalDistances(MapNode node) {
+    
+    /***************************************************************************
+     * This method does most of the work for the algorithm determining the 
+     * minimal distance from all neighboring nodes.
+     * 
+     * @param node MapNode: The node from which to start
+     **************************************************************************/
+    private void findMinimalDistances(final MapNode node) {
         List<MapNode> adjacentNodes = getNeighbors(node);
         for (MapNode target : adjacentNodes) {
             if (getShortestDistance(target) > getShortestDistance(node)
@@ -92,13 +96,17 @@ public class DijkstraAlgorithm {
         }
 
     }
-/**
- * 
- * @param node
- * @param target
- * @return
- */
-    private double getDistance(MapNode node, MapNode target) {
+    
+    /***************************************************************************
+     * The getDistance method does the calculation between two nodes to see what
+     * the actual distance is.
+     * 
+     * @param node MapNode: This node is the first of the two nodes
+     * @param target MapNode: The second of the two nodes
+     * 
+     * @return double: The edge weight between the two nodes
+     **************************************************************************/
+    private double getDistance(final MapNode node, final MapNode target) {
         for (Edge edge : edges) {
             if (edge.getSource().equals(node)
                     && edge.getDestination().equals(target)) {
@@ -107,12 +115,18 @@ public class DijkstraAlgorithm {
         }
         throw new RuntimeException("Should not happen");
     }
-/**
- * 
- * @param node
- * @return
- */
-    private List<MapNode> getNeighbors(MapNode node) {
+    
+    /***************************************************************************
+     * Returns a list of all nodes that have an edge connecting them to the 
+     * input node. Works in close conjunction with the findMinimalDistance 
+     * method.
+     * 
+     * @param node MapNode: The node we want to find all the nodes that are
+     * connected to it
+     * 
+     * @return List<MapNode>: A list of all connected nodes
+     **************************************************************************/
+    private List<MapNode> getNeighbors(final MapNode node) {
         List<MapNode> neighbors = new ArrayList<MapNode>();
         for (Edge edge : edges) {
             if (edge.getSource().equals(node)
@@ -123,17 +137,21 @@ public class DijkstraAlgorithm {
         return neighbors;
     }
 
-/**
- * 
- * @param MapNodees
- * @return
- */
-    private MapNode getMinimum(Set<MapNode> MapNodees) {
+    /***************************************************************************
+     * Compares the current shortest distance from one node to another to the 
+     * next possible distance.
+     * 
+     * @param mapNodes Set<MapNode>: The set of MapNodes with the keys 
+     * representing the cumulative distance to the source node
+     * 
+     * @return MapNode: The MapNode with the shortest distance
+     **************************************************************************/
+    private MapNode getMinimum(final Set<MapNode> mapNodes) {
         MapNode minimum = null;
-        for (MapNode node : MapNodees) {
-            if (minimum == null) {
-                minimum = node;
-            } else {
+        for (MapNode node : mapNodes) {
+        	if (minimum == null) {
+        		minimum = node;
+        	} else {
                 if (getShortestDistance(node) < getShortestDistance(minimum)) {
                     minimum = node;
                 }
@@ -141,37 +159,45 @@ public class DijkstraAlgorithm {
         }
         return minimum;
     }
-/**
- * 
- * @param MapNode
- * @return
- */
-    private boolean isSettled(MapNode MapNode) {
-        return settledNodes.contains(MapNode);
+    
+    /***************************************************************************
+     * Checks to see if a given node has been settled by seeing if it is 
+     * contained within the settledNodes list.
+     * 
+     * @param node MapNode: The node to be checked
+     * 
+     * @return boolean: A boolean representing whether a node has been settled
+     **************************************************************************/ 
+    private boolean isSettled(final MapNode node) {
+        return settledNodes.contains(node);
     }
-/**
- * 
- * @param destination
- * @return
- */
-    private double getShortestDistance(MapNode destination) {
+
+    /***************************************************************************
+     * Gets the distance from a node to another specific node.
+     * 
+     * @param destination MapNode: The node to which the distance from the
+     * source node is desired 
+     * 
+     * @return boolean: A boolean representing whether a node has been settled
+     **************************************************************************/
+    private double getShortestDistance(final MapNode destination) {
         Double d = distance.get(destination);
         if (d == null) {
             return Integer.MAX_VALUE;
-        } 
-        else {
+        } else {
             return d;
         }
     }
-
     
-    /**
+    /***************************************************************************
      * This method returns the path from the source to the selected target and
-     * NULL if no path exists
-     * @param target
-     * @return
-     */
-    public LinkedList<MapNode> getPath(MapNode target) {
+     * NULL if no path exists.
+     * 
+     * @param target MapNode: The destination of the shortest path desired
+     * 
+     * @return LinkedList<MapNode>: A list of nodes along the path
+     **************************************************************************/
+    public LinkedList<MapNode> getPath(final MapNode target) {
         LinkedList<MapNode> path = new LinkedList<MapNode>();
         MapNode step = target;
         // check if a path exists
@@ -183,19 +209,23 @@ public class DijkstraAlgorithm {
             step = predecessors.get(step);
             path.add(step);
         }
-        // Put it into the correct order
+   
         Collections.reverse(path);
         return path;
     }
-    /**
+    
+    /***************************************************************************
+     * Looks up a node by id from the original map.
      * 
-     * @param input
-     * @return
-     */
-    private MapNode findByNodeInfo(String input){
+     * @param id String: The id of the node to be looked up
+     * 
+     * @return MapNode: The node desired
+     **************************************************************************/
+    private MapNode findByNodeInfo(final String id) {
     	for (MapNode node : nodes) {
-    		if (node.getNodeInfo().equals(input))
+    		if (node.getNodeInfo().equals(id)) {
     			return node;
+    		}
         }
     	return null;
     	//check for errors here, maybe

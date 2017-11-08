@@ -19,8 +19,39 @@ import java.util.List;
  * @author Clay Negen
  * @author Douglas Wallim
  */
+
+
 public class GUI extends JPanel implements ActionListener {
-	JButton one = new JButton("Classes");
+	
+	public static void main(String[] args) throws IOException {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					GUI gui = new GUI();
+					gui.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		
+		
+		
+//		
+//		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(testMap);
+//        dijkstra.execute(nodes.get(0));
+//        LinkedList<MapNode> path = dijkstra.getPath(nodes.get(4));
+//
+//        for (MapNode node : path) {
+//            System.out.println(node);
+//        }
+//		
+		System.out.println("Doing good Captain");
+	}
+	
+	
+	
+	JButton JButtonClasses = new JButton("Add Classes");
 	JButton two = new JButton("Bus Stops");
 	JButton three = new JButton("Update Information");
 	JLabel blank1 = new JLabel("");
@@ -29,7 +60,7 @@ public class GUI extends JPanel implements ActionListener {
 	User user = new User();
 	
 	public static String IMG_PATH = "src/gvsuMaps.jpg";
-	public static String IMG_PATH1 = "src/GVmaps.png";
+	public static String IMG_PATH1 = "src/GVMaps.png";
 	
 	/**
 	 * @see GUI creates an interactive user experiance that allows user to click between menu, classes, buss stops and update information
@@ -43,12 +74,13 @@ public class GUI extends JPanel implements ActionListener {
 			
 	        JFrame frame = new JFrame("GVSU Maps");
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.setSize(680, 600);
-			frame.setVisible(true);
+			
 			
 			JPanel panel = new JPanel();
+			frame.setBounds(680, 600, 1090, 1000);
+			frame.setVisible(true);
 			panel.setLayout(new BorderLayout());
-			panel.setOpaque(true);
+			//panel.setOpaque(true);
 			panel.setBackground(Color.blue);
 			
 			JPanel items = new JPanel();
@@ -58,10 +90,14 @@ public class GUI extends JPanel implements ActionListener {
 			JTextPane logoPicture = new JTextPane();
 			logoPicture.insertIcon ( new ImageIcon ( getScaledImage(logo, 245, 126) ) );
 			items.add(logoPicture);
-			items.add(one);
+			items.add(JButtonClasses);
 			items.add(two);
 			items.add(three);
 			panel.add(items, BorderLayout.EAST);
+			
+			/**
+			 * Add action listener to JButtonClasses to run classSchedule GUI
+			 */
 			
 			JTextPane txtpnPicture = new JTextPane();
 			
@@ -88,6 +124,7 @@ public class GUI extends JPanel implements ActionListener {
 			panel.add(txtpnPicture, BorderLayout.WEST);
 			
 			three.addActionListener(this);
+			JButtonClasses.addActionListener(this);
 			frame.add(panel);
 		}
 
@@ -96,24 +133,7 @@ public class GUI extends JPanel implements ActionListener {
 		@see initializes and runs GUI
 		 @throws IOException 
 		************************************************************/
-		public static void main(String[] args) throws IOException {
-			GUI gui = new GUI();
-			gui.setVisible(true);
-			
-			GVSUMap testMap = new GVSUMap();
-			
-			testMap.initialize();
-//			
-//			DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(testMap);
-//	        dijkstra.execute(nodes.get(0));
-//	        LinkedList<MapNode> path = dijkstra.getPath(nodes.get(4));
-//
-//	        for (MapNode node : path) {
-//	            System.out.println(node);
-//	        }
-//			
-			System.out.println("Doing good Captain");
-		}
+		
 		/************************************************************
 		@see Action performed Method; Declares what happens upon button presses
 		************************************************************/
@@ -122,9 +142,18 @@ public class GUI extends JPanel implements ActionListener {
 			Info info = new Info();
 			info.setVisible(false);
 			
+			classSchedule  classScheduleGUI = new classSchedule();
+			classScheduleGUI.setVisible(false);
+			
 			if (source == three){
 				info.setVisible(true);
 			}
+			
+			if (source == JButtonClasses) {
+				classScheduleGUI.setVisible(true);
+			}
+					
+				
 			/*if (source == Info.submit){
 				String c1 = Info.Class1.getText();
 				String c2 = Info.Class2.getText();

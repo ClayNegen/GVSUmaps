@@ -21,7 +21,7 @@ import java.util.List;
  */
 
 
-public class GUI extends JPanel implements ActionListener {
+public class GUI extends JPanel {
 	
 	public static void main(String[] args) throws IOException {
 		EventQueue.invokeLater(new Runnable() {
@@ -134,9 +134,27 @@ public class GUI extends JPanel implements ActionListener {
 		 @throws IOException 
 		************************************************************/
 		
+	
 		/************************************************************
 		@see Action performed Method; Declares what happens upon button presses
 		************************************************************/
+	
+		JButtonClasses.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				classSchedule ClassSchedule = new classSchedule();
+				ClassSchedule.setVisible(true);
+			}
+		});
+		
+		three.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Info info = new Info();
+				info.setVisible(true);
+			}
+		});
+	
+	/*
+	
 		public void actionPerformed(ActionEvent e) {
 			Object source = e.getSource();
 			Info info = new Info();
@@ -152,7 +170,7 @@ public class GUI extends JPanel implements ActionListener {
 			if (source == JButtonClasses) {
 				classScheduleGUI.setVisible(true);
 			}
-					
+			*/		
 				
 			/*if (source == Info.submit){
 				String c1 = Info.Class1.getText();

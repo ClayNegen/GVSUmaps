@@ -42,6 +42,8 @@ public class LineController {
 		}
 	}
 	
+	
+	
 	private List<CoordinateTuple> getYPoints(int x1, int x2, int y1, int y2) {		
 		List<CoordinateTuple> line = new ArrayList<CoordinateTuple>();
 		

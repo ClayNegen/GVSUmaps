@@ -229,6 +229,7 @@ public class GVSUMap {
 		this.addNode(557, 177, 21);
 		this.addLane(20, 21);
 		this.addLane(20, 19);
+		
 		this.addLane(19, 21);
 		this.addNode(564, 175, 22);
 		this.addLane(19, 22);

@@ -80,7 +80,7 @@ public class GUI extends JPanel implements ActionListener {
 			controller.drawDiagonal(_22, _24);
 			
 			img = controller.getCanvas();
-			
+
 			//end testing segments
 			
 			

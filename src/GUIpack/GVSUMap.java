@@ -19,6 +19,8 @@ import java.util.Set;
 public class GVSUMap {
 	private List<MapNode> nodeList;
 	private List<Edge> edgeList;
+
+
 	
 	/**
 	 * 
@@ -29,6 +31,7 @@ public class GVSUMap {
 		this.nodeList = nodeList;
 		this.edgeList = edgeList;
 	}
+
 	/**
 	 * 
 	 * @param nodeList
@@ -36,10 +39,6 @@ public class GVSUMap {
 	public GVSUMap(List<MapNode> nodeList){
 		this.nodeList = nodeList;
 		edgeList = new ArrayList<Edge>();
-	}
-	
-	private void addNode(int x, int y){
-		MapNode temp = new MapNode(x, y);
 	}
 
 
@@ -62,7 +61,6 @@ public class GVSUMap {
 	public void addNode(int x, int y, String id){
 		MapNode temp = new MapNode(x, y, id);
 		nodeList.add(temp);
-
 	}
 	
 	private void addNode(int x, int y, int id) {
@@ -85,13 +83,14 @@ public class GVSUMap {
 	public List<Edge> getEdgeList(){
 		return edgeList;
 	}
+
 	/**
 	 * 
 	 * @param sourceLocId
 	 * @param destLocId
 	 */
 
-	public void addLane(int sourceLocId, int destLocId) {
+	public void addLane(String sourceLocId, String destLocId) {
 		MapNode sourceNode = null;
 		MapNode destinationNode = null;
 		for (MapNode node : nodeList) {
@@ -99,32 +98,46 @@ public class GVSUMap {
 				sourceNode = node;
 			}
 		}
-	}
 
-	
-	public void addLane(String sourceLocId, String destLocId) {
-        MapNode sourceNode = null;
-        MapNode destinationNode = null;
-		for(MapNode node: nodeList){
-        	if (node.getNodeId().equals(sourceLocId)){
-        		sourceNode = node;
-        	}
-        }
-		
-		for(MapNode node: nodeList){
-        	if (node.getNodeId().equals(destLocId)){
-        		destinationNode = node;
-        	}
-        }
+		for (MapNode node : nodeList) {
+			if (node.getNodeId().equals(destLocId)) {
+				destinationNode = node;
+			}
+		}
 
-		if(sourceNode != null && destinationNode != null){
+		if (sourceNode != null && destinationNode != null) {
 			Edge lane = new Edge(sourceNode, destinationNode);
 			edgeList.add(lane);
 			lane = new Edge(destinationNode, sourceNode);
 			edgeList.add(lane);
 			return;
 		}
+		throw new NullPointerException();
+	}
+
+	public void addLane(int sourceLocNum, int destLocNum) {
+		MapNode sourceNode = null;
+		MapNode destinationNode = null;
+		for (MapNode node : nodeList) {
+			if (node.getNodeInfo().equals(Integer.toString(sourceLocNum))) {
+				sourceNode = node;
+			}
 		}
+
+		for (MapNode node : nodeList) {
+			if (node.getNodeInfo().equals(Integer.toString(sourceLocNum))) {
+				destinationNode = node;
+			}
+		}
+
+		if (sourceNode != null && destinationNode != null) {
+			Edge lane = new Edge(sourceNode, destinationNode);
+			edgeList.add(lane);
+			lane = new Edge(destinationNode, sourceNode);
+			edgeList.add(lane);
+			return;
+		}
+	}
 
 	public void initialize(){
 		this.addNode(388, 62, "");
@@ -216,6 +229,7 @@ public class GVSUMap {
 		this.addNode(557, 177, 21);
 		this.addLane(20, 21);
 		this.addLane(20, 19);
+		
 		this.addLane(19, 21);
 		this.addNode(564, 175, 22);
 		this.addLane(19, 22);

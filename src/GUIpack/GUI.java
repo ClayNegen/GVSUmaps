@@ -80,7 +80,7 @@ public class GUI extends JPanel implements ActionListener {
 			controller.drawDiagonal(_22, _24);
 			
 			img = controller.getCanvas();
-			
+
 			//end testing segments
 			
 			
@@ -185,12 +185,12 @@ public class GUI extends JPanel implements ActionListener {
 					String c1 = Class01.getText();
 					String c2 = Class02.getText();
 					if (c1.length() > 0){
-						Location first = new Location(c1, 1, 1);
-						user.setClass1(first);
+						//Location first = new Location(c1, 1, 1);
+						//user.setClass1(first);
 					}
 					if (c2.length() > 0){
-						Location second = new Location(c2, 1, 1);
-						user.setClass1(second);
+						//Location second = new Location(c2, 1, 1);
+						//user.setClass1(second);
 					}
 				}
 			}

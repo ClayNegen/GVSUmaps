@@ -50,7 +50,7 @@ public class LineController {
 		
 		return line;
 	}
-	
+		
 	private int getYValue(int x, double slope, int xRef, int yRef) {
 		int yVal;
 		double yIntercept;
@@ -74,8 +74,9 @@ public class LineController {
 				}
 	}
 	
-	private void reset() {
+	private BufferedImage reset() {
 		canvas = original;
+		return original;
 	}
 	
 	public BufferedImage getCanvas() {

@@ -46,7 +46,6 @@ public class GUI extends JPanel implements ActionListener {
 //            System.out.println(node);
 //        }
 //		
-		System.out.println("Doing good Captain");
 	}
 	
 	
@@ -111,16 +110,18 @@ public class GUI extends JPanel implements ActionListener {
 			MapNode _23 = new MapNode(566, 190, "23");
 			MapNode _24 = new MapNode(573, 176, "24");
 			
+			
 			controller.drawDiagonal(_21, _22);
 			controller.drawDiagonal(_22, _23);
 			controller.drawDiagonal(_22, _24);
+			
 			
 			img = controller.getCanvas();
 
 			//end testing segments
 			
 			
-			txtpnPicture.insertIcon ( new ImageIcon ( img ) );
+			txtpnPicture.insertIcon(new ImageIcon(img));
 			panel.add(txtpnPicture, BorderLayout.WEST);
 			
 			three.addActionListener(this);

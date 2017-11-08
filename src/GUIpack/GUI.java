@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.text.*;
 
 import java.util.ArrayList;
+import java.util.EventObject;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,9 +21,21 @@ import java.util.List;
  * @author Douglas Wallim
  */
 
+/************************************************************
+@category Main Method
+@see initializes and runs GUI
+ @throws IOException 
+************************************************************/
 
-public class GUI extends JPanel implements ActionListener {
+/************************************************************
+@see Action performed Method; Declares what happens upon button presses
+************************************************************/
+public class GUI extends JPanel //implements ActionListener 
+{
+	Boolean THREEFRAME, JButtonClassesFrame;
 	
+	
+
 	public static void main(String[] args) throws IOException {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -50,6 +63,7 @@ public class GUI extends JPanel implements ActionListener {
 	
 	
 	
+	
 	JButton JButtonClasses = new JButton("Add Classes");
 	JButton two = new JButton("Bus Stops");
 	JButton three = new JButton("Update Information");
@@ -62,18 +76,35 @@ public class GUI extends JPanel implements ActionListener {
 	public static String IMG_PATH1 = "src/GVMaps.png";
 	
 	/**
+	 * @return 
 	 * @see GUI creates an interactive user experiance that allows user to click between menu, classes, buss stops and update information
 	 * @throws IOException
 	 */
+	public Boolean getResetTHREEFRAME(Boolean tmp) {
+		THREEFRAME = tmp;
+		return THREEFRAME;
+	}
+	
+	public Boolean getResetJButtonClassesFrame(Boolean tmp) {
+		JButtonClassesFrame = tmp;
+		return JButtonClassesFrame;
+	}
+	
 		public GUI() throws IOException {
+			 
+			
+			
+			
 			BufferedImage img = ImageIO.read(new File(IMG_PATH));
 	        ImageIcon icon = new ImageIcon(img);
 	        BufferedImage logo = ImageIO.read(new File(IMG_PATH1));
 	        ImageIcon logoIcon = new ImageIcon(logo);
 			
 	        JFrame frame = new JFrame("GVSU Maps");
+	        
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			
+	       
+	        
 			
 			JPanel panel = new JPanel();
 			frame.setBounds(680, 600, 1090, 1000);
@@ -124,35 +155,52 @@ public class GUI extends JPanel implements ActionListener {
 			txtpnPicture.insertIcon(new ImageIcon(img));
 			panel.add(txtpnPicture, BorderLayout.WEST);
 			
-			three.addActionListener(this);
-			JButtonClasses.addActionListener(this);
+			//three.addActionListener(this);
+			//JButtonClasses.addActionListener(this);
+			//JButtonClasses.addActionListener(this);
 			frame.add(panel);
-		}
-
-		/************************************************************
-		@category Main Method
-		@see initializes and runs GUI
-		 @throws IOException 
-		************************************************************/
 		
-		/************************************************************
-		@see Action performed Method; Declares what happens upon button presses
-		************************************************************/
-		public void actionPerformed(ActionEvent e) {
+		
+		JButtonClasses.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				classSchedule ClassSchedule = new classSchedule();
+				ClassSchedule.setVisible(true);
+			}
+		});
+		
+		three.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Info info = new Info();
+				info.setVisible(true);
+			}
+		});
+		
+		
+			
+			
+		
+		/*public void actionPerformed(ActionEvent e) {
+			
+			*//**
+			 * Using booleans so multiple button presses won't open more than 1 window
+			 *//*
+			
+			THREEFRAME = true;
+			JButtonClassesFrame = true;
+			
 			Object source = e.getSource();
 			Info info = new Info();
 			info.setVisible(false);
 			
-			classSchedule  classScheduleGUI = new classSchedule();
-			classScheduleGUI.setVisible(false);
 			
-			if (source == three){
+			
+			
+			if (THREEFRAME && source == three){
 				info.setVisible(true);
-			}
+				THREEFRAME = false;
+				
+			}*/
 			
-			if (source == JButtonClasses) {
-				classScheduleGUI.setVisible(true);
-			}
 					
 				
 			/*if (source == Info.submit){

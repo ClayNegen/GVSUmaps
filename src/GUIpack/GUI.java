@@ -31,22 +31,29 @@ import java.util.List;
 @see Action performed Method; Declares what happens upon button presses
  ************************************************************/
 public class GUI extends JPanel {
-
-
-	//probably temporary//
-	public MapAlgorithmEngine djk;
-
-	public GVSUMap map;
-	//maybe not :P //
 	
-	/** Variable to hold a BufferedImage to be displayed to the user */
-	private BufferedImage mapImage;
+	/** Controller to talk to the model */
+	public DirectionsController controller;
 	
-	/** String to designate where to find the map to buffer */
-	private final String IMG_PATH = "src/gvsuMaps.jpg";
-
 	Boolean THREEFRAME, JButtonClassesFrame;
+	JButton JButtonClasses = new JButton("Add Classes");
+	JButton two = new JButton("Bus Stops");
+	JButton three = new JButton("Update Information");
+	JLabel blank1 = new JLabel("");
+	JLabel blank2 = new JLabel("");
+	JLabel blank3 = new JLabel("");
+	User user = new User();
+	public static String IMG_PATH1 = "src/GVMaps.png";
+	public Boolean getResetTHREEFRAME(Boolean tmp) {
+		THREEFRAME = tmp;
+		return THREEFRAME;
+	}
 
+	public Boolean getResetJButtonClassesFrame(Boolean tmp) {
+		JButtonClassesFrame = tmp;
+		return JButtonClassesFrame;
+	}
+	
 	public static void main(String[] args) throws IOException {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -60,71 +67,30 @@ public class GUI extends JPanel {
 		});
 
 	}
-
 	
-
-
-	JButton JButtonClasses = new JButton("Add Classes");
-	JButton two = new JButton("Bus Stops");
-	JButton three = new JButton("Update Information");
-	JLabel blank1 = new JLabel("");
-	JLabel blank2 = new JLabel("");
-	JLabel blank3 = new JLabel("");
-	User user = new User();
-
-	
-	public static String IMG_PATH1 = "src/GVMaps.png";
-
-	/**
-	 * @return 
-	 * @see GUI creates an interactive user experiance that allows user to click between menu, classes, buss stops and update information
-	 * @throws IOException
-	 */
-	public Boolean getResetTHREEFRAME(Boolean tmp) {
-		THREEFRAME = tmp;
-		return THREEFRAME;
-	}
-
-	public Boolean getResetJButtonClassesFrame(Boolean tmp) {
-		JButtonClassesFrame = tmp;
-		return JButtonClassesFrame;
-	}
-
 	public GUI() throws IOException {
-		BufferedImage img = ImageIO.read(new File(IMG_PATH));
-
+		controller = new DirectionsController(ImageIO.read
+				(new File("src/gvsuMaps.jpg")));
+	
+		
+		//sample usage of the DirectionsController
+		controller.getDirections("5", "50");
+		controller.reset();
+		controller.getDirections("Alumni House", "Edward J. Frey LC");
+		//end sample
 		
 		BufferedImage logo = ImageIO.read(new File(IMG_PATH1));
 		ImageIcon logoIcon = new ImageIcon(logo);
-
-
-
-
-		//testing connection between djikstra and linecontroller
-
-//		map = new GVSUMap();
-//		djk = new MapAlgorithmEngine(map, img);
-//		djk.execute(3);
-//		LinkedList<MapNode> path = djk.getPath(map.getNode(50));
-//		
-//		djk.drawPath(path);
-//		
-//		img = djk.getUpdatedImage();
-
-		//end testing
 
 
 		JFrame frame = new JFrame("GVSU Maps");
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
-
 		JPanel panel = new JPanel();
 		frame.setBounds(680, 600, 1090, 1000);
 		frame.setVisible(true);
 		panel.setLayout(new BorderLayout());
-		//panel.setOpaque(true);
 		panel.setBackground(Color.blue);
 
 		JPanel items = new JPanel();
@@ -145,7 +111,7 @@ public class GUI extends JPanel {
 
 		JTextPane txtpnPicture = new JTextPane();
 
-		txtpnPicture.insertIcon(new ImageIcon(img));
+		txtpnPicture.insertIcon(new ImageIcon(controller.getImage()));
 		panel.add(txtpnPicture, BorderLayout.WEST);
 
 		//three.addActionListener(this);
@@ -168,15 +134,8 @@ public class GUI extends JPanel {
 			}
 		});
 
-
-
-
-
 		/*public void actionPerformed(ActionEvent e) {
 
-		 *//**
-		 * Using booleans so multiple button presses won't open more than 1 window
-		 *//*
 
 			THREEFRAME = true;
 			JButtonClassesFrame = true;
@@ -274,10 +233,12 @@ public class GUI extends JPanel {
 	 * @return Image 
 	 */
 	Image getScaledImage(Image Img, int wt, int ht) {
-		BufferedImage resizedImg = new BufferedImage(wt, ht, BufferedImage.TYPE_INT_ARGB);
+		BufferedImage resizedImg = new BufferedImage(wt, ht,
+				BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = resizedImg.createGraphics();
 
-		g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+		g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
+				RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 		g2.drawImage(Img, 0, 0, wt, ht, null);
 		g2.dispose();
 

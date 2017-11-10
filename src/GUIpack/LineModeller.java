@@ -1,22 +1,26 @@
 package GUIpack;
 
 import java.util.List;
+
+import javax.imageio.ImageIO;
+
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class LineModeller {
 	
 	private BufferedImage canvas;
 	
-	private final BufferedImage original;
+	private final String original = "src/gvsuMaps.jpg";
 	
 	private final int width;
 	
 	private final int height;
 	
 	public LineModeller (BufferedImage image) {
-		original = image;
 		canvas = image;
 		width = canvas.getWidth();
 		height = canvas.getHeight();
@@ -128,9 +132,9 @@ public class LineModeller {
 				}
 	}
 	
-	public BufferedImage reset() {
-		canvas = original;
-		return original;
+	public BufferedImage reset() throws IOException  {
+		canvas = ImageIO.read(new File(original));
+		return canvas;
 	}
 	
 	public BufferedImage getCanvas() {

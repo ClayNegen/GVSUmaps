@@ -15,11 +15,9 @@ import java.util.Set;
  * famous algorithm to solve the shortest path problem. In this case it is being
  * applied to a GVSUMap object with nodes and edges.
  * 
- * @author Louis Sullivan
- * @author Clay Negen
  * @author Douglas Wallim
  ******************************************************************************/
-public class MapAlgorithmEngine {
+public class MapEngine {
 	
 	/** This is an unchanged copy of the original map to reset to. */
 	private final GVSUMap original;
@@ -52,7 +50,7 @@ public class MapAlgorithmEngine {
      * 
      * @param graph GVSUMap: The map on which the algorithm is going to be run
      **************************************************************************/
-    public MapAlgorithmEngine(final GVSUMap graph) {
+    public MapEngine(final GVSUMap graph) {
         this.nodes = new ArrayList<MapNode>(graph.getNodeList());
         this.edges = new ArrayList<Edge>(graph.getEdgeList());
 
@@ -66,38 +64,13 @@ public class MapAlgorithmEngine {
      * @param name String: This string is nodeInfo member of the source node
      * desired
      **************************************************************************/
-    public void execute(final String name) {
+    public void execute(final MapNode source) {
         settledNodes = new HashSet<MapNode>();
         unSettledNodes = new HashSet<MapNode>();
         distance = new HashMap<MapNode, Double>();
         predecessors = new HashMap<MapNode, MapNode>();
         
-        MapNode source = original.getNode(name);
-        
-        distance.put(source, 0.0);
-        unSettledNodes.add(source);
-        while (unSettledNodes.size() > 0) {
-            MapNode node = getMinimum(unSettledNodes);
-            settledNodes.add(node);
-            unSettledNodes.remove(node);
-            findMinimalDistances(node);
-        }
-    }
-    
-    /***************************************************************************
-     * Overload of execute to accept an integer instead of String. (functionally
-     * identical)
-     * 
-     * @param name String: This string is nodeInfo member of the source node
-     * desired
-     **************************************************************************/
-    public void execute(final int name) {
-        settledNodes = new HashSet<MapNode>();
-        unSettledNodes = new HashSet<MapNode>();
-        distance = new HashMap<MapNode, Double>();
-        predecessors = new HashMap<MapNode, MapNode>();
-        
-        MapNode source = original.getNode(name);
+        //MapNode source = original.getNode(name);
         
         distance.put(source, 0.0);
         unSettledNodes.add(source);
@@ -246,8 +219,16 @@ public class MapAlgorithmEngine {
         return path;
     }
     
+    /***************************************************************************
+     * Resets the engine to be used for another set of directions. Resets most
+     * instance variable to null sets the node and edge lists to the originals
+     **************************************************************************/
     public void reset() {
     	this.nodes = original.getNodeList();
     	this.edges = original.getEdgeList();
+    	settledNodes = null;
+        unSettledNodes = null;
+        distance = null;
+        predecessors = null;
     }
 }

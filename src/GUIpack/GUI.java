@@ -170,8 +170,8 @@ public class GUI extends JPanel //implements ActionListener
 		
 		three.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Info info = new Info();
-				info.setVisible(true);
+				Classes c = new Classes();
+				c.setVisible(true);
 			}
 		});
 		
@@ -220,7 +220,7 @@ public class GUI extends JPanel //implements ActionListener
 		 * Creates the classes Jframe 
 		 *
 		 */
-		public class Info extends JPanel implements ActionListener{
+		public class Classes extends JPanel implements ActionListener{
 			JLabel Class1 = new JLabel("Class One:");
 			JTextArea Class01 = new JTextArea("");
 			JLabel Class2 = new JLabel("Class Two:");
@@ -233,8 +233,8 @@ public class GUI extends JPanel //implements ActionListener
 			/**
 			 * Creates update information Jframe 
 			 */
-			public Info(){
-				JFrame frame = new JFrame("Your Information");
+			public Classes(){
+				JFrame frame = new JFrame("Classes");
 				frame.setVisible(true);
 				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				frame.setSize(300, 400);

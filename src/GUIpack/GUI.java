@@ -14,164 +14,140 @@ import java.util.EventObject;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * 
- * @author Louis Sullivan
- * @author Clay Negen
- * @author Douglas Wallim
- */
-
-/************************************************************
-@category Main Method
-@see initializes and runs GUI
- @throws IOException 
- ************************************************************/
-
-/************************************************************
-@see Action performed Method; Declares what happens upon button presses
- ************************************************************/
-public class GUI extends JPanel {
+public class GUI extends JPanel implements ActionListener {
 	
 	/** Controller to talk to the model */
 	public DirectionsController controller;
 	
+	/** Path to the image to be used as a logo */
+	private final String IMG_PATH1 = "src/GVMaps.png";
+	
+	/** JPanel to represent a background to add all other components to */
+	private JPanel background = new JPanel();
+	
+	/** JPanel to hold the logo and buttons to navigate to various sub-menus */
+	private JPanel eastPanel = new JPanel();
+	
+	/** JLabel to hold the logo image */
+	private JLabel gvLogo;
+	
+	/** JButton to take the user to a submenu to choose a class to navigate to */
+	private JButton classes = new JButton("Go to Class");;
+
+	/** JButton to take the user to a submenu to choose a food spot to navigate
+	 * to */
+	private JButton foods = new JButton("Find Food");
+	
+	/** JButton to take the user to a a page of favorites for quick access */
+	private JButton favorites = new JButton("Favorites");
+	
+	/** JButton to take the user to a submenu to find bus stops */
+	private JButton busStops = new JButton("Bus Stops");
+	
+	/** JFrame to display the application */
+	private JFrame frame;
+	
 	Boolean THREEFRAME, JButtonClassesFrame;
-	JButton JButtonClasses = new JButton("Add Classes");
-	JButton two = new JButton("Bus Stops");
 	JButton three = new JButton("Update Information");
 	JLabel blank1 = new JLabel("");
 	JLabel blank2 = new JLabel("");
 	JLabel blank3 = new JLabel("");
 	User user = new User();
-	public static String IMG_PATH1 = "src/GVMaps.png";
-	public Boolean getResetTHREEFRAME(Boolean tmp) {
-		THREEFRAME = tmp;
-		return THREEFRAME;
-	}
-
-	public Boolean getResetJButtonClassesFrame(Boolean tmp) {
-		JButtonClassesFrame = tmp;
-		return JButtonClassesFrame;
+	
+	/***************************************************************************
+	 * Constructor for our GUI. Loads the user into the mainMenu
+	 * 
+	 * @throws IOException
+	 **************************************************************************/
+	public GUI() throws IOException  {
+		this.initBorderLayoutEast();
+		
+		background.setLayout(new BorderLayout());
+		background.setBackground(Color.DARK_GRAY);
+		
+		frame = initFrame();
 	}
 	
-	public static void main(String[] args) throws IOException {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GUI gui = new GUI();
-					gui.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	public void actionPerformed(ActionEvent e) {
+		Object source = e.getSource();
 
+		if (source == classes){
+			
+		}
+		
+		if (source == foods){
+			
+		}
+		
+		if (source == busStops){
+			
+		}
+		
+		if (source == favorites){
+			
+		}
 	}
 	
-	public GUI() throws IOException {
+	/***************************************************************************
+	 * Method to do most of the legwork to open up the main menu; creates the
+	 * frame, sets up bounds and other options, and adds neccesary panels.
+	 * 
+	 * @return
+	 * @throws IOException
+	 **************************************************************************/
+	private JFrame initFrame() throws IOException {
+		JFrame frame = new JFrame("GVSU Maps");
+		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setBounds(100, 100, 1050, 770);
+		frame.setResizable(false);
+		frame.setVisible(true);
+		
 		controller = new DirectionsController(ImageIO.read
 				(new File("src/gvsuMaps.jpg")));
+
+		JLabel westLabel = new JLabel(new ImageIcon(controller.getImage()));
+		background.add(westLabel, BorderLayout.WEST);		
+		background.add(eastPanel, BorderLayout.EAST);
+		frame.add(background);		
+		
+		return frame;
+	}
 	
-		
-		//sample usage of the DirectionsController
-		controller.getDirections("5", "50");
-		controller.reset();
-		controller.getDirections("Alumni House", "Edward J. Frey LC");
-		//end sample
-		
-		BufferedImage logo = ImageIO.read(new File(IMG_PATH1));
-		ImageIcon logoIcon = new ImageIcon(logo);
-
-
-		JFrame frame = new JFrame("GVSU Maps");
-
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		JPanel panel = new JPanel();
-		frame.setBounds(680, 600, 1090, 1000);
-		frame.setVisible(true);
-		panel.setLayout(new BorderLayout());
-		panel.setBackground(Color.blue);
-
-		JPanel items = new JPanel();
-		items.setLayout(new GridLayout(4, 1, 5, 5));
-		items.setOpaque(true);
-		items.setBackground(Color.blue);
-		JTextPane logoPicture = new JTextPane();
-		logoPicture.insertIcon ( new ImageIcon ( getScaledImage(logo, 245, 126) ) );
-		items.add(logoPicture);
-		items.add(JButtonClasses);
-		items.add(two);
-		items.add(three);
-		panel.add(items, BorderLayout.EAST);
-
-		/**
-		 * Add action listener to JButtonClasses to run classSchedule GUI
-		 */
-
-		JTextPane txtpnPicture = new JTextPane();
-
-		txtpnPicture.insertIcon(new ImageIcon(controller.getImage()));
-		panel.add(txtpnPicture, BorderLayout.WEST);
-
-		//three.addActionListener(this);
-		//JButtonClasses.addActionListener(this);
-		//JButtonClasses.addActionListener(this);
-		frame.add(panel);
-
-
-		JButtonClasses.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				classSchedule ClassSchedule = new classSchedule();
-				ClassSchedule.setVisible(true);
-			}
-		});
-
-		three.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Info info = new Info();
-				info.setVisible(true);
-			}
-		});
-
-		/*public void actionPerformed(ActionEvent e) {
-
-
-			THREEFRAME = true;
-			JButtonClassesFrame = true;
-
-			Object source = e.getSource();
-			Info info = new Info();
-			info.setVisible(false);
-
-
-
-
-			if (THREEFRAME && source == three){
-				info.setVisible(true);
-				THREEFRAME = false;
-
-			}*/
-
-
-
-		/*if (source == Info.submit){
-				String c1 = Info.Class1.getText();
-				String c2 = Info.Class2.getText();
-				if (c1.length() > 0){
-					//update class 1
-				}
-				if (c2.length() > 0){
-					//update class 2
-				}
-				info.setVisible(false);
-			} */
-	} 
-	/**
+	/***************************************************************************
+	 * This creates and sets up the JPanel which holds all the buttons and 
+	 * the GV logo
 	 * 
-	 * Creates the classes Jframe 
-	 *
-	 */
+	 * @throws IOException
+	 **************************************************************************/
+	private void initBorderLayoutEast() throws IOException {
+		eastPanel.setLayout(new GridLayout(5, 1, 0, 3));
+		eastPanel.setBackground(Color.DARK_GRAY);
+		
+		BufferedImage logo = ImageIO.read(new File("src/GVMaps.png"));
+		gvLogo = new JLabel(new ImageIcon(getScaledImage
+				(logo, 245, 126)));
+		
+		classes.addActionListener(this);
+		
+		eastPanel.add(gvLogo);
+		eastPanel.add(classes);
+		eastPanel.add(foods);
+		eastPanel.add(busStops);
+		eastPanel.add(favorites);
+	}
+	
+	/***************************************************************************
+	 * Main method for testing of GUI
+	 * 
+	 * @param args
+	 * @throws IOException
+	 **************************************************************************/
+	public static void main(String args[]) throws IOException {
+		GUI gooy = new GUI();
+	}
+
+	
 	public class Info extends JPanel implements ActionListener{
 		JLabel Class1 = new JLabel("Class One:");
 		JTextArea Class01 = new JTextArea("");
@@ -205,9 +181,7 @@ public class GUI extends JPanel {
 			submit.addActionListener(this);
 		}
 
-		/**
-		 * @param ActionEvent sets the location of classes in the class menu
-		 */
+
 		public void actionPerformed(ActionEvent e) {
 			Object source = e.getSource();
 
@@ -225,21 +199,26 @@ public class GUI extends JPanel {
 			}
 		}
 	}
-	/**
+
+	
+	/***************************************************************************
+	 * Private helper method to res-cale images in the GUI. Will be called in
+	 * the ActionPerformed Method
 	 * 
-	 * @param Img
-	 * @param wt
-	 * @param ht
-	 * @return Image 
-	 */
-	Image getScaledImage(Image Img, int wt, int ht) {
-		BufferedImage resizedImg = new BufferedImage(wt, ht,
+	 * @param img Image: The input image to be resized
+	 * @param width int: The width in pixels desired for the output
+	 * @param height int: The height in pixels desired for the output
+	 * 
+	 * @return Image: The resized image
+	 **************************************************************************/
+	private Image getScaledImage(Image img, int width, int height) {
+		BufferedImage resizedImg = new BufferedImage(width, height,
 				BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = resizedImg.createGraphics();
 
 		g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
 				RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-		g2.drawImage(Img, 0, 0, wt, ht, null);
+		g2.drawImage(img, 0, 0, width, height, null);
 		g2.dispose();
 
 		return resizedImg;

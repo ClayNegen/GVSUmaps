@@ -70,8 +70,6 @@ public class MapEngine {
         distance = new HashMap<MapNode, Double>();
         predecessors = new HashMap<MapNode, MapNode>();
         
-        //MapNode source = original.getNode(name);
-        
         distance.put(source, 0.0);
         unSettledNodes.add(source);
         while (unSettledNodes.size() > 0) {

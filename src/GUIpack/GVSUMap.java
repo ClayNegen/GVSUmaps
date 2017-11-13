@@ -31,11 +31,18 @@ public class GVSUMap {
 		MapNode temp = new MapNode(x, y, Integer.toString(info));
 		nodeList.add(temp);
 	}
-
+ 
+	
+	/***************************************************************************
+	 * @return nodeList: List<MapNode>
+	 **************************************************************************/
 	public List<MapNode> getNodeList(){
 		return nodeList;
 	}
 	
+	/***************************************************************************
+	 * @return edgeList: List<Edge>
+	 **************************************************************************/
 	public List<Edge> getEdgeList(){
 		return edgeList;
 	}

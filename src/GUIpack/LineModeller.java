@@ -42,7 +42,7 @@ public class LineModeller {
 		
 		for (CoordinateTuple coordinatePair: pointsList) {
 			canvas.setRGB(coordinatePair.getX(), coordinatePair.getY(),
-					Color.RED.getRGB());
+					Color.BLUE.getRGB());
 		}
 	}
 	

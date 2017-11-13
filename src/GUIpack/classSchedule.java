@@ -26,9 +26,13 @@ import java.awt.Font;
 import java.awt.Canvas;
 
 public class classSchedule extends JFrame {
-	private String getTxtpnEnterClass_1 ,getTxtpnEnterClass_2, getTxtpnEnterClass_3, getTxtpnEnterClass_4, getTxtpnEnterClass_5, getTxtpnEnterClass_6;
+	
+	private static String [] n = new String[6] ;
+	private static String [] p = new String[6] ;
+	boolean isClicked = false;
+	//public String getTxtpnEnterClass_1 ,getTxtpnEnterClass_2, getTxtpnEnterClass_3, getTxtpnEnterClass_4, getTxtpnEnterClass_5, getTxtpnEnterClass_6;
 
-	private String getClassRoom_1, getClassRoom_2, getClassRoom_3, getClassRoom_4, getClassRoom_5, getClassRoom_6;
+	//public String getClassRoom_1, getClassRoom_2, getClassRoom_3, getClassRoom_4, getClassRoom_5, getClassRoom_6;
 	
 	private JPanel contentPane;
 
@@ -46,6 +50,8 @@ public class classSchedule extends JFrame {
 					classSchedule frame = new classSchedule();
 					frame.setTitle("Class Schedule");
 					frame.setVisible(true);
+					
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -161,48 +167,63 @@ public class classSchedule extends JFrame {
 		txtpnClassSchedule.setText("Class Schedule");
 		panel.add(txtpnClassSchedule);
 		
-		JButton btnClass = new JButton("Save Classes");
+		JButton btnClass = new JButton("Save Classes"); 
 		btnClass.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				isClicked = true;
+					
+				setClassroomLoc(	
+					 txtpnEnterClass_1.getText().toString(),
+					
+					txtpnEnterClass_2.getText(),
+	
+					txtpnEnterClass_3.getText(),
+	
+					 txtpnEnterClass_4.getText(),
+	
+					txtpnEnterClass_5.getText(),
+	
+					txtpnEnterClass_6.getText());
+					
 				
-				getTxtpnEnterClass_1 = txtpnEnterClass_1.getText();
 				
-				getTxtpnEnterClass_2 = txtpnEnterClass_2.getText();
-
-				getTxtpnEnterClass_3 = txtpnEnterClass_3.getText();
-
-				getTxtpnEnterClass_4 = txtpnEnterClass_4.getText();
-
-				getTxtpnEnterClass_5 = txtpnEnterClass_5.getText();
-
-				getTxtpnEnterClass_6 = txtpnEnterClass_6.getText();
+				setClassroomNames(classRoom_1.getSelectedItem().toString(),
 				
-				
-
-				getClassRoom_1 = classRoom_1.getSelectedItem().toString();
-				
-				getClassRoom_2 = classRoom_2.getSelectedItem().toString();
-				
-				getClassRoom_3 = classRoom_3.getSelectedItem().toString();
-				
-				getClassRoom_4 = classRoom_4.getSelectedItem().toString();
-				
-				getClassRoom_5 = classRoom_5.getSelectedItem().toString();
-				
-				getClassRoom_6 = classRoom_6.getSelectedItem().toString();
-				
-				dispose();
+					classRoom_2.getSelectedItem().toString(),
+					
+					classRoom_3.getSelectedItem().toString(),
+					
+					classRoom_4.getSelectedItem().toString(),
+					
+					classRoom_5.getSelectedItem().toString(),
+					
+					classRoom_6.getSelectedItem().toString());
 				
 			}
 		});
 		
 		
 		
-		btnClass.setBounds(231, 468, 117, 29);
+		btnClass.setBounds(152, 469, 117, 29);
 		btnClass.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 		btnClass.setForeground(Color.BLACK);
 		panel.add(btnClass);
+		
+		JButton btnGetDirections = new JButton("Get Directions");
+		btnGetDirections.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if(isClicked) {
+				Classes classes = new Classes();
+				classes.setVisible(true);
+				}
+				
+				//dispose();
+			}
+		});
+		btnGetDirections.setBounds(307, 469, 117, 29);
+		panel.add(btnGetDirections);
 		
 		
 		Panel panel_1 = new Panel();
@@ -215,39 +236,45 @@ public class classSchedule extends JFrame {
 		JLabel label = new JLabel("", IMG_PATH1, JLabel.CENTER);
 		
 		panel_1.add(label, BorderLayout.CENTER);
-		
-		
+			
+	}
+	/**
+	 * 
+	 * @return
+	 */
 	
-		
-        
+	public void setClassroomNames(String  setTxtpnEnterClass_1 ,String  setTxtpnEnterClass_2 ,String  setTxtpnEnterClass_3 ,String  setTxtpnEnterClass_4 ,String  setTxtpnEnterClass_5 ,String  setTxtpnEnterClass_6) 
+	{
+		n[0] = setTxtpnEnterClass_1;
+		n[1] = setTxtpnEnterClass_2;
+		n[2] = setTxtpnEnterClass_3;
+		n[3] = setTxtpnEnterClass_4;
+		n[4] = setTxtpnEnterClass_5;
+		n[5] = setTxtpnEnterClass_6;
 		
 	}
-	public ArrayList<String> getClassroomNames() 
+	public void setClassroomLoc(String setClassRoom_1, String setClassRoom_2, String setClassRoom_3, String setClassRoom_4, String setClassRoom_5, String setClassRoom_6) 
 	{
-		ArrayList<String> n = new ArrayList();
-		
-		n.add(getTxtpnEnterClass_1);
-		n.add(getTxtpnEnterClass_2);
-		n.add(getTxtpnEnterClass_3);
-		n.add(getTxtpnEnterClass_4);
-		n.add(getTxtpnEnterClass_5);
-		n.add(getTxtpnEnterClass_6);
-		
-		
-		return n;
-		
+		p[0] = setClassRoom_1;
+		p[1] = setClassRoom_2;
+		p[2] = setClassRoom_3;
+		p[3] = setClassRoom_4;
+		p[4] = setClassRoom_5;
+		p[5] = setClassRoom_6;
 	}
 	
-	public ArrayList<String> getClassroomLocation() 
+	public String[] getClassroomNames() 
 	{
-		ArrayList<String> p = new ArrayList();
-		p.add(getClassRoom_1);
-		p.add(getClassRoom_2);
-		p.add(getClassRoom_3);
-		p.add(getClassRoom_4);
-		p.add(getClassRoom_5);
-		p.add(getClassRoom_6);
-		return  p;
+		return p;	
+	}
+	/**
+	 * 
+	 * @return getClassroomLocation
+	 */
+	
+	public String[] getClassroomLocation() 
+	{
+		return  n;
 				
 	}
 }

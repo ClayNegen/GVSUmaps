@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.EventObject;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class GUI extends JPanel implements ActionListener {
 	
@@ -47,6 +48,16 @@ public class GUI extends JPanel implements ActionListener {
 	/** JFrame to display the application */
 	private JFrame frame;
 	
+	private Map<MapNode, String> userClassList;
+	private Map<MapNode, String> userFavoriteList;
+	private Map<MapNode, String> busStopList;
+	
+	
+	
+	
+	
+	
+	
 	Boolean THREEFRAME, JButtonClassesFrame;
 	JButton three = new JButton("Update Information");
 	JLabel blank1 = new JLabel("");
@@ -70,22 +81,40 @@ public class GUI extends JPanel implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
-
+		SubMenu tempMenu;
+		
 		if (source == classes){
-			
+			tempMenu = new SubMenu(this, "classes" );
 		}
 		
 		if (source == foods){
-			
+			tempMenu = new SubMenu(this, "foods");
 		}
 		
 		if (source == busStops){
-			
+			tempMenu = new SubMenu(this, "busStops");
 		}
 		
 		if (source == favorites){
-			
+			tempMenu = new SubMenu(this, "favorites");
 		}
+	}
+	
+	public void setVisibility(boolean flag) {
+		if(flag == true) {
+			frame.setVisible(flag);
+		}
+		else {
+			frame.setVisible(flag);
+		}
+	}
+	
+	public Map<MapNode, String> getUserClassList() {
+		return userClassList;
+	}
+	
+	public Map<MapNode, String> getUserFavoriteList() {
+		return userFavoriteList;
 	}
 	
 	/***************************************************************************

@@ -4,7 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.*;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -43,18 +45,13 @@ public class SubMenu implements WindowListener, ActionListener {
 		switch (type) {
         case "classes":  	
         	options = gui.getUserClassList();
-        	mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         	
         	for (int i = 0; i < options.size(); i++) {
         		temp.add(options.get(i).getNodeInfo());
         	}
         	
-        	label = new JLabel("Please select a class to navigate to.",
-        			JLabel.LEFT);
+        	label = new JLabel("Please select a class to navigate to.");
         	choices = new JComboBox(temp);
-        	
-        	finalize.addActionListener(this);
-        	
         	break;
         case "favorites":	
         	options = null;
@@ -74,20 +71,9 @@ public class SubMenu implements WindowListener, ActionListener {
 		subFrame.setVisible(true);
 		
 		label.setForeground(Color.WHITE);
-		mainPanel.setBackground(Color.DARK_GRAY);
+		label.setFont(new Font("Serif", Font.BOLD, 16));
 		
-		
-		
-		HorizontalBox b1 = new HorizontalBox();
-		mainPanel.add(label);
-		label.setAlignmentX(Component.LEFT_ALIGNMENT);
-		
-//		mainPanel.add(Box.createRigidArea(new Dimension(1, 6)));
-//		
-//		mainPanel.add(choices);
-//		mainPanel.add(Box.createRigidArea(new Dimension(1, 90)));
-//		mainPanel.add(finalize);
-		
+		initMainPanel();
 		subFrame.add(mainPanel);
 	}
 
@@ -97,11 +83,64 @@ public class SubMenu implements WindowListener, ActionListener {
 		
 		if (source == finalize) {
 			System.out.println(choices.getSelectedItem());
+			try {
+				gui.controller.reset();
+			} catch (IOException e1){
+				System.out.println("Problem reseting controller during finalize"
+						+ "button press");
+			}
+			gui.controller.getDirections(choices.getSelectedItem().toString(),
+					"Alumni House");
+			gui.reDrawMap();
+			gui.setVisibility(true);
+			subFrame.dispose();
 		}
 	}
 	
 	public void windowClosing(WindowEvent e) {
 		gui.setVisibility(true);
 		subFrame.dispose();
+	}
+	
+	private void initMainPanel() {
+		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+		mainPanel.setBackground(Color.DARK_GRAY);
+		
+		Box testBox = new Box(BoxLayout.LINE_AXIS);
+		testBox.setAlignmentX(Box.RIGHT_ALIGNMENT);
+		Box testBox1 = new Box(BoxLayout.LINE_AXIS);
+		testBox1.setAlignmentX(Box.RIGHT_ALIGNMENT);
+		Box testBox2 = new Box(BoxLayout.LINE_AXIS);
+		testBox2.setAlignmentX(Box.LEFT_ALIGNMENT);
+		
+		
+		testBox.add(Box.createRigidArea(new Dimension(10, 1)));
+		testBox.add(label);
+	
+		
+		mainPanel.add(Box.createRigidArea(new Dimension(1, 6)));
+		mainPanel.add(testBox);
+
+		
+		
+
+		choices.setMaximumSize(new Dimension(200, 18));
+		testBox1.add(choices);
+		testBox1.add(Box.createRigidArea(new Dimension(32, 1)));
+
+		
+		
+		mainPanel.add(Box.createRigidArea(new Dimension(1, 6)));	
+		mainPanel.add(testBox1);
+		
+		testBox2.add(Box.createRigidArea(new Dimension(25, 1)));
+		finalize.addActionListener(this);
+		testBox2.add(finalize);
+		
+
+		
+		
+		mainPanel.add(Box.createRigidArea(new Dimension(1, 78)));
+		mainPanel.add(testBox2);
 	}
 }  

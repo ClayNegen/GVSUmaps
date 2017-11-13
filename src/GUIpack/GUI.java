@@ -69,6 +69,8 @@ public class GUI extends JPanel implements ActionListener {
 	 **************************************************************************/
 	public GUI() throws IOException  {
 		this.initBorderLayoutEast();
+		controller = new DirectionsController(ImageIO.read
+				(new File("src/gvsuMaps.jpg")));
 		
 		background.setLayout(new BorderLayout());
 		background.setBackground(Color.DARK_GRAY);
@@ -147,9 +149,6 @@ public class GUI extends JPanel implements ActionListener {
 		frame.setResizable(false);
 		frame.setVisible(true);
 		
-		controller = new DirectionsController(ImageIO.read
-				(new File("src/gvsuMaps.jpg")));
-
 		JLabel westLabel = new JLabel(new ImageIcon(controller.getImage()));
 		background.add(westLabel, BorderLayout.WEST);		
 		background.add(eastPanel, BorderLayout.EAST);
@@ -179,6 +178,17 @@ public class GUI extends JPanel implements ActionListener {
 		eastPanel.add(foods);
 		eastPanel.add(busStops);
 		eastPanel.add(favorites);
+	}
+	
+	public void reDrawMap() {
+		JPanel temp = new JPanel();
+		
+		background.remove(0);
+		
+		JLabel imgHolder = new JLabel(new ImageIcon(controller.getImage()));
+
+		temp.add(imgHolder);
+		background.add(temp, 0);
 	}
 	
 	public class Info extends JPanel implements ActionListener{

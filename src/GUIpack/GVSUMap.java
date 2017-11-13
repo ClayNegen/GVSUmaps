@@ -322,6 +322,11 @@ public class GVSUMap {
 		this.addLane("Auther Hills LC", "57");
 		this.addLane("William Packard LC", "57");
 
+		this.addLane(61, 62);
+		this.addLane(61, 60);
+		this.addLane(61, 36);
+		this.addLane(61, 48);
+		
 		this.addLane(60, 57);
 		this.addLane(64, 62);
 		this.addLane(66, 62);

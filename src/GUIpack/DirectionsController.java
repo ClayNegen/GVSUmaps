@@ -22,7 +22,7 @@ public class DirectionsController {
 	private MapEngine algorithm;
 	
 	/**	A hardcoded graphical representation of the GVSU Allendale campus */
-	private final GVSUMap map;
+	public final GVSUMap map;
 	
 	/***************************************************************************
 	 * This constructor instantiates each of the engine components.

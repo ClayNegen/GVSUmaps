@@ -20,9 +20,6 @@ public class GUI extends JPanel implements ActionListener {
 	/** Controller to talk to the model */
 	public DirectionsController controller;
 	
-	/** Path to the image to be used as a logo */
-	private final String IMG_PATH1 = "src/GVMaps.png";
-	
 	/** JPanel to represent a background to add all other components to */
 	private JPanel background = new JPanel();
 	
@@ -48,7 +45,7 @@ public class GUI extends JPanel implements ActionListener {
 	/** JFrame to display the application */
 	private JFrame frame;
 	
-	private Map<MapNode, String> userClassList;
+	private List<MapNode> userClassList;
 	private Map<MapNode, String> userFavoriteList;
 	private Map<MapNode, String> busStopList;
 	
@@ -77,6 +74,24 @@ public class GUI extends JPanel implements ActionListener {
 		background.setBackground(Color.DARK_GRAY);
 		
 		frame = initFrame();
+		frame.setVisible(true);
+		
+		//testing submenus by preloading some choices
+		
+		userClassList = new LinkedList<MapNode>();
+		userClassList.add(controller.map.getNode("William Kill Patrick LC"));
+		userClassList.add(controller.map.getNode("Edward J. Frey LC"));
+		userClassList.add(controller.map.getNode("Robert Kliener Commons"));
+	}
+	
+	/***************************************************************************
+	 * Main method for testing of GUI
+	 * 
+	 * @param args
+	 * @throws IOException
+	 **************************************************************************/
+	public static void main(String args[]) throws IOException {
+		GUI gooy = new GUI();
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -109,7 +124,7 @@ public class GUI extends JPanel implements ActionListener {
 		}
 	}
 	
-	public Map<MapNode, String> getUserClassList() {
+	public List<MapNode> getUserClassList() {
 		return userClassList;
 	}
 	
@@ -165,17 +180,6 @@ public class GUI extends JPanel implements ActionListener {
 		eastPanel.add(busStops);
 		eastPanel.add(favorites);
 	}
-	
-	/***************************************************************************
-	 * Main method for testing of GUI
-	 * 
-	 * @param args
-	 * @throws IOException
-	 **************************************************************************/
-	public static void main(String args[]) throws IOException {
-		GUI gooy = new GUI();
-	}
-
 	
 	public class Info extends JPanel implements ActionListener{
 		JLabel Class1 = new JLabel("Class One:");

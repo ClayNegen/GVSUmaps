@@ -265,6 +265,7 @@ public class GVSUMap {
 		this.addNode(598, 376, 72);
 		this.addNode(612, 378, 73);
 		this.addNode(614, 390, 74);
+		
 		//this.addNode(641, 376, 69);
 
 		this.addLane(19,20);
@@ -301,35 +302,34 @@ public class GVSUMap {
 		this.addLane(42, 36);
 		this.addLane(43, 41);
 		this.addLane(43, 42);
-		this.addLane(44, 43);
+		this.addLane("Grace O. Kisler LC", "43");
 
 		this.addLane(45, 43);
-		this.addLane(46, 43);
-		this.addLane(46, 45);
-		this.addLane(47, 45);
+		this.addLane("North C. LC", "43");
+		this.addLane("North C. LC", "45");
+		this.addLane("Robert C. Pew LC", "45");
 		this.addLane(48, 45);
 
 		this.addLane(49, 48);
 		this.addLane(50, 49);
 		this.addLane(52, 51);
-		this.addLane(53, 51);
-		this.addLane(54, 52);
+		this.addLane("William Kill Patrick LC", "51");
+		this.addLane("Dale Stafford LC", "52");
 
-		this.addLane(55, 52);
-		this.addLane(56, 51);
+		this.addLane("Max Swansin LC", "52");
+		this.addLane("Seedman LC", "51");
 		this.addLane(57, 50);
-		this.addLane(58, 57);
-		this.addLane(59, 57);
+		this.addLane("Auther Hills LC", "57");
+		this.addLane("William Packard LC", "57");
 
 		this.addLane(60, 57);
 		this.addLane(64, 62);
 		this.addLane(66, 62);
-		this.addLane(66, 62);
 		this.addLane(66, 65);
 
 		this.addLane(65, 64);
-		this.addLane(63, 62);
-		this.addLane(67, 62);
+		this.addLane("Robert Kliener Commons", "62");
+		this.addLane("Greg Olsin Kisler LC", "62");
 		this.addLane(68, 66);
 		this.addLane(69, 66);
 

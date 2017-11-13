@@ -94,6 +94,10 @@ public class GUI extends JPanel implements ActionListener {
 	 **************************************************************************/
 	public static void main(String args[]) throws IOException {
 		GUI gooy = new GUI();
+		
+		
+		//test//
+		
 	}
 	
 	public void actionPerformed(ActionEvent e) {

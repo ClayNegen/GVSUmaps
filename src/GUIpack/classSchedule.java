@@ -163,66 +163,50 @@ public class classSchedule extends JFrame {
 		
 		JLabel txtpnClassSchedule = new JLabel();
 		
-		txtpnClassSchedule.setBounds(231, 33, 103, 16);
+		txtpnClassSchedule.setBounds(231, 33, 133, 16);
 		txtpnClassSchedule.setText("Class Schedule");
 		panel.add(txtpnClassSchedule);
 		
-		JButton btnClass = new JButton("Save Classes"); 
-		btnClass.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				isClicked = true;
-					
-				setClassroomLoc(	
-					 txtpnEnterClass_1.getText().toString(),
-					
-					txtpnEnterClass_2.getText(),
-	
-					txtpnEnterClass_3.getText(),
-	
-					 txtpnEnterClass_4.getText(),
-	
-					txtpnEnterClass_5.getText(),
-	
-					txtpnEnterClass_6.getText());
-					
-				
-				
-				setClassroomNames(classRoom_1.getSelectedItem().toString(),
-				
-					classRoom_2.getSelectedItem().toString(),
-					
-					classRoom_3.getSelectedItem().toString(),
-					
-					classRoom_4.getSelectedItem().toString(),
-					
-					classRoom_5.getSelectedItem().toString(),
-					
-					classRoom_6.getSelectedItem().toString());
-				
-			}
-		});
 		
-		
-		
-		btnClass.setBounds(152, 469, 117, 29);
-		btnClass.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-		btnClass.setForeground(Color.BLACK);
-		panel.add(btnClass);
 		
 		JButton btnGetDirections = new JButton("Get Directions");
 		btnGetDirections.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if(isClicked) {
+				setClassroomLoc(	
+						 txtpnEnterClass_1.getText().toString(),
+						
+						txtpnEnterClass_2.getText(),
+		
+						txtpnEnterClass_3.getText(),
+		
+						 txtpnEnterClass_4.getText(),
+		
+						txtpnEnterClass_5.getText(),
+		
+						txtpnEnterClass_6.getText());
+						
+					
+					
+					setClassroomNames(classRoom_1.getSelectedItem().toString(),
+					
+						classRoom_2.getSelectedItem().toString(),
+						
+						classRoom_3.getSelectedItem().toString(),
+						
+						classRoom_4.getSelectedItem().toString(),
+						
+						classRoom_5.getSelectedItem().toString(),
+						
+						classRoom_6.getSelectedItem().toString());
+				
 				Classes classes = new Classes();
 				classes.setVisible(true);
-				}
 				
-				//dispose();
+				dispose();
 			}
 		});
-		btnGetDirections.setBounds(307, 469, 117, 29);
+		btnGetDirections.setBounds(307, 469, 166, 29);
 		panel.add(btnGetDirections);
 		
 		

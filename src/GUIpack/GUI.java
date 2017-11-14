@@ -105,7 +105,10 @@ public class GUI extends JPanel implements ActionListener {
 		SubMenu tempMenu;
 		
 		if (source == classes){
-			tempMenu = new SubMenu(this, "classes" );
+			//tempMenu = new SubMenu(this, "classes" );
+			classSchedule ClassSchedule = new classSchedule();
+
+			ClassSchedule.setVisible(true);
 		}
 		
 		if (source == foods){

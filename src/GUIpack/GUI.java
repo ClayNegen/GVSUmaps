@@ -42,17 +42,17 @@ public class GUI extends JPanel implements ActionListener {
 	/** JButton to take the user to a submenu to find bus stops */
 	private JButton busStops = new JButton("Bus Stops");
 	
+	/** JButton to take the user to a settings submenu */
+	private JButton settings = new JButton("Settings");
+	
+	/** JButton to allow an user to sign in or create an account */
+	private JButton signOn = new JButton("Sign In/Create Account");
+	
 	/** JFrame to display the application */
 	private JFrame frame;
 	
-	private List<MapNode> userClassList;
-	private Map<MapNode, String> userFavoriteList;
-	private Map<MapNode, String> busStopList;
-	
-	
-	
-	
-	
+	/** Instance of an user, if null buttons should be disabled */
+	private User user;
 	
 	
 	Boolean THREEFRAME, JButtonClassesFrame;
@@ -60,8 +60,7 @@ public class GUI extends JPanel implements ActionListener {
 	JLabel blank1 = new JLabel("");
 	JLabel blank2 = new JLabel("");
 	JLabel blank3 = new JLabel("");
-	User user = new User();
-	
+
 	/***************************************************************************
 	 * Constructor for our GUI. Loads the user into the mainMenu
 	 * 
@@ -80,10 +79,10 @@ public class GUI extends JPanel implements ActionListener {
 		
 		//testing submenus by preloading some choices
 		
-		userClassList = new LinkedList<MapNode>();
-		userClassList.add(controller.map.getNode("William Kill Patrick LC"));
-		userClassList.add(controller.map.getNode("Edward J. Frey LC"));
-		userClassList.add(controller.map.getNode("Robert Kliener Commons"));
+//		userClassList = new LinkedList<MapNode>();
+//		userClassList.add(controller.map.getNode("William Kill Patrick LC"));
+//		userClassList.add(controller.map.getNode("Edward J. Frey LC"));
+//		userClassList.add(controller.map.getNode("Robert Kliener Commons"));
 	}
 	
 	/***************************************************************************
@@ -131,13 +130,13 @@ public class GUI extends JPanel implements ActionListener {
 		}
 	}
 	
-	public List<MapNode> getUserClassList() {
-		return userClassList;
-	}
-	
-	public Map<MapNode, String> getUserFavoriteList() {
-		return userFavoriteList;
-	}
+//	public List<MapNode> getUserClassList() {
+//		return getuserClassList();
+//	}
+//	
+//	public Map<MapNode, String> getUserFavoriteList() {
+//		return userFavoriteList;
+//	}
 	
 	/***************************************************************************
 	 * Method to do most of the legwork to open up the main menu; creates the
@@ -169,7 +168,7 @@ public class GUI extends JPanel implements ActionListener {
 	 * @throws IOException
 	 **************************************************************************/
 	private void initBorderLayoutEast() throws IOException {
-		eastPanel.setLayout(new GridLayout(5, 1, 0, 3));
+		eastPanel.setLayout(new GridLayout(6, 1, 0, 3));
 		eastPanel.setBackground(Color.DARK_GRAY);
 		
 		BufferedImage logo = ImageIO.read(new File("src/GVMaps.png"));
@@ -183,6 +182,16 @@ public class GUI extends JPanel implements ActionListener {
 		eastPanel.add(foods);
 		eastPanel.add(busStops);
 		eastPanel.add(favorites);
+		
+		Box settingsBox = new Box(BoxLayout.Y_AXIS);
+		settings.setMaximumSize(new Dimension(250, 25));
+		signOn.setMaximumSize(new Dimension(250, 25));
+		settingsBox.add(settings);
+		settingsBox.add(signOn);
+		
+		eastPanel.add(settingsBox);
+		
+		disableButtons();
 	}
 	
 	public void reDrawMap() {
@@ -196,61 +205,61 @@ public class GUI extends JPanel implements ActionListener {
 		background.add(temp, 0);
 	}
 	
-	public class Info extends JPanel implements ActionListener{
-		JLabel Class1 = new JLabel("Class One:");
-		JTextArea Class01 = new JTextArea("");
-		JLabel Class2 = new JLabel("Class Two:");
-		JTextArea Class02 = new JTextArea("");
-		JLabel Class3 = new JLabel("Class Three:");
-		JTextArea Class03 = new JTextArea("");
-		JButton submit = new JButton("Submit");
-		JLabel blank1 = new JLabel();
+//	public class Info extends JPanel implements ActionListener{
+//		JLabel Class1 = new JLabel("Class One:");
+//		JTextArea Class01 = new JTextArea("");
+//		JLabel Class2 = new JLabel("Class Two:");
+//		JTextArea Class02 = new JTextArea("");
+//		JLabel Class3 = new JLabel("Class Three:");
+//		JTextArea Class03 = new JTextArea("");
+//		JButton submit = new JButton("Submit");
+//		JLabel blank1 = new JLabel();
+//
+//		/**
+//		 * Creates update information Jframe 
+//		 */
+//		public Info(){
+//			JFrame frame = new JFrame("Your Information");
+//			frame.setVisible(true);
+//			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//			frame.setSize(300, 400);
+//			JPanel panel = new JPanel();
+//			panel.setLayout(new GridLayout(4, 2, 5, 10));
+//			panel.add(Class1);
+//			panel.add(Class01);
+//			panel.add(Class2);
+//			panel.add(Class02);
+//			panel.add(Class3);
+//			panel.add(Class03);
+//			panel.add(submit);
+//			panel.add(blank1);
+//			frame.add(panel);
+//
+//			submit.addActionListener(this);
+//		}
 
-		/**
-		 * Creates update information Jframe 
-		 */
-		public Info(){
-			JFrame frame = new JFrame("Your Information");
-			frame.setVisible(true);
-			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			frame.setSize(300, 400);
-			JPanel panel = new JPanel();
-			panel.setLayout(new GridLayout(4, 2, 5, 10));
-			panel.add(Class1);
-			panel.add(Class01);
-			panel.add(Class2);
-			panel.add(Class02);
-			panel.add(Class3);
-			panel.add(Class03);
-			panel.add(submit);
-			panel.add(blank1);
-			frame.add(panel);
 
-			submit.addActionListener(this);
-		}
-
-
-		public void actionPerformed(ActionEvent e) {
-			Object source = e.getSource();
-
-			if (source == submit){
-				String c1 = Class01.getText();
-				String c2 = Class02.getText();
-				if (c1.length() > 0){
-					Location first = new Location(c1, 1, 1);
-					user.setClass1(first);
-				}
-				if (c2.length() > 0){
-					Location second = new Location(c2, 1, 1);
-					user.setClass1(second);
-				}
-			}
-		}
-	}
+//		public void actionPerformed(ActionEvent e) {
+//			Object source = e.getSource();
+//
+//			if (source == submit){
+//				String c1 = Class01.getText();
+//				String c2 = Class02.getText();
+//				if (c1.length() > 0){
+//					Location first = new Location(c1, 1, 1);
+//					user.setClass1(first);
+//				}
+//				if (c2.length() > 0){
+//					Location second = new Location(c2, 1, 1);
+//					user.setClass1(second);
+//				}
+//			}
+//		}
+//	}
 
 	
 	/***************************************************************************
-	 * Private helper method to res-cale images in the GUI. Will be called in
+	 * Private helper method to re-scale images in the GUI. Will be called in
 	 * the ActionPerformed Method
 	 * 
 	 * @param img Image: The input image to be resized
@@ -270,5 +279,19 @@ public class GUI extends JPanel implements ActionListener {
 		g2.dispose();
 
 		return resizedImg;
+	}
+	
+	public void enableButtons() {
+		classes.setEnabled(true);
+		foods.setEnabled(true);
+		favorites.setEnabled(true);
+		busStops.setEnabled(true);
+	}
+	
+	public void disableButtons() {
+		classes.setEnabled(false);
+		foods.setEnabled(false);
+		favorites.setEnabled(false);
+		busStops.setEnabled(false);
 	}
 }

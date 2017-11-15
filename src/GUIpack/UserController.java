@@ -14,8 +14,10 @@ import java.io.Writer;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.StringJoiner;
 import java.util.StringTokenizer;
 
 public class UserController {
@@ -42,32 +44,37 @@ public class UserController {
 		testController.addClass("Edward J. Frey LC");
 		testController.addClass("Robert Kliener Commons");
 		
-		testController.getTokens("doesnt matter");
 		
-		
-		
+		testController.writeMidFile("louisS", "|ClassList|", null);
 		System.out.println("Got this far");
 	}
 	
-	public void getTokens(String name) throws IOException {		
-		final String EoL = System.getProperty("line.separator");
-		List<String> lines = Files.readAllLines(Paths.get("./src/accounts.txt"),
-		        Charset.defaultCharset());
-
-		StringBuilder sb = new StringBuilder();
-		for (String line : lines) {
-		    sb.append(line).append(EoL);
+	private List<String> getTokens(String line) throws IOException {		
+		StringTokenizer tokenizer = new StringTokenizer(line);
+		List<String> result = new LinkedList<String>();
+		
+		while (tokenizer.hasMoreTokens()) {
+			result.add(tokenizer.nextToken(","));
 		}
-		final String content = sb.toString();
-		
-		StringTokenizer tokenizer = new StringTokenizer(content);
-		
-		System.out.println(content);
+		return result;
 	}
 	
-	public void addClass(String bldName) {
-		loadedUser.addClass(map.getNode(bldName));
+	private String deTokenize(List<String> line) {
+		StringJoiner joiner = new StringJoiner(",");
+		String result = "";
 		
+		for (int i = 0; i < line.size(); i++) {
+			//if (i != (line.size() - 1)) {
+				joiner.add(line.get(i));
+			//}
+			
+		}
+		return joiner.toString();
+	}
+	
+	public void addClass(String bldName) throws IOException {
+		loadedUser.addClass(map.getNode(bldName));
+		writeMidFile(loadedUser.getUsername(), "|ClassList|", bldName);
 	}
 	
 	public void writeToFile(String content) throws IOException {
@@ -79,7 +86,7 @@ public class UserController {
 		writer.close();
 	}
 	
-	public void writeMidFile(String name, String content)
+	public void writeMidFile(String name, String category, String content)
 			throws IOException {
 	    
 		File tempFile = new File("tempFile");
@@ -87,23 +94,36 @@ public class UserController {
 	    Scanner scanner = new Scanner(new FileInputStream(accountsFile));
 	    String newLine = System.getProperty("line.separator");
 	    String line;
+	    boolean foundUser = false;
+	    List<String> tokens;
+	    int numEntries;
 	    
-	    while(scanner.hasNextLine()){
-	        line = scanner.nextLine();
-
+	    while (scanner.hasNextLine()) {
+	    	line = scanner.nextLine();
+	    	
+	    	if (foundUser = true) {
+		    	tokens = getTokens(line);
+	    		if (category.equals(tokens.get(0))) {
+	    			if (content != null) {
+	    				tokens.add(content);
+	    			}
+	    		}
+	    		line = deTokenize(tokens);
+	    	}	        
 	        out.write(line);
 	        out.write(newLine);
 	        
-	        String searchKey = ("Username: " + name); 
+	        String searchKey = ("|Username|," + name);
 	        
 	        if(line.equals(searchKey)){
-	            out.write();
-	            out.write(newLine);
+	            foundUser = true;
 	        }
 	    }
 
 	    scanner.close();
 	    out.close();
+	    
+	    accountsFile = tempFile;
 	}
 	
 	public void clearFile() throws IOException {
@@ -126,20 +146,21 @@ public class UserController {
 		loadedUser = new User(name, pass);
 		
 		if (isEmpty()) {
-			writeToFile("Username: " + name + "\n");
+			writeToFile("|Username|," + name + "\n");
 		}
 		else {
-			appendToFile(name + ",");
+			appendToFile("|Username|," + name + "\n");
 		}
 
-		appendToFile(pass + ",\n");
-		appendToFile("classList,");
-		if (!(loadedUser.getClassList().isEmpty()))	
+		appendToFile("|Password|," + pass + "\n");
+		appendToFile("|ClassList|,");
+		if (!(loadedUser.getClassList().isEmpty()))	{
 			for (MapNode node: loadedUser.getClassList()) {
 				String temp = node.getNodeInfo();
 				appendToFile(temp + ",");
 			}
-
+		}
+		appendToFile("\n");
 	}
 	
 	private boolean isEmpty() throws IOException {

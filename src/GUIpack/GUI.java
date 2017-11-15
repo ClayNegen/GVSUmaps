@@ -18,7 +18,10 @@ import java.util.Map;
 public class GUI extends JPanel implements ActionListener {
 	
 	/** Controller to talk to the model */
-	public DirectionsController controller;
+	public DirectionsController directionsController;
+	
+	/** Controller to handle User information */
+	public UserController userController;
 	
 	/** JPanel to represent a background to add all other components to */
 	private JPanel background = new JPanel();
@@ -45,22 +48,18 @@ public class GUI extends JPanel implements ActionListener {
 	/** JButton to take the user to a settings submenu */
 	private JButton settings = new JButton("Settings");
 	
-	/** JButton to allow an user to sign in or create an account */
-	private JButton signOn = new JButton("Sign In/Create Account");
+	/** JButton to allow to user to log in or create an account */
+	private JButton loadUser = new JButton("Sign In/Create Account");
 	
 	/** JFrame to display the application */
 	private JFrame frame;
-	
-	/** Instance of an user, if null buttons should be disabled */
-	private User user;
-	
 	
 	Boolean THREEFRAME, JButtonClassesFrame;
 	JButton three = new JButton("Update Information");
 	JLabel blank1 = new JLabel("");
 	JLabel blank2 = new JLabel("");
 	JLabel blank3 = new JLabel("");
-
+	
 	/***************************************************************************
 	 * Constructor for our GUI. Loads the user into the mainMenu
 	 * 
@@ -68,8 +67,10 @@ public class GUI extends JPanel implements ActionListener {
 	 **************************************************************************/
 	public GUI() throws IOException  {
 		this.initBorderLayoutEast();
-		controller = new DirectionsController(ImageIO.read
+		directionsController = new DirectionsController(ImageIO.read
 				(new File("src/gvsuMaps.jpg")));
+		userController = new UserController();
+		
 		
 		background.setLayout(new BorderLayout());
 		background.setBackground(Color.DARK_GRAY);
@@ -79,10 +80,9 @@ public class GUI extends JPanel implements ActionListener {
 		
 		//testing submenus by preloading some choices
 		
-//		userClassList = new LinkedList<MapNode>();
-//		userClassList.add(controller.map.getNode("William Kill Patrick LC"));
-//		userClassList.add(controller.map.getNode("Edward J. Frey LC"));
-//		userClassList.add(controller.map.getNode("Robert Kliener Commons"));
+		userController.addClass("William Kill Patrick LC");
+		userController.addClass("Edward J. Frey LC");
+		userController.addClass("Robert Kliener Commons");
 	}
 	
 	/***************************************************************************
@@ -105,10 +105,10 @@ public class GUI extends JPanel implements ActionListener {
 		SubMenu tempMenu;
 		
 		if (source == classes){
-			//tempMenu = new SubMenu(this, "classes" );
-			classSchedule ClassSchedule = new classSchedule();
+			tempMenu = new SubMenu(this, "classes" );
+			//classSchedule ClassSchedule = new classSchedule();
 
-			ClassSchedule.setVisible(true);
+			//ClassSchedule.setVisible(true);
 		}
 		
 		if (source == foods){
@@ -133,14 +133,6 @@ public class GUI extends JPanel implements ActionListener {
 		}
 	}
 	
-//	public List<MapNode> getUserClassList() {
-//		return getuserClassList();
-//	}
-//	
-//	public Map<MapNode, String> getUserFavoriteList() {
-//		return userFavoriteList;
-//	}
-	
 	/***************************************************************************
 	 * Method to do most of the legwork to open up the main menu; creates the
 	 * frame, sets up bounds and other options, and adds neccesary panels.
@@ -156,7 +148,7 @@ public class GUI extends JPanel implements ActionListener {
 		frame.setResizable(false);
 		frame.setVisible(true);
 		
-		JLabel westLabel = new JLabel(new ImageIcon(controller.getImage()));
+		JLabel westLabel = new JLabel(new ImageIcon(directionsController.getImage()));
 		background.add(westLabel, BorderLayout.WEST);		
 		background.add(eastPanel, BorderLayout.EAST);
 		frame.add(background);		
@@ -180,21 +172,24 @@ public class GUI extends JPanel implements ActionListener {
 		
 		classes.addActionListener(this);
 		
+		Box userSettingsBox = new Box(BoxLayout.Y_AXIS);
+
+		loadUser.setAlignmentX(CENTER_ALIGNMENT);
+		settings.setAlignmentX(CENTER_ALIGNMENT);
+		loadUser.setMaximumSize(new Dimension(180, 30));
+		settings.setMaximumSize(new Dimension(180, 30));
+		
+		userSettingsBox.add(Box.createRigidArea(new Dimension(0, 30)));
+		userSettingsBox.add(settings);
+		userSettingsBox.add(Box.createRigidArea(new Dimension(0, 5)));
+		userSettingsBox.add(loadUser);
+		
 		eastPanel.add(gvLogo);
 		eastPanel.add(classes);
 		eastPanel.add(foods);
 		eastPanel.add(busStops);
 		eastPanel.add(favorites);
-		
-		Box settingsBox = new Box(BoxLayout.Y_AXIS);
-		settings.setMaximumSize(new Dimension(250, 25));
-		signOn.setMaximumSize(new Dimension(250, 25));
-		settingsBox.add(settings);
-		settingsBox.add(signOn);
-		
-		eastPanel.add(settingsBox);
-		
-		disableButtons();
+		eastPanel.add(userSettingsBox);
 	}
 	
 	public void reDrawMap() {
@@ -202,67 +197,74 @@ public class GUI extends JPanel implements ActionListener {
 		
 		background.remove(0);
 		
-		JLabel imgHolder = new JLabel(new ImageIcon(controller.getImage()));
+		JLabel imgHolder = new JLabel(new ImageIcon(directionsController.getImage()));
 
 		temp.add(imgHolder);
 		background.add(temp, 0);
 	}
 	
-//	public class Info extends JPanel implements ActionListener{
-//		JLabel Class1 = new JLabel("Class One:");
-//		JTextArea Class01 = new JTextArea("");
-//		JLabel Class2 = new JLabel("Class Two:");
-//		JTextArea Class02 = new JTextArea("");
-//		JLabel Class3 = new JLabel("Class Three:");
-//		JTextArea Class03 = new JTextArea("");
-//		JButton submit = new JButton("Submit");
-//		JLabel blank1 = new JLabel();
-//
-//		/**
-//		 * Creates update information Jframe 
-//		 */
-//		public Info(){
-//			JFrame frame = new JFrame("Your Information");
-//			frame.setVisible(true);
-//			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-//			frame.setSize(300, 400);
-//			JPanel panel = new JPanel();
-//			panel.setLayout(new GridLayout(4, 2, 5, 10));
-//			panel.add(Class1);
-//			panel.add(Class01);
-//			panel.add(Class2);
-//			panel.add(Class02);
-//			panel.add(Class3);
-//			panel.add(Class03);
-//			panel.add(submit);
-//			panel.add(blank1);
-//			frame.add(panel);
-//
-//			submit.addActionListener(this);
-//		}
+	public class Info extends JPanel implements ActionListener{
+		JLabel Class1 = new JLabel("Class One:");
+		JTextArea Class01 = new JTextArea("");
+		JLabel Class2 = new JLabel("Class Two:");
+		JTextArea Class02 = new JTextArea("");
+		JLabel Class3 = new JLabel("Class Three:");
+		JTextArea Class03 = new JTextArea("");
+		JButton submit = new JButton("Submit");
+		JLabel blank1 = new JLabel();
+
+		/**
+		 * Creates update information Jframe 
+		 */
+		public Info(){
+			JFrame frame = new JFrame("Your Information");
+			frame.setVisible(true);
+			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			frame.setSize(300, 400);
+			JPanel panel = new JPanel();
+			panel.setLayout(new GridLayout(4, 2, 5, 10));
+			panel.add(Class1);
+			panel.add(Class01);
+			panel.add(Class2);
+			panel.add(Class02);
+			panel.add(Class3);
+			panel.add(Class03);
+			panel.add(submit);
+			panel.add(blank1);
+			frame.add(panel);
+
+			submit.addActionListener(this);
+		}
 
 
-//		public void actionPerformed(ActionEvent e) {
-//			Object source = e.getSource();
-//
-//			if (source == submit){
-//				String c1 = Class01.getText();
-//				String c2 = Class02.getText();
-//				if (c1.length() > 0){
-//					Location first = new Location(c1, 1, 1);
-//					user.setClass1(first);
-//				}
-//				if (c2.length() > 0){
-//					Location second = new Location(c2, 1, 1);
-//					user.setClass1(second);
-//				}
-//			}
-//		}
-//	}
+		public void actionPerformed(ActionEvent e) {
+			Object source = e.getSource();
+
+			if (source == submit){
+				String c1 = Class01.getText();
+				String c2 = Class02.getText();
+				if (c1.length() > 0){
+					Location first = new Location(c1, 1, 1);
+					//
+					//FIX THIS
+					//
+					//user.setClass1(first);
+				}
+				if (c2.length() > 0){
+					Location second = new Location(c2, 1, 1);
+					
+					//THIS TOO FIXXX
+					
+					
+					//user.setClass1(second);
+				}
+			}
+		}
+	}
 
 	
 	/***************************************************************************
-	 * Private helper method to re-scale images in the GUI. Will be called in
+	 * Private helper method to res-cale images in the GUI. Will be called in
 	 * the ActionPerformed Method
 	 * 
 	 * @param img Image: The input image to be resized
@@ -282,19 +284,5 @@ public class GUI extends JPanel implements ActionListener {
 		g2.dispose();
 
 		return resizedImg;
-	}
-	
-	public void enableButtons() {
-		classes.setEnabled(true);
-		foods.setEnabled(true);
-		favorites.setEnabled(true);
-		busStops.setEnabled(true);
-	}
-	
-	public void disableButtons() {
-		classes.setEnabled(false);
-		foods.setEnabled(false);
-		favorites.setEnabled(false);
-		busStops.setEnabled(false);
 	}
 }

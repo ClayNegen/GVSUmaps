@@ -44,7 +44,7 @@ public class SubMenu implements WindowListener, ActionListener {
 		
 		switch (type) {
         case "classes":  	
-        	options = gui.getUserClassList();
+        	//options = gui.getUserClassList();
         	
         	for (int i = 0; i < options.size(); i++) {
         		temp.add(options.get(i).getNodeInfo());
@@ -84,12 +84,12 @@ public class SubMenu implements WindowListener, ActionListener {
 		if (source == finalize) {
 			System.out.println(choices.getSelectedItem());
 			try {
-				gui.controller.reset();
+				gui.directionsController.reset();
 			} catch (IOException e1){
 				System.out.println("Problem reseting controller during finalize"
 						+ "button press");
 			}
-			gui.controller.getDirections(choices.getSelectedItem().toString(),
+			gui.directionsController.getDirections(choices.getSelectedItem().toString(),
 					"Alumni House");
 			gui.reDrawMap();
 			gui.setVisibility(true);

@@ -59,7 +59,6 @@ public class GUI extends JPanel implements ActionListener {
 	JLabel blank1 = new JLabel("");
 	JLabel blank2 = new JLabel("");
 	JLabel blank3 = new JLabel("");
-	User user = new User();
 	
 	/***************************************************************************
 	 * Constructor for our GUI. Loads the user into the mainMenu

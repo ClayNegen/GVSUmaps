@@ -44,7 +44,7 @@ public class SubMenu implements WindowListener, ActionListener {
 		
 		switch (type) {
         case "classes":  	
-        	options = gui.getUserClassList();
+        	//options = gui.getUserClassList();
         	
         	for (int i = 0; i < options.size(); i++) {
         		temp.add(options.get(i).getNodeInfo());

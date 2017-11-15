@@ -18,7 +18,10 @@ import java.util.Map;
 public class GUI extends JPanel implements ActionListener {
 	
 	/** Controller to talk to the model */
-	public DirectionsController controller;
+	public DirectionsController directionsController;
+	
+	/** Controller to handle User information */
+	public UserController userController;
 	
 	/** JPanel to represent a background to add all other components to */
 	private JPanel background = new JPanel();
@@ -42,18 +45,14 @@ public class GUI extends JPanel implements ActionListener {
 	/** JButton to take the user to a submenu to find bus stops */
 	private JButton busStops = new JButton("Bus Stops");
 	
+	/** JButton to take the user to a settings submenu */
+	private JButton settings = new JButton("Settings");
+	
+	/** JButton to allow to user to log in or create an account */
+	private JButton loadUser = new JButton("Sign In/Create Account");
+	
 	/** JFrame to display the application */
 	private JFrame frame;
-	
-	private List<MapNode> userClassList;
-	private Map<MapNode, String> userFavoriteList;
-	private Map<MapNode, String> busStopList;
-	
-	
-	
-	
-	
-	
 	
 	Boolean THREEFRAME, JButtonClassesFrame;
 	JButton three = new JButton("Update Information");
@@ -69,8 +68,10 @@ public class GUI extends JPanel implements ActionListener {
 	 **************************************************************************/
 	public GUI() throws IOException  {
 		this.initBorderLayoutEast();
-		controller = new DirectionsController(ImageIO.read
+		directionsController = new DirectionsController(ImageIO.read
 				(new File("src/gvsuMaps.jpg")));
+		userController = new UserController();
+		
 		
 		background.setLayout(new BorderLayout());
 		background.setBackground(Color.DARK_GRAY);
@@ -80,10 +81,9 @@ public class GUI extends JPanel implements ActionListener {
 		
 		//testing submenus by preloading some choices
 		
-		userClassList = new LinkedList<MapNode>();
-		userClassList.add(controller.map.getNode("William Kill Patrick LC"));
-		userClassList.add(controller.map.getNode("Edward J. Frey LC"));
-		userClassList.add(controller.map.getNode("Robert Kliener Commons"));
+		userController.addClass("William Kill Patrick LC");
+		userController.addClass("Edward J. Frey LC");
+		userController.addClass("Robert Kliener Commons");
 	}
 	
 	/***************************************************************************
@@ -106,10 +106,10 @@ public class GUI extends JPanel implements ActionListener {
 		SubMenu tempMenu;
 		
 		if (source == classes){
-			//tempMenu = new SubMenu(this, "classes" );
-			classSchedule ClassSchedule = new classSchedule();
+			tempMenu = new SubMenu(this, "classes" );
+			//classSchedule ClassSchedule = new classSchedule();
 
-			ClassSchedule.setVisible(true);
+			//ClassSchedule.setVisible(true);
 		}
 		
 		if (source == foods){
@@ -134,14 +134,6 @@ public class GUI extends JPanel implements ActionListener {
 		}
 	}
 	
-	public List<MapNode> getUserClassList() {
-		return userClassList;
-	}
-	
-	public Map<MapNode, String> getUserFavoriteList() {
-		return userFavoriteList;
-	}
-	
 	/***************************************************************************
 	 * Method to do most of the legwork to open up the main menu; creates the
 	 * frame, sets up bounds and other options, and adds neccesary panels.
@@ -157,7 +149,7 @@ public class GUI extends JPanel implements ActionListener {
 		frame.setResizable(false);
 		frame.setVisible(true);
 		
-		JLabel westLabel = new JLabel(new ImageIcon(controller.getImage()));
+		JLabel westLabel = new JLabel(new ImageIcon(directionsController.getImage()));
 		background.add(westLabel, BorderLayout.WEST);		
 		background.add(eastPanel, BorderLayout.EAST);
 		frame.add(background);		
@@ -172,7 +164,7 @@ public class GUI extends JPanel implements ActionListener {
 	 * @throws IOException
 	 **************************************************************************/
 	private void initBorderLayoutEast() throws IOException {
-		eastPanel.setLayout(new GridLayout(5, 1, 0, 3));
+		eastPanel.setLayout(new GridLayout(6, 1, 0, 3));
 		eastPanel.setBackground(Color.DARK_GRAY);
 		
 		BufferedImage logo = ImageIO.read(new File("src/GVMaps.png"));
@@ -181,11 +173,24 @@ public class GUI extends JPanel implements ActionListener {
 		
 		classes.addActionListener(this);
 		
+		Box userSettingsBox = new Box(BoxLayout.Y_AXIS);
+
+		loadUser.setAlignmentX(CENTER_ALIGNMENT);
+		settings.setAlignmentX(CENTER_ALIGNMENT);
+		loadUser.setMaximumSize(new Dimension(180, 30));
+		settings.setMaximumSize(new Dimension(180, 30));
+		
+		userSettingsBox.add(Box.createRigidArea(new Dimension(0, 30)));
+		userSettingsBox.add(settings);
+		userSettingsBox.add(Box.createRigidArea(new Dimension(0, 5)));
+		userSettingsBox.add(loadUser);
+		
 		eastPanel.add(gvLogo);
 		eastPanel.add(classes);
 		eastPanel.add(foods);
 		eastPanel.add(busStops);
 		eastPanel.add(favorites);
+		eastPanel.add(userSettingsBox);
 	}
 	
 	public void reDrawMap() {
@@ -193,7 +198,7 @@ public class GUI extends JPanel implements ActionListener {
 		
 		background.remove(0);
 		
-		JLabel imgHolder = new JLabel(new ImageIcon(controller.getImage()));
+		JLabel imgHolder = new JLabel(new ImageIcon(directionsController.getImage()));
 
 		temp.add(imgHolder);
 		background.add(temp, 0);
@@ -241,11 +246,18 @@ public class GUI extends JPanel implements ActionListener {
 				String c2 = Class02.getText();
 				if (c1.length() > 0){
 					Location first = new Location(c1, 1, 1);
-					user.setClass1(first);
+					//
+					//FIX THIS
+					//
+					//user.setClass1(first);
 				}
 				if (c2.length() > 0){
 					Location second = new Location(c2, 1, 1);
-					user.setClass1(second);
+					
+					//THIS TOO FIXXX
+					
+					
+					//user.setClass1(second);
 				}
 			}
 		}

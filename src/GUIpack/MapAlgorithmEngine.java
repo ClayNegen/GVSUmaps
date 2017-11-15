@@ -1,5 +1,6 @@
 package GUIpack;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -18,7 +19,10 @@ import java.util.Set;
  * @author Clay Negen
  * @author Douglas Wallim
  ******************************************************************************/
-public class DijkstraAlgorithm {
+public class MapAlgorithmEngine {
+	
+	/** This is an unchanged copy of the original map to reset to. */
+	private final GVSUMap original;
 	
 	/** Instance variable to hold all the nodes in the graph. */
     private List<MapNode> nodes;
@@ -48,16 +52,19 @@ public class DijkstraAlgorithm {
      * 
      * @param graph GVSUMap: The map on which the algorithm is going to be run
      **************************************************************************/
-    public DijkstraAlgorithm(final GVSUMap graph) {
+    public MapAlgorithmEngine(final GVSUMap graph) {
         this.nodes = new ArrayList<MapNode>(graph.getNodeList());
         this.edges = new ArrayList<Edge>(graph.getEdgeList());
+
+        original = graph;
     }
     
     /***************************************************************************
      * This method runs Djikstras algorithm from the source node to all other 
      * nodes in the map loading the results into the predecessors HashMap.
      * 
-     * @param name String: This string is ID of the source node desired
+     * @param name String: This string is nodeInfo member of the source node
+     * desired
      **************************************************************************/
     public void execute(final String name) {
         settledNodes = new HashSet<MapNode>();
@@ -65,7 +72,32 @@ public class DijkstraAlgorithm {
         distance = new HashMap<MapNode, Double>();
         predecessors = new HashMap<MapNode, MapNode>();
         
-        MapNode source = findByNodeInfo(name);
+        MapNode source = original.getNode(name);
+        
+        distance.put(source, 0.0);
+        unSettledNodes.add(source);
+        while (unSettledNodes.size() > 0) {
+            MapNode node = getMinimum(unSettledNodes);
+            settledNodes.add(node);
+            unSettledNodes.remove(node);
+            findMinimalDistances(node);
+        }
+    }
+    
+    /***************************************************************************
+     * Overload of execute to accept an integer instead of String. (functionally
+     * identical)
+     * 
+     * @param name String: This string is nodeInfo member of the source node
+     * desired
+     **************************************************************************/
+    public void execute(final int name) {
+        settledNodes = new HashSet<MapNode>();
+        unSettledNodes = new HashSet<MapNode>();
+        distance = new HashMap<MapNode, Double>();
+        predecessors = new HashMap<MapNode, MapNode>();
+        
+        MapNode source = original.getNode(name);
         
         distance.put(source, 0.0);
         unSettledNodes.add(source);
@@ -214,20 +246,8 @@ public class DijkstraAlgorithm {
         return path;
     }
     
-    /***************************************************************************
-     * Looks up a node by id from the original map.
-     * 
-     * @param id String: The id of the node to be looked up
-     * 
-     * @return MapNode: The node desired
-     **************************************************************************/
-    private MapNode findByNodeInfo(final String id) {
-    	for (MapNode node : nodes) {
-    		if (node.getNodeInfo().equals(id)) {
-    			return node;
-    		}
-        }
-    	return null;
-    	//check for errors here, maybe
+    public void reset() {
+    	this.nodes = original.getNodeList();
+    	this.edges = original.getEdgeList();
     }
 }

@@ -4,53 +4,62 @@ import java.awt.*;
 import java.awt.EventQueue;
 
 import javax.swing.*;
-import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
 import javax.swing.border.TitledBorder;
-import javax.swing.JButton;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
-import javax.swing.JList;
+
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 
 import javax.imageio.ImageIO;
-import javax.swing.AbstractListModel;
-import javax.swing.ImageIcon;
 
 import java.awt.Font;
-import javax.swing.JComboBox;
-import javax.swing.JTextPane;
-import javax.swing.JLayeredPane;
-import javax.swing.JInternalFrame;
-import javax.swing.JToolBar;
 import java.awt.Canvas;
 
 public class classSchedule extends JFrame {
+	
+	private static String [] n = new String[6] ;
+	private static String [] p = new String[6] ;
+	boolean isClicked = false;
+	//public String getTxtpnEnterClass_1 ,getTxtpnEnterClass_2, getTxtpnEnterClass_3, getTxtpnEnterClass_4, getTxtpnEnterClass_5, getTxtpnEnterClass_6;
 
+	//public String getClassRoom_1, getClassRoom_2, getClassRoom_3, getClassRoom_4, getClassRoom_5, getClassRoom_6;
+	
 	private JPanel contentPane;
 
 	/**
-	 * Launch the application.
+	 * @PostConstruct
+	 * @param args
 	 */
 	public static void main(String[] args) {
+		
+		
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					classSchedule frame = new classSchedule();
 					frame.setTitle("Class Schedule");
 					frame.setVisible(true);
+					
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
+		
+		
+		
 	}
 
 	/**
@@ -58,7 +67,17 @@ public class classSchedule extends JFrame {
 	 * 
 	 */
 	public classSchedule()  {
+		
+		
+		
+		try {
+			
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		}
+		finally{
+		
+		}
 		setBounds(100, 100, 1300, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -142,49 +161,53 @@ public class classSchedule extends JFrame {
 		classRoom_6.setBounds(344, 396, 213, 27);
 		panel.add(classRoom_6);
 		
-		JTextPane txtpnClassSchedule = new JTextPane();
-		txtpnClassSchedule.setBounds(231, 33, 103, 16);
+		JLabel txtpnClassSchedule = new JLabel();
+		
+		txtpnClassSchedule.setBounds(231, 33, 133, 16);
 		txtpnClassSchedule.setText("Class Schedule");
 		panel.add(txtpnClassSchedule);
 		
-		JButton btnClass = new JButton("Save Classes");
-		btnClass.addActionListener(new ActionListener() {
+		
+		
+		JButton btnGetDirections = new JButton("Get Directions");
+		btnGetDirections.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				String getTxtpnEnterClass_1 ,getTxtpnEnterClass_2, getTxtpnEnterClass_3, getTxtpnEnterClass_4, getTxtpnEnterClass_5, getTxtpnEnterClass_6;
-
-				String getClassRoom_1, getClassRoom_2, getClassRoom_3, getClassRoom_4, getClassRoom_5, getClassRoom_6;
+				setClassroomLoc(	
+						 txtpnEnterClass_1.getText().toString(),
+						
+						txtpnEnterClass_2.getText(),
+		
+						txtpnEnterClass_3.getText(),
+		
+						 txtpnEnterClass_4.getText(),
+		
+						txtpnEnterClass_5.getText(),
+		
+						txtpnEnterClass_6.getText());
+						
+					
+					
+					setClassroomNames(classRoom_1.getSelectedItem().toString(),
+					
+						classRoom_2.getSelectedItem().toString(),
+						
+						classRoom_3.getSelectedItem().toString(),
+						
+						classRoom_4.getSelectedItem().toString(),
+						
+						classRoom_5.getSelectedItem().toString(),
+						
+						classRoom_6.getSelectedItem().toString());
 				
-				getTxtpnEnterClass_1 = txtpnEnterClass_1.getText();
+				Classes classes = new Classes();
+				classes.setVisible(true);
 				
-				getTxtpnEnterClass_2 = txtpnEnterClass_2.getText();
-
-				getTxtpnEnterClass_3 = txtpnEnterClass_3.getText();
-
-				getTxtpnEnterClass_4 = txtpnEnterClass_4.getText();
-
-				getTxtpnEnterClass_5 = txtpnEnterClass_5.getText();
-
-				getTxtpnEnterClass_6 = txtpnEnterClass_6.getText();
-
-				getClassRoom_1 = classRoom_1.getSelectedItem().toString();
-				
-				getClassRoom_2 = classRoom_2.getSelectedItem().toString();
-				
-				getClassRoom_3 = classRoom_3.getSelectedItem().toString();
-				
-				getClassRoom_4 = classRoom_4.getSelectedItem().toString();
-				
-				getClassRoom_5 = classRoom_5.getSelectedItem().toString();
-				
-				getClassRoom_6 = classRoom_6.getSelectedItem().toString();
+				dispose();
 			}
 		});
-		
-		btnClass.setBounds(231, 468, 117, 29);
-		btnClass.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-		btnClass.setForeground(Color.BLACK);
-		panel.add(btnClass);
+		btnGetDirections.setBounds(307, 469, 166, 29);
+		panel.add(btnGetDirections);
 		
 		
 		Panel panel_1 = new Panel();
@@ -192,17 +215,50 @@ public class classSchedule extends JFrame {
 		
 		contentPane.add(panel_1);
 		
-
 		ImageIcon IMG_PATH1 = new ImageIcon("src/gvsuMaps.jpg");
 		
 		JLabel label = new JLabel("", IMG_PATH1, JLabel.CENTER);
 		
 		panel_1.add(label, BorderLayout.CENTER);
-		
-		
+			
+	}
+	/**
+	 * 
+	 * @return
+	 */
 	
+	public void setClassroomNames(String  setTxtpnEnterClass_1 ,String  setTxtpnEnterClass_2 ,String  setTxtpnEnterClass_3 ,String  setTxtpnEnterClass_4 ,String  setTxtpnEnterClass_5 ,String  setTxtpnEnterClass_6) 
+	{
+		n[0] = setTxtpnEnterClass_1;
+		n[1] = setTxtpnEnterClass_2;
+		n[2] = setTxtpnEnterClass_3;
+		n[3] = setTxtpnEnterClass_4;
+		n[4] = setTxtpnEnterClass_5;
+		n[5] = setTxtpnEnterClass_6;
 		
-        
-		
+	}
+	public void setClassroomLoc(String setClassRoom_1, String setClassRoom_2, String setClassRoom_3, String setClassRoom_4, String setClassRoom_5, String setClassRoom_6) 
+	{
+		p[0] = setClassRoom_1;
+		p[1] = setClassRoom_2;
+		p[2] = setClassRoom_3;
+		p[3] = setClassRoom_4;
+		p[4] = setClassRoom_5;
+		p[5] = setClassRoom_6;
+	}
+	
+	public String[] getClassroomNames() 
+	{
+		return p;	
+	}
+	/**
+	 * 
+	 * @return getClassroomLocation
+	 */
+	
+	public String[] getClassroomLocation() 
+	{
+		return  n;
+				
 	}
 }

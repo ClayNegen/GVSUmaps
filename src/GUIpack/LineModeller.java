@@ -5,7 +5,7 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class LineController {
+public class LineModeller {
 	
 	private BufferedImage canvas;
 	
@@ -15,7 +15,7 @@ public class LineController {
 	
 	private final int height;
 	
-	public LineController (BufferedImage image) {
+	public LineModeller (BufferedImage image) {
 		original = image;
 		canvas = image;
 		width = canvas.getWidth();
@@ -128,7 +128,7 @@ public class LineController {
 				}
 	}
 	
-	private BufferedImage reset() {
+	public BufferedImage reset() {
 		canvas = original;
 		return original;
 	}

@@ -1,10 +1,9 @@
-package GUIpack;
+package guiPack;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -16,24 +15,42 @@ import java.util.Scanner;
 import java.util.StringJoiner;
 import java.util.StringTokenizer;
 
-public class FileHandler {
-	/** Copy of GVSUMap (maybe temporary fix, maybe not) */
+/*******************************************************************************
+ * A model component to handle files and write/read files for the 
+ * UserController.
+ * 
+ * @author Douglas Wallin
+ ******************************************************************************/
+public class FileHandlerModel {
+	/** Copy of GVSUMap (maybe temporary fix, maybe not). */
 	private GVSUMap map = new GVSUMap();
 	
-	/** File to hold user accounts */
-	private File accountsFile = new File("src/accounts.txt");
+	/** File to hold user accounts. */
+	private File accountsFile;
 	
-	/** File to temporarily re-write to */
-	private File tempFile = new File("src/tempFile.txt");
+    /** File to temporarily re-write to. */
+	private File tempFile;
 	
-	public FileHandler() throws IOException {
-		//clearFile(accountsFile);
+	/***************************************************************************
+	 * Creates a FileHandlerModel to manipulate files storing user information.
+	 **************************************************************************/
+	public FileHandlerModel() {
+		accountsFile = new File("src/accounts.txt");
+		tempFile = new File("src/tempFile.txt");
 	}
 	
-	public static void main(String args[]) throws IOException {
-	}
-	
-	private List<String> getTokens(String line) throws IOException {		
+    /***************************************************************************
+	 * A helper method that takes a String and returns a list of Strings using
+	 * commmas as a delimiter.
+	 * 
+	 * @param line String: The string to broken down to tokens
+	 * 
+	 * @return List<String> The ouput in the format of Strings "tokens" in a
+	 * list
+	 * 
+	 * @throws IOException
+	 **************************************************************************/
+	private List<String> getTokens(final String line) {		
 		StringTokenizer tokenizer = new StringTokenizer(line);
 		List<String> result = new LinkedList<String>();
 		
@@ -43,9 +60,15 @@ public class FileHandler {
 		return result;
 	}
 	
-	private String deTokenize(List<String> line) {
+	/***************************************************************************
+	 * Reconstructs a list of tokens back to a single string.
+	 * 
+	 * @param line List<String>: The current line as a list of strings(tokens).
+	 * @return String: A detokenized version of the current line. In other
+	 * words back to a single string
+	 **************************************************************************/
+	private String deTokenize(final List<String> line) {
 		StringJoiner joiner = new StringJoiner(",");
-		String result = "";
 		
 		for (int i = 0; i < line.size(); i++) {
 			joiner.add(line.get(i));
@@ -54,7 +77,21 @@ public class FileHandler {
 		return joiner.toString();
 	}
 	
-	public Tuple<User, List<Boolean>> loadUser(String name, String pass) throws IOException{
+	/***************************************************************************
+	 * Tries to load a user based on search parameters of a String(username) and
+	 * another String(password). If it is able to find an user with matching
+	 * name it will set the second boolean to true. It it is able to find an
+	 * user with matching name and password it will also set the first boolean
+	 * to be true, and create an user based on the information stored in the
+	 * file
+	 * 
+	 * @param name
+	 * @param pass
+	 * @return
+	 * @throws IOException
+	 **************************************************************************/
+	public Tuple<User, List<Boolean>> loadUser(final String name,
+			final String pass) throws IOException {
 		User user = null;
 		String tempName = null;
 	    Tuple<User, List<Boolean>> result;
@@ -70,16 +107,13 @@ public class FileHandler {
 	    	if (tokens.get(0).equals("|Username|") &&
 	    			tokens.get(1).equals(name)) {
 	    		tempName = tokens.get(1);
-	    		foundUser = true;
 	    		matchedUsername = true;
 	    	}
 	    	
-	    	if (tokens.get(0).equals("|Password|") && foundUser ) {
+	    	if (tokens.get(0).equals("|Password|") && matchedUsername ) {
 	    		if (tokens.get(1).equals(pass)) {
 		    		user = new User(tempName, tokens.get(1));
-	    		}
-	    		else {
-	    			foundUser = false;
+		    		foundUser = true;
 	    		}
 	    	}
 	    	

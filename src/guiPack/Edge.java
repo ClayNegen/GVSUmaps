@@ -1,4 +1,4 @@
-package GUIpack;
+package guiPack;
 
 /*******************************************************************************
  * The Edge object represents an edge in graph theory between two nodes. More

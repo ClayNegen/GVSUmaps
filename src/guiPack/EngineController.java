@@ -1,4 +1,4 @@
-package GUIpack;
+package guiPack;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -11,7 +11,7 @@ import java.util.LinkedList;
  * 
  * @author Douglas Wallin
  ******************************************************************************/
-public class DirectionsController {
+public class EngineController {
 	
 	/**	Instance of the LineModeller engine component. Handles all changes to
 	 * the BufferedImage */
@@ -29,7 +29,7 @@ public class DirectionsController {
 	 * 
 	 * @param img BufferedImage: The picture to have directions drawn on
 	 **************************************************************************/
-	public DirectionsController(BufferedImage img) {
+	public EngineController(BufferedImage img) {
 		lineModel = new LineModeller(img);
 		map = new GVSUMap();
 		algorithm = new MapEngine(map);

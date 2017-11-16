@@ -31,7 +31,7 @@ public class LineModeller {
 		int x2 = node2.getX();
 		int y1 = node1.getY();
 		int y2 = node2.getY();
-		List<CoordinateTuple> pointsList;
+		List<Tuple<Integer, Integer>> pointsList;
 		
 		
 		if (Math.abs(y2 - y1) < Math.abs(x2 - x1)) {
@@ -40,7 +40,7 @@ public class LineModeller {
 			pointsList  = getXPoints(x1, x2, y1, y2);
 		}
 		
-		for (CoordinateTuple coordinatePair: pointsList) {
+		for (Tuple<Integer, Integer> coordinatePair: pointsList) {
 			canvas.setRGB(coordinatePair.getX(), coordinatePair.getY(),
 					Color.BLUE.getRGB());
 		}
@@ -48,8 +48,10 @@ public class LineModeller {
 	
 	
 	
-	private List<CoordinateTuple> getYPoints(int x1, int x2, int y1, int y2) {		
-		List<CoordinateTuple> line = new ArrayList<CoordinateTuple>();
+	private List<Tuple<Integer, Integer>> getYPoints(int x1, int x2,
+			int y1, int y2) {		
+		List<Tuple<Integer, Integer>> line = 
+				new ArrayList<Tuple<Integer, Integer>>();
 		
 		if (x2 < x1) {
 			int temp = x2;
@@ -66,15 +68,17 @@ public class LineModeller {
 		int yVal;
 		for (int i = x1; i < x2; i++) {
 			yVal = getYValue(i, slope, x2, y2);
-			CoordinateTuple temp = new CoordinateTuple(i, yVal);
+			Tuple<Integer, Integer> temp = new Tuple<Integer, Integer>(i, yVal);
 			line.add(temp);
 		}
 		
 		return line;
 	}
 	
-	private List<CoordinateTuple> getXPoints(int x1, int x2, int y1, int y2) {		
-		List<CoordinateTuple> line = new ArrayList<CoordinateTuple>();
+	private List<Tuple<Integer, Integer>> getXPoints(int x1, int x2,
+			int y1, int y2) {		
+		List<Tuple<Integer, Integer>> line = 
+				new ArrayList<Tuple<Integer, Integer>>();
 		
 		if (y2 < y1) {
 			int temp = x2;
@@ -91,7 +95,7 @@ public class LineModeller {
 		int xVal;
 		for (int i = y1; i < y2; i++) {
 			xVal = getXValue(i, slope, x2, y2);
-			CoordinateTuple temp = new CoordinateTuple(xVal, i);
+			Tuple<Integer, Integer> temp = new Tuple<Integer, Integer>(xVal, i);
 			line.add(temp);
 		}
 		

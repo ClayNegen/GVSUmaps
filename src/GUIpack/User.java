@@ -3,15 +3,14 @@ package GUIpack;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
+
+/*******************************************************************************
+ * An user object holds lists of classes, favorite food places, etc
  * 
+ * @author Douglas Wallin
  * @author Louis Sullivan
- * @author Clay Negen
- * @author Douglas Wallim
- *
- */
+ ******************************************************************************/
 public class User {
-	
 	/** List of mapNodes to represent the users classes as saved by the user */
 	private List<MapNode> classList;
 	

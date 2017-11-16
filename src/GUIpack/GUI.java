@@ -105,10 +105,10 @@ public class GUI extends JPanel implements ActionListener {
 		SubMenu tempMenu;
 		
 		if (source == classes){
-			tempMenu = new SubMenu(this, "classes" );
-			//classSchedule ClassSchedule = new classSchedule();
+			//tempMenu = new SubMenu(this, "classes" );
+			classSchedule ClassSchedule = new classSchedule();
 
-			//ClassSchedule.setVisible(true);
+			ClassSchedule.setVisible(true);
 		}
 		
 		if (source == foods){
@@ -238,27 +238,7 @@ public class GUI extends JPanel implements ActionListener {
 
 
 		public void actionPerformed(ActionEvent e) {
-			Object source = e.getSource();
-
-			if (source == submit){
-				String c1 = Class01.getText();
-				String c2 = Class02.getText();
-				if (c1.length() > 0){
-					Location first = new Location(c1, 1, 1);
-					//
-					//FIX THIS
-					//
-					//user.setClass1(first);
-				}
-				if (c2.length() > 0){
-					Location second = new Location(c2, 1, 1);
-					
-					//THIS TOO FIXXX
-					
-					
-					//user.setClass1(second);
-				}
-			}
+			
 		}
 	}
 

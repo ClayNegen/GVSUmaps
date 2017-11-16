@@ -268,20 +268,20 @@ public class GVSUMap {
 		
 		//this.addNode(641, 376, 69);
 
-		this.addLane(19,20);
-		this.addLane(19,21);
-		this.addLane(19,22);
-		this.addLane(22,23);
-		this.addLane(22,24);
-		this.addLane(24,25);
-		this.addLane(25,26);
+		this.addLane(19, 20);
+		this.addLane(19, 21);
+		this.addLane(19, 22);
+		this.addLane(22,  23);
+		this.addLane(22, 24);
+		this.addLane(24, 25);
+		this.addLane(25, 26);
 
-		this.addLane(25,27);
+		this.addLane(25, 27);
 		this.addLane(24, 27);
-		this.addLane(25,28);
+		this.addLane(25, 28);
 		this.addLane(27, 28);
-		this.addLane(24,29);
-		this.addLane(24,29);
+		this.addLane(24, 29);
+		this.addLane(24, 29);
 		this.addLane(29, 28);
 		this.addLane(30, 28);
 		this.addLane(31, 30);
@@ -295,7 +295,7 @@ public class GVSUMap {
 		this.addLane(36, 31);
 		this.addLane(37, 36);
 		this.addLane(38, 37);
-		this.addLane(39,37);
+		this.addLane(39, 37);
 		this.addLane("Edward J. Frey LC", "39");
 
 		this.addLane(41, 42);

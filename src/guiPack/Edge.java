@@ -12,13 +12,13 @@ public class Edge {
 	 * style of "idOfSourceNode idOfDestinationNode" */
 	private final String id;
 	
-	/**	A double to represent the edge's weight	*/
+	/**	A double to represent the edge's weight.	*/
 	private final double edgeWeight;
 	
-	/**	The source MapNode */
+	/**	The source MapNode. */
 	private final MapNode source;
 	
-	/**	The destination MapNode	*/
+	/**	The destination MapNode.	*/
 	private final MapNode destination;
 	
 	/***************************************************************************

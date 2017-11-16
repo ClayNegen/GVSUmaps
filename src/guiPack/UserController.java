@@ -26,7 +26,8 @@ public class UserController {
 	
 	public void addClass(String bldName) throws IOException {
 		loadedUser.addClass(map.getNode(bldName));
-		fileHandler.writeMidFile(loadedUser.getUsername(), "|ClassList|", bldName);
+		fileHandler.writeMidFile(loadedUser.getUsername(), "|ClassList|",
+				bldName);
 	}
 	
 	public void newUser(String name, String pass) throws IOException {

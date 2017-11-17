@@ -1,4 +1,4 @@
-package GUIpack;
+package guiPack;
 
 import java.awt.*;
 import java.io.IOException;
@@ -149,6 +149,7 @@ public class SubMenu implements ActionListener {
 					}
 					else if (name != null) {
 						flag = false;
+						System.out.println(flag);
 					}
 				}
 				catch (Exception k) {
@@ -161,7 +162,7 @@ public class SubMenu implements ActionListener {
 						gui.enableButtons();
 					}
 					catch (Exception l){
-
+						System.out.println("Couldnt load expected user?");
 					}
 					JOptionPane.showMessageDialog(subFrame,
 							"Succesful login " + name);

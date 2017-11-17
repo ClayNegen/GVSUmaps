@@ -1,26 +1,6 @@
-package GUIpack;
+package guiPack;
 
-import java.io.BufferedReader;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
-import java.nio.channels.FileChannel;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.StringJoiner;
-import java.util.StringTokenizer;
-import static java.nio.file.StandardCopyOption.*;
 
 public class UserController {
 	/** Copy of GVSUMap (maybe temporary fix, maybe not) */

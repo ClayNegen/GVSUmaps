@@ -1,4 +1,4 @@
-package GUIpack;
+package guiPack;
 import java.awt.*;
 
 import javax.imageio.ImageIO;

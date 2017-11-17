@@ -1,4 +1,4 @@
-package GUIpack;
+package guiPack;
 
 import java.util.ArrayList;
 import java.util.Collections;

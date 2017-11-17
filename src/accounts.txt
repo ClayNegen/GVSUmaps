@@ -10,3 +10,6 @@
 |Username|,wallind
 |Password|,password
 |ClassList|,
+|Username|,test2
+|Password|,morejokes
+|ClassList|,

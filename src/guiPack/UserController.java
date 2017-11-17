@@ -7,7 +7,7 @@ public class UserController {
 	private GVSUMap map = new GVSUMap();
 	
 	/** File Handler to manage reading and writing of files */
-	public FileHandler fileHandler = new FileHandler();
+	public FileHandlerModel fileHandler = new FileHandlerModel();
 	
 	/** The current user of the application */
 	public User loadedUser;
@@ -19,14 +19,13 @@ public class UserController {
 	public static void main(String args[]) throws IOException {
 		UserController testController = new UserController();
 			
-		testController.loadUser("louisS", "hi1", 0);
-			
 		System.out.println("Got this far");
 	}
 	
 	public void addClass(String bldName) throws IOException {
 		loadedUser.addClass(map.getNode(bldName));
-		fileHandler.writeMidFile(loadedUser.getUsername(), "|ClassList|", bldName);
+		fileHandler.writeMidFile(loadedUser.getUsername(), "|ClassList|",
+				bldName);
 	}
 	
 	public void newUser(String name, String pass) throws IOException {

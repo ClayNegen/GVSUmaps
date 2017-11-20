@@ -1,4 +1,4 @@
-package GUIpack;
+package guiPack;
 
 import java.awt.*;
 import java.io.IOException;
@@ -230,36 +230,4 @@ public class SubMenu implements ActionListener {
 		mainPanel.add(testBox2);
 		subFrame.add(mainPanel);
 	}
-
-
-	public void windowActivated(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void windowClosed(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void windowDeactivated(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void windowDeiconified(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	public void windowIconified(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void windowOpened(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-}  
+}

@@ -1,4 +1,4 @@
-package GUIpack;
+package guiPack;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -32,6 +32,11 @@ public class User {
 		classList = new LinkedList<MapNode>();
 	}
 
+	/***************************************************************************
+	 * 
+	 * 
+	 * @return
+	 **************************************************************************/
 	public List<MapNode> getClassList() {
 		return classList;
 	}

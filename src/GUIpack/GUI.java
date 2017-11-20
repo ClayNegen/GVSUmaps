@@ -1,4 +1,4 @@
-package GUIpack;
+package guiPack;
 import java.awt.*;
 
 import javax.imageio.ImageIO;
@@ -7,11 +7,6 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.EventObject;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 
 /*******************************************************************************
  *
@@ -21,7 +16,7 @@ import java.util.Map;
 public class GUI extends JPanel implements ActionListener {
 
 	/** Controller to talk to the model */
-	public DirectionsController directionsController;
+	public EngineController directionsController;
 
 	/** Controller to handle User information */
 	public UserController userController;
@@ -70,7 +65,7 @@ public class GUI extends JPanel implements ActionListener {
 	 **************************************************************************/
 	public GUI() throws IOException  {
 		this.initBorderLayoutEast();
-		directionsController = new DirectionsController(ImageIO.read
+		directionsController = new EngineController(ImageIO.read
 				(new File("src/gvsuMaps.jpg")));
 		userController = new UserController();
 
@@ -98,10 +93,10 @@ public class GUI extends JPanel implements ActionListener {
 		SubMenu tempMenu;
 
 		if (source == classes){
-			//tempMenu = new SubMenu(this, "classes" );
-			classSchedule ClassSchedule = new classSchedule();
+			tempMenu = new SubMenu(this, "classes" );
+			//classSchedule ClassSchedule = new classSchedule();
 
-			ClassSchedule.setVisible(true);
+			//ClassSchedule.setVisible(true);
 		}
 
 		if (source == foods){
@@ -141,7 +136,8 @@ public class GUI extends JPanel implements ActionListener {
 		frame.setResizable(false);
 		frame.setVisible(true);
 
-		JLabel westLabel = new JLabel(new ImageIcon(directionsController.getImage()));
+		JLabel westLabel = new JLabel(new ImageIcon(
+				directionsController.getImage()));
 		background.add(westLabel, BorderLayout.WEST);		
 		background.add(eastPanel, BorderLayout.EAST);
 		frame.add(background);		
@@ -188,98 +184,110 @@ public class GUI extends JPanel implements ActionListener {
 		eastPanel.add(userSettingsBox);
 	}
 
+	/***************************************************************************
+	 * Method to be called in any frame (Submenu) that gets directions between
+	 * two places
+	 **************************************************************************/
 	public void reDrawMap() {
 		JPanel temp = new JPanel();
 
 		background.remove(0);
 
-		JLabel imgHolder = new JLabel(new ImageIcon(directionsController.getImage()));
+		JLabel imgHolder = new JLabel(new ImageIcon(
+				directionsController.getImage()));
 
 		temp.add(imgHolder);
 		background.add(temp, 0);
 	}
 
-	public class Info extends JPanel implements ActionListener{
-		JLabel Class1 = new JLabel("Class One:");
-		JTextArea Class01 = new JTextArea("");
-		JLabel Class2 = new JLabel("Class Two:");
-		JTextArea Class02 = new JTextArea("");
-		JLabel Class3 = new JLabel("Class Three:");
-		JTextArea Class03 = new JTextArea("");
-		JButton submit = new JButton("Submit");
-		JLabel blank1 = new JLabel();
+//	public class Info extends JPanel implements ActionListener{
+//		JLabel Class1 = new JLabel("Class One:");
+//		JTextArea Class01 = new JTextArea("");
+//		JLabel Class2 = new JLabel("Class Two:");
+//		JTextArea Class02 = new JTextArea("");
+//		JLabel Class3 = new JLabel("Class Three:");
+//		JTextArea Class03 = new JTextArea("");
+//		JButton submit = new JButton("Submit");
+//		JLabel blank1 = new JLabel();
+//
+//		/**
+//		 * Creates update information Jframe 
+//		 */
+//		public Info(){
+//			JFrame frame = new JFrame("Your Information");
+//			frame.setVisible(true);
+//			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//			frame.setSize(300, 400);
+//			JPanel panel = new JPanel();
+//			panel.setLayout(new GridLayout(4, 2, 5, 10));
+//			panel.add(Class1);
+//			panel.add(Class01);
+//			panel.add(Class2);
+//			panel.add(Class02);
+//			panel.add(Class3);
+//			panel.add(Class03);
+//			panel.add(submit);
+//			panel.add(blank1);
+//			frame.add(panel);
+//
+//			submit.addActionListener(this);
+//		}
+//
+	//		@Override
+	//		public void actionPerformed(ActionEvent arg0) {
+	//			// TODO Auto-generated method stub
+	//			
+	//		}
+	//	}
 
-		/**
-		 * Creates update information Jframe 
-		 */
-		public Info(){
-			JFrame frame = new JFrame("Your Information");
-			frame.setVisible(true);
-			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			frame.setSize(300, 400);
-			JPanel panel = new JPanel();
-			panel.setLayout(new GridLayout(4, 2, 5, 10));
-			panel.add(Class1);
-			panel.add(Class01);
-			panel.add(Class2);
-			panel.add(Class02);
-			panel.add(Class3);
-			panel.add(Class03);
-			panel.add(submit);
-			panel.add(blank1);
-			frame.add(panel);
 
-			submit.addActionListener(this);
-		}
+	/***************************************************************************
+	 * Private helper method to res-cale images in the GUI. Will be called in
+	 * the ActionPerformed Method
+	 * 
+	 * @param img Image: The input image to be resized
+	 * @param width int: The width in pixels desired for the output
+	 * @param height int: The height in pixels desired for the output
+	 * 
+	 * @return Image: The resized image
+	 **************************************************************************/
+	private Image getScaledImage(Image img, int width, int height) {
+		BufferedImage resizedImg = new BufferedImage(width, height,
+				BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2 = resizedImg.createGraphics();
 
+		g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
+				RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+		g2.drawImage(img, 0, 0, width, height, null);
+		g2.dispose();
 
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
-
-			
-		}
+		return resizedImg;
 	}
 
-
-		/***************************************************************************
-		 * Private helper method to res-cale images in the GUI. Will be called in
-		 * the ActionPerformed Method
-		 * 
-		 * @param img Image: The input image to be resized
-		 * @param width int: The width in pixels desired for the output
-		 * @param height int: The height in pixels desired for the output
-		 * 
-		 * @return Image: The resized image
-		 **************************************************************************/
-		private Image getScaledImage(Image img, int width, int height) {
-			BufferedImage resizedImg = new BufferedImage(width, height,
-					BufferedImage.TYPE_INT_ARGB);
-			Graphics2D g2 = resizedImg.createGraphics();
-
-			g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
-					RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-			g2.drawImage(img, 0, 0, width, height, null);
-			g2.dispose();
-
-			return resizedImg;
-		}
-		
-		public JLabel getLogo() {
-			return gvLogo;
-		}
-		
-		public void enableButtons() {
-			classes.setEnabled(true);
-			busStops.setEnabled(true);
-			foods.setEnabled(true);
-			favorites.setEnabled(true);
-		}
-		
-		public void disableButtons() {
-			classes.setEnabled(false);
-			busStops.setEnabled(false);
-			foods.setEnabled(false);
-			favorites.setEnabled(false);
-		}
+	/***************************************************************************
+	 * @return gvLogo
+	 **************************************************************************/
+	public JLabel getLogo() {
+		return gvLogo;
 	}
+
+	/***************************************************************************
+	 * Simply put, sets all buttons to be able to be clicked.
+	 **************************************************************************/
+	public void enableButtons() {
+		classes.setEnabled(true);
+		busStops.setEnabled(true);
+		foods.setEnabled(true);
+		favorites.setEnabled(true);
+	}
+
+	/***************************************************************************
+	 * Sets all buttons to be disabled (unclickable)
+	 **************************************************************************/
+	public void disableButtons() {
+		classes.setEnabled(false);
+		busStops.setEnabled(false);
+		foods.setEnabled(false);
+		favorites.setEnabled(false);
+	}
+}

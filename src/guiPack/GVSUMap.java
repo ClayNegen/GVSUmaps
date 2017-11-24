@@ -347,6 +347,47 @@ public class GVSUMap {
 		this.addLane(74, 73);
 		this.addLane(75, 73);
 
-
+		/**
+		 * Add Nodes 
+		 * Class Room loactions
+		 */
+		
+		this.addNode(584, 334, "Mackinaw");
+		
+		this.addNode(550, 360, "Manitou");
+		
+		this.addNode(578, 390, "Fresh Food Dinning");
+		
+		this.addNode(547, 418, "Padnos");
+		
+		this.addNode(514, 419, "Loutit");
+		
+		this.addNode(511, 438, "Henry Hall");
+		
+		this.addNode(499, 553, "72");
+		
+		this.addNode(507, 483, "82");
+		
+		this.addNode(501, 504, "Clocktower");
+		
+		this.addNode(500, 523, "Kirkoff");
+		
+		this.addNode(471, 515, "Library");
+		
+		this.addNode(521, 578, "Preforming Arts");
+		
+		this.addNode(612, 511, "Au Sable Hall");
+		
+		this.addNode(617, 546, "Lake Huron Hall");
+		
+		this.addNode(604, 571, "Seidman house");
+		
+		this.addNode(573, 578, "Lake Superior");
+		
+		this.addNode(584, 604, "Lake Michigan");
+		
+		this.addNode(612, 608, "Lake Ontario");
+		
+		this.addNode(699, 611, "Calder");
 	}
 }

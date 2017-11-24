@@ -389,5 +389,72 @@ public class GVSUMap {
 		this.addNode(612, 608, "Lake Ontario");
 		
 		this.addNode(699, 611, "Calder");
+		
+		
+		/**
+		 * Add Paths from calder to Mackinaw
+		 */
+		
+		
+		this.addNode(658, 603, 84); 
+		
+		this.addLane("84", "Calder");
+		
+		this.addLane("84", "Lake Ontario");
+		
+		this.addNode(587, 592, 85);
+		
+		this.addLane("Lake Ontario", "85");
+		
+		this.addLane("Lake Michigan", "85");
+		
+		this.addNode(587, 571, 86);
+		
+		this.addLane("Seidman house", "86");
+		
+		this.addLane("Lake Superior", "86");
+		
+		this.addNode(586, 557, 87);
+		
+		this.addLane("86", "87");
+		
+		this.addNode(625, 562, 88);
+		
+		this.addLane("87", "88");
+		
+		this.addNode(586, 528, 89);
+		
+		this.addLane("87", "89");
+		
+		this.addLane("Zumberge", "89");
+		
+		this.addNode(587, 514, 90);
+		
+		this.addLane("89", "90");
+		
+		this.addLane("Au Sable Hall", "90");
+		
+		this.addNode(582, 454, 91);
+		
+		this.addNode(558, 398, 93);
+		
+		this.addLane("91", "92");
+		
+		this.addLane("91", "90");
+		
+		this.addLane("93", "Padnos");
+		
+		this.addLane("93", "Fresh");
+		
+		this.addNode(561, 417, 92);
+		
+		this.addNode(599, 385, 94);
+		
+		this.addNode(598, 361, 95);
+		
+		this.addNode(609, 361, "Holden Hocker");
+		
+		this.addLane("95", "Holden Hocker");
+		
 	}
 }

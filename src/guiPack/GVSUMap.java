@@ -364,9 +364,9 @@ public class GVSUMap {
 		
 		this.addNode(511, 438, "Henry Hall");
 		
-		this.addNode(499, 553, "72");
+		this.addNode(499, 553, "Student Services");
 		
-		this.addNode(507, 483, "82");
+		this.addNode(507, 483, "Cook-Dewitt Center");
 		
 		this.addNode(501, 504, "Clocktower");
 		

@@ -9,7 +9,7 @@
 |ClassList|,
 |Username|,wallind
 |Password|,password
-|ClassList|,
+|ClassList|,William Kill Patrick LC,Edward J. Frey LC,Robert Kliener Commons
 |Username|,test2
 |Password|,morejokes
 |ClassList|,

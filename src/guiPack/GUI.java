@@ -21,41 +21,42 @@ import java.util.Map;
  ******************************************************************************/
 public class GUI extends JPanel implements ActionListener {
 
-	/** Controller to talk to the model */
+	/** Controller to talk to the model. */
 	public EngineController directionsController;
 
-	/** Controller to handle User information */
+	/** Controller to handle User information. */
 	public UserController userController;
 
-	/** JPanel to represent a background to add all other components to */
+	/** JPanel to represent a background to add all other components to. */
 	private JPanel background = new JPanel();
 
-	/** JPanel to hold the logo and buttons to navigate to various sub-menus */
+	/** JPanel to hold the logo and buttons to navigate to various sub-menus. */
 	private JPanel eastPanel = new JPanel();
 
-	/** JLabel to hold the logo image */
+	/** JLabel to hold the logo image. */
 	private JLabel gvLogo;
 
-	/** JButton to take the user to a submenu to choose a class to navigate to */
+	/** JButton to take the user to a submenu to choose a class to navigate 
+	 * to. */
 	private JButton classes = new JButton("Go to Class");;
 
 	/** JButton to take the user to a submenu to choose a food spot to navigate
-	 * to */
+	 * to. */
 	private JButton foods = new JButton("Find Food");
 
-	/** JButton to take the user to a a page of favorites for quick access */
+	/** JButton to take the user to a a page of favorites for quick access. */
 	private JButton favorites = new JButton("Favorites");
 
-	/** JButton to take the user to a submenu to find bus stops */
+	/** JButton to take the user to a submenu to find bus stops. */
 	private JButton busStops = new JButton("Bus Stops");
 
-	/** JButton to take the user to a settings submenu */
+	/** JButton to take the user to a settings submenu. */
 	private JButton settings = new JButton("Settings");
 
-	/** JButton to allow to user to log in or create an account */
+	/** JButton to allow to user to log in or create an account. */
 	private JButton loadUser = new JButton("Sign In/Create Account");
 
-	/** JFrame to display the application */
+	/** JFrame to display the application. */
 	private JFrame frame;
 
 	Boolean THREEFRAME, JButtonClassesFrame;
@@ -99,10 +100,8 @@ public class GUI extends JPanel implements ActionListener {
 		SubMenu tempMenu;
 
 		if (source == classes){
-			tempMenu = new SubMenu(this, "classes" );
-			//classSchedule ClassSchedule = new classSchedule();
-
-			//ClassSchedule.setVisible(true);
+			selectClasses();
+			reDrawMap();
 		}
 
 		if (source == foods){
@@ -123,6 +122,36 @@ public class GUI extends JPanel implements ActionListener {
 		}
 	}
 
+	public void selectClasses() {
+		String[] originList= userController.getUserClassList();
+        String[] destinationList = userController.getUserClassList();
+
+        
+        JComboBox jcO = new JComboBox(originList);
+        JComboBox jcD = new JComboBox(destinationList);
+
+        jcO.setEditable(false);
+        jcD.setEditable(false);
+
+        //create a JOptionPane
+        Object[] options = new Object[] {};
+        JOptionPane jop = new JOptionPane("Please Select an origin and destination class",
+                                        JOptionPane.QUESTION_MESSAGE,
+                                        JOptionPane.DEFAULT_OPTION,
+                                        null,options, null);
+
+        //add combos to JOptionPane
+        jop.add(jcO);
+        jop.add(jcD);
+
+
+        //create a JDialog and add JOptionPane to it 
+        JDialog diag = new JDialog();
+        diag.getContentPane().add(jop);
+        diag.pack();
+        diag.setVisible(true);
+	}
+	
 	public void setVisibility(boolean flag) {
 		frame.setVisible(flag);
 	}
@@ -197,55 +226,14 @@ public class GUI extends JPanel implements ActionListener {
 	public void reDrawMap() {
 		JPanel temp = new JPanel();
 
-		background.remove(0);
+		background.removeAll();
 
-		JLabel imgHolder = new JLabel(new ImageIcon(
-				directionsController.getImage()));
-
-		temp.add(imgHolder);
-		background.add(temp, 0);
+//		JLabel imgHolder = new JLabel(n ew ImageIcon(
+//				directionsController.getImage()));
+//
+//		temp.add(imgHolder);
+//		background.add(temp, 0);
 	}
-
-//	public class Info extends JPanel implements ActionListener{
-//		JLabel Class1 = new JLabel("Class One:");
-//		JTextArea Class01 = new JTextArea("");
-//		JLabel Class2 = new JLabel("Class Two:");
-//		JTextArea Class02 = new JTextArea("");
-//		JLabel Class3 = new JLabel("Class Three:");
-//		JTextArea Class03 = new JTextArea("");
-//		JButton submit = new JButton("Submit");
-//		JLabel blank1 = new JLabel();
-//
-//		/**
-//		 * Creates update information Jframe 
-//		 */
-//		public Info(){
-//			JFrame frame = new JFrame("Your Information");
-//			frame.setVisible(true);
-//			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-//			frame.setSize(300, 400);
-//			JPanel panel = new JPanel();
-//			panel.setLayout(new GridLayout(4, 2, 5, 10));
-//			panel.add(Class1);
-//			panel.add(Class01);
-//			panel.add(Class2);
-//			panel.add(Class02);
-//			panel.add(Class3);
-//			panel.add(Class03);
-//			panel.add(submit);
-//			panel.add(blank1);
-//			frame.add(panel);
-//
-//			submit.addActionListener(this);
-//		}
-//
-	//		@Override
-	//		public void actionPerformed(ActionEvent arg0) {
-	//			// TODO Auto-generated method stub
-	//			
-	//		}
-	//	}
-
 
 	/***************************************************************************
 	 * Private helper method to res-cale images in the GUI. Will be called in

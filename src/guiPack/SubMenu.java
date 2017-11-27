@@ -33,6 +33,8 @@ public class SubMenu implements ActionListener {
 	
 	private GUI gui;
 	
+	private Vector<String> selections = new Vector<String>();
+	
 	private List<MapNode> options;
 
 	private Vector<String> temp;
@@ -45,51 +47,54 @@ public class SubMenu implements ActionListener {
 		subFrame.setResizable(false);
 		subFrame.setVisible(true);
 		
+//		temp = new Vector<String>();
+//		
 		switch (type) {
-        case "classes":  	
-        	options = getUserClassList();
-        	
-        	for (int i = 0; i < options.size(); i++) {
-        		temp.add(options.get(i).getNodeInfo());
-        	}
-        	
-        	label = new JLabel("Please select a class to navigate to.");
-        	choices = new JComboBox(temp);
-    		initMainPanel();
-        	break;
-        case "favorites":	
-        	options = null;
-        	break;
-        case "foods":		
-        	options = null;
-        	break;
+//        case "classes":  	
+//        	options = getUserClassList();
+//        	
+//        	for (int i = 0; i < options.size(); i++) {
+//        		temp.add(options.get(i).getNodeInfo());
+//        	}
+//        	
+//        	label = new JLabel("Please select a class to navigate to.");
+//        	choices = new JComboBox(temp);
+//        	choices.setSelectedIndex(-1);
+//    		initMainPanel();    		
+//    		
+//        	break;
+//        case "favorites":	
+//        	options = null;
+//        	break;
+//        case "foods":		
+//        	options = null;
+//        	break;
         case "login":
+        	initLoginPanel();
         	options = null;
         	break;
         default: options = null;
-                 break;
-    }
-
-    	initLoginPanel();
+        break;
+		}	
 	}
 	
-	private List<MapNode> getUserClassList() {
-			return gui.userController.loadedUser.getClassList();
-		}
-
+	public String getSelections() {
+		return selections.get(0);
+	}
+	
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
 		SubMenu tempMenu;
 
 		if (source == finalize) {
-			try {
-				gui.directionsController.reset();
-			} catch (IOException e1){
-			}
-			gui.directionsController.getDirections(
-					choices.getSelectedItem().toString(),"Alumni House");
-			gui.reDrawMap();
-			subFrame.dispose();
+    		while (true) {
+    			try {
+    				selections.add(choices.getSelectedItem().toString());
+
+    				subFrame.dispose();    				
+    			} catch (NullPointerException error) {
+    			}
+    		}
 		}
 
 		if (source == signUp) {

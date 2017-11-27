@@ -426,7 +426,7 @@ public class GVSUMap {
 		
 		this.addLane("87", "89");
 		
-		this.addLane("Zumberge", "89");
+		//this.addLane("Zumberge", "89");
 		
 		this.addNode(587, 514, 90);
 		
@@ -438,13 +438,13 @@ public class GVSUMap {
 		
 		this.addNode(558, 398, 93);
 		
-		this.addLane("91", "92");
+		this.addLane(91, 92);
 		
-		this.addLane("91", "90");
+		this.addLane(91, 90);
 		
 		this.addLane("93", "Padnos");
 		
-		this.addLane("93", "Fresh");
+		this.addLane("93", "Fresh Food Dinning");
 		
 		this.addNode(561, 417, 92);
 		

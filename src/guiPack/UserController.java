@@ -1,6 +1,8 @@
 package guiPack;
 
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 
 /*******************************************************************************
  * This controller will allow the gui to manipulate users and their information.
@@ -80,5 +82,16 @@ public class UserController {
 			loadedUser = fileHandler.loadUser(name, pass).getX();
 		}
 		return fileHandler.loadUser(name, pass).getY().get(whichBool);
+	}
+	
+	public String[] getUserClassList() {
+		List<MapNode> classes = loadedUser.getClassList();
+		String[] result = new String[classes.size()];
+		
+		for (int i = 0; i < classes.size(); i++) {
+			result[i] = classes.get(i).getNodeInfo();
+		}
+		
+		return result;
 	}
 }

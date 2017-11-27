@@ -1,15 +1,9 @@
-|Username|,louisS
-|Password|,hi1
-|ClassList|,William Kill Patrick LC,Edward J. Frey LC,Robert Kliener Commons
-|Username|,greg
-|Password|,
-|ClassList|,
 |Username|,test
 |Password|,jokes
 |ClassList|,
 |Username|,wallind
 |Password|,password
-|ClassList|,William Kill Patrick LC,Edward J. Frey LC,Robert Kliener Commons
+|ClassList|,William Kill Patrick LC,Edward J. Frey LC,Robert Kliener Commons,Alumni House
 |Username|,test2
 |Password|,morejokes
 |ClassList|,

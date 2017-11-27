@@ -8,44 +8,51 @@ package guiPack;
  ******************************************************************************/
 public class Tuple<E, T> { 
 	/** The first element of the tuple. */
-	private E x;
+	private E element1;
 	
 	/** The second element of the tuple. */
-	private T y;
+	private T element2;
 	  
 	/***************************************************************************
 	 * Creates a tuple of types <E,T>.
 	 * 
-	 * @param x E: Instantiates the first element of the tuple of type E
-	 * @param y T: Instantiates the second element of the tuple of type T
+	 * @param first x E: Instantiates the first element of the tuple of type E
+	 * @param second T: Instantiates the second element of the tuple of type T
 	 **************************************************************************/
-	public Tuple(final E x, final T y) { 
-		this.x = x; 
-		this.y = y; 
+	public Tuple(final E first, final T second) { 
+		element1 = first;
+		element2 = second; 
 	}
 
 	/***************************************************************************
 	 * @return E: Returns the first element of the tuple of type E
 	 **************************************************************************/
-	public E getX() {
-		return x;
+	public E getElement1() {
+		return element1;
 	}
 
 	/***************************************************************************
 	 * @return T: Returns the second element of the tuple of type T
 	 **************************************************************************/
-	public T getY() {
-		return y;
+	public T getElemnt2() {
+		return element2;
 	}
 	
 	/***************************************************************************
-	 * @param x
+	 * Sets the first element of the tuple to the input.
+	 * 
+	 * @param input E: The data to replace element 1 of the tuple
 	 **************************************************************************/
-	public void setX(E x) {
-		this.x = x;
+	public void setX(final E input) {
+		element1 = input;
 	}
 	
-	public void setY(T y) {
-		this.y = y;
+	/***************************************************************************
+	 * Sets the second element of the tuple to the input.
+	 * 
+	 * @param input T: The data to replace element 2 of the tuple
+	 **************************************************************************/
+	public void setY(final T input) {
+		element2 = input;
 	}
 }

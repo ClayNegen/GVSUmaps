@@ -14,10 +14,10 @@ public class UserController {
 	private GVSUMap map = new GVSUMap();
 	
 	/** File Handler to manage reading and writing of files. */
-	public FileHandlerModel fileHandler = new FileHandlerModel();
+	private FileHandlerModel fileHandler = new FileHandlerModel();
 	
 	/** The current user of the application. */
-	public User loadedUser;
+	private User loadedUser;
 	
 
 
@@ -55,7 +55,7 @@ public class UserController {
 	 **************************************************************************/
 	public boolean newUser(final String name, final String pass)
 			throws IOException {
-		boolean flag = fileHandler.loadUser(name, pass).getY().get(1);
+		boolean flag = fileHandler.loadUser(name, pass).getElemnt2().get(1);
 		if (!flag) {
 			loadedUser = fileHandler.makeAccount(name, pass);
 		}
@@ -78,12 +78,18 @@ public class UserController {
 	 **************************************************************************/
 	public boolean loadUser(final String name, final String pass, 
 			final int whichBool) throws IOException {
-		if (fileHandler.loadUser(name, pass).getY().get(0)) {
-			loadedUser = fileHandler.loadUser(name, pass).getX();
+		if (fileHandler.loadUser(name, pass).getElemnt2().get(0)) {
+			loadedUser = fileHandler.loadUser(name, pass).getElement1();
 		}
-		return fileHandler.loadUser(name, pass).getY().get(whichBool);
+		return fileHandler.loadUser(name, pass).getElemnt2().get(whichBool);
 	}
 	
+	/***************************************************************************
+	 * This method returns an array of strings representing the users saved
+	 * classes
+	 * 
+	 * @return
+	 **************************************************************************/
 	public String[] getUserClassList() {
 		List<MapNode> classes = loadedUser.getClassList();
 		String[] result = new String[classes.size()];

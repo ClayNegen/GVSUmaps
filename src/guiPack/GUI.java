@@ -1,28 +1,40 @@
 package guiPack;
-import java.awt.*;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.event.*;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.EventObject;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 
 
 /*******************************************************************************
- *
+ * A graphical interface to interact with the application. Contains instances
+ * of the DirectionsController model and the UserController model.
  * 
  * @author Douglas Wallin
  ******************************************************************************/
 public class GUI extends JPanel implements ActionListener {
 
 	/** Controller to talk to the model. */
-	public EngineController directionsController;
+	private EngineController directionsController;
 
 	/** Controller to handle User information. */
 	public UserController userController;
@@ -59,21 +71,15 @@ public class GUI extends JPanel implements ActionListener {
 	/** JFrame to display the application. */
 	private JFrame frame;
 
-	Boolean THREEFRAME, JButtonClassesFrame;
-	JButton three = new JButton("Update Information");
-	JLabel blank1 = new JLabel("");
-	JLabel blank2 = new JLabel("");
-	JLabel blank3 = new JLabel("");
-
 	/***************************************************************************
 	 * Constructor for our GUI. Loads the user into the mainMenu
 	 * 
-	 * @throws IOException
+	 * @throws IOException Exception
 	 **************************************************************************/
 	public GUI() throws IOException  {
 		this.initBorderLayoutEast();
-		directionsController = new EngineController(ImageIO.read
-				(new File("src/gvsuMaps.jpg")));
+		directionsController = new EngineController(ImageIO.read(
+				new File("src/gvsuMaps.jpg")));
 		userController = new UserController();
 
 
@@ -99,9 +105,21 @@ public class GUI extends JPanel implements ActionListener {
 		Object source = e.getSource();
 		SubMenu tempMenu;
 
+		Tuple<String, String> output;
+		
 		if (source == classes){
-			selectClasses();
+			output = selectClasses();
+			
+			try {
+				directionsController.reset();
+			} catch (IOException e1) {
+			}
+			
+			directionsController.getDirections(output.getElement1(),
+					output.getElemnt2());
+			
 			reDrawMap();
+			System.out.println("Supposedly working, probs not though");
 		}
 
 		if (source == foods){
@@ -122,49 +140,47 @@ public class GUI extends JPanel implements ActionListener {
 		}
 	}
 
-	public void selectClasses() {
-		String[] originList= userController.getUserClassList();
+	/***************************************************************************
+	 * Creates a JOptionPane for the user to enter classes.
+	 * 
+	 * @return Tuple<String, String>
+	 **************************************************************************/
+	public Tuple<String, String> selectClasses() {
+		String[] sourceList = userController.getUserClassList();
         String[] destinationList = userController.getUserClassList();
 
-        
-        JComboBox jcO = new JComboBox(originList);
-        JComboBox jcD = new JComboBox(destinationList);
+        String source = (String) JOptionPane.showInputDialog(
+        		frame,
+        		"Please Select an origin class\n"
+        				+ "Press Ok when finished",
+        				"Directions",
+        				JOptionPane.PLAIN_MESSAGE,
+        				null,
+        				sourceList,
+        				null);
 
-        jcO.setEditable(false);
-        jcD.setEditable(false);
-
-        //create a JOptionPane
-        Object[] options = new Object[] {};
-        JOptionPane jop = new JOptionPane("Please Select an origin and destination class",
-                                        JOptionPane.QUESTION_MESSAGE,
-                                        JOptionPane.DEFAULT_OPTION,
-                                        null,options, null);
-
-        //add combos to JOptionPane
-        jop.add(jcO);
-        jop.add(jcD);
-
-
-        //create a JDialog and add JOptionPane to it 
-        JDialog diag = new JDialog();
-        diag.getContentPane().add(jop);
-        diag.pack();
-        diag.setVisible(true);
-	}
-	
-	public void setVisibility(boolean flag) {
-		frame.setVisible(flag);
+        String dest = (String) JOptionPane.showInputDialog(
+        		frame,
+        		"Please Select a destination class\n"
+        				+ "Press Ok when finished",
+        				"Directions",
+        				JOptionPane.PLAIN_MESSAGE,
+        				null,
+        				destinationList,
+        				null);
+        Tuple<String, String> result = new Tuple<String, String>(source, dest);
+        return result;
 	}
 
 	/***************************************************************************
 	 * Method to do most of the legwork to open up the main menu; creates the
 	 * frame, sets up bounds and other options, and adds neccesary panels.
 	 * 
-	 * @return
-	 * @throws IOException
+	 * @return frame JFrame: The main frame for the application
+	 * @throws IOException Exception
 	 **************************************************************************/
 	private JFrame initFrame() throws IOException {
-		JFrame frame = new JFrame("GVSU Maps");
+		frame = new JFrame("GVSU Maps");
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(100, 100, 1050, 770);
@@ -182,17 +198,17 @@ public class GUI extends JPanel implements ActionListener {
 
 	/***************************************************************************
 	 * This creates and sets up the JPanel which holds all the buttons and 
-	 * the GV logo
+	 * the GV logo.
 	 * 
-	 * @throws IOException
+	 * @throws IOException Exception
 	 **************************************************************************/
 	private void initBorderLayoutEast() throws IOException {
 		eastPanel.setLayout(new GridLayout(6, 1, 0, 3));
 		eastPanel.setBackground(Color.DARK_GRAY);
 
 		BufferedImage logo = ImageIO.read(new File("src/GVMaps.png"));
-		gvLogo = new JLabel(new ImageIcon(getScaledImage
-				(logo, 245, 126)));
+		gvLogo = new JLabel(new ImageIcon(getScaledImage(
+				logo, 245, 126)));
 
 
 		Box userSettingsBox = new Box(BoxLayout.Y_AXIS);
@@ -220,19 +236,21 @@ public class GUI extends JPanel implements ActionListener {
 	}
 
 	/***************************************************************************
-	 * Method to be called in any frame (Submenu) that gets directions between
-	 * two places
+	 * This method reDraws the map to reflect or not reflect directions
+	 * depending on the state of the directionsController.
 	 **************************************************************************/
 	public void reDrawMap() {
 		JPanel temp = new JPanel();
 
-		background.removeAll();
+		background.remove(0);
 
-//		JLabel imgHolder = new JLabel(n ew ImageIcon(
-//				directionsController.getImage()));
-//
-//		temp.add(imgHolder);
-//		background.add(temp, 0);
+		JLabel imgHolder = new JLabel(new ImageIcon(
+				directionsController.getImage()));
+
+		temp.add(imgHolder);
+		background.add(temp, BorderLayout.WEST);
+		frame.remove(background);
+//		frame.add(background);
 	}
 
 	/***************************************************************************
@@ -245,7 +263,8 @@ public class GUI extends JPanel implements ActionListener {
 	 * 
 	 * @return Image: The resized image
 	 **************************************************************************/
-	private Image getScaledImage(Image img, int width, int height) {
+	private Image getScaledImage(final Image img, final int width,
+			final int height) {
 		BufferedImage resizedImg = new BufferedImage(width, height,
 				BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = resizedImg.createGraphics();
@@ -276,7 +295,7 @@ public class GUI extends JPanel implements ActionListener {
 	}
 
 	/***************************************************************************
-	 * Sets all buttons to be disabled (unclickable)
+	 * Sets all buttons to be disabled (unclickable).
 	 **************************************************************************/
 	public void disableButtons() {
 		classes.setEnabled(false);

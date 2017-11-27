@@ -86,7 +86,7 @@ public class GUI extends JPanel implements ActionListener {
 		background.setLayout(new BorderLayout());
 		background.setBackground(Color.DARK_GRAY);
 
-		frame = initFrame();
+		initFrame();
 		frame.setVisible(true);
 		disableButtons();
 	}
@@ -105,6 +105,8 @@ public class GUI extends JPanel implements ActionListener {
 		Object source = e.getSource();
 		SubMenu tempMenu;
 
+		System.out.println("Test1");
+		
 		Tuple<String, String> output;
 		
 		if (source == classes){
@@ -138,6 +140,8 @@ public class GUI extends JPanel implements ActionListener {
 			tempMenu = new SubMenu(this, "login");
 			
 		}
+		
+		System.out.println("Test2");
 	}
 
 	/***************************************************************************
@@ -174,12 +178,9 @@ public class GUI extends JPanel implements ActionListener {
 
 	/***************************************************************************
 	 * Method to do most of the legwork to open up the main menu; creates the
-	 * frame, sets up bounds and other options, and adds neccesary panels.
-	 * 
-	 * @return frame JFrame: The main frame for the application
-	 * @throws IOException Exception
+	 * frame, sets up bounds and other options, and adds necessary panels.
 	 **************************************************************************/
-	private JFrame initFrame() throws IOException {
+	private void initFrame() {
 		frame = new JFrame("GVSU Maps");
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -192,8 +193,6 @@ public class GUI extends JPanel implements ActionListener {
 		background.add(westLabel, BorderLayout.WEST);		
 		background.add(eastPanel, BorderLayout.EAST);
 		frame.add(background);		
-
-		return frame;
 	}
 
 	/***************************************************************************
@@ -238,23 +237,30 @@ public class GUI extends JPanel implements ActionListener {
 	/***************************************************************************
 	 * This method reDraws the map to reflect or not reflect directions
 	 * depending on the state of the directionsController.
+	 * @throws IOException 
 	 **************************************************************************/
 	public void reDrawMap() {
 		JPanel temp = new JPanel();
 
-		background.remove(0);
+		background.removeAll();
 
 		JLabel imgHolder = new JLabel(new ImageIcon(
 				directionsController.getImage()));
-
+		
 		temp.add(imgHolder);
-		background.add(temp, BorderLayout.WEST);
-		frame.remove(background);
-//		frame.add(background);
+		
+
+		background.add(temp, BorderLayout.WEST);	
+		background.add(eastPanel, BorderLayout.EAST);
+
+		frame.getContentPane().removeAll();
+		frame.getContentPane().add(background);
+		frame.revalidate();
+		frame.repaint();
 	}
 
 	/***************************************************************************
-	 * Private helper method to res-cale images in the GUI. Will be called in
+	 * Private helper method to re-scale images in the GUI. Will be called in
 	 * the ActionPerformed Method
 	 * 
 	 * @param img Image: The input image to be resized

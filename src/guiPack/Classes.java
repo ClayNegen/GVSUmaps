@@ -10,8 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JTextPane;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
-import java.beans.Expression;
-import java.util.ArrayList;
+
 import java.awt.event.ActionEvent;
 
 public class Classes extends JFrame {
@@ -71,14 +70,12 @@ public class Classes extends JFrame {
 		txtpnYourBusStop.setText("Your classes");
 		txtpnYourBusStop.setBounds(6, 98, 93, 29);
 		panel.add(txtpnYourBusStop);
-		String  []ArrayClassschedule  ;
-		 String []ArrayClassroomLocation ;
+		String[] arrayClassschedule;
 		
 		
 		classSchedule classschedule = new classSchedule();
 		
-		ArrayClassschedule  = classschedule.getClassroomNames();
-		ArrayClassroomLocation = classschedule.getClassroomLocation();
+		arrayClassschedule  = classschedule.getClassroomNames();
 		
 		 System.out.println("Success:  " +  classschedule.getClassroomNames()[0]);
 		 System.out.println("Success:  " + classschedule.getClassroomLocation()[0]);
@@ -94,7 +91,7 @@ public class Classes extends JFrame {
 		comboBox.setBounds(151, 45, 240, 29);
 		panel.add(comboBox);
 		
-		JComboBox comboBox_1 = new JComboBox(ArrayClassschedule);
+		JComboBox comboBox_1 = new JComboBox(arrayClassschedule);
 		comboBox_1.setBounds(151, 98, 240, 29);
 		panel.add(comboBox_1);
 	}

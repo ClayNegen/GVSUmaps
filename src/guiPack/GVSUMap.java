@@ -268,20 +268,20 @@ public class GVSUMap {
 		
 		//this.addNode(641, 376, 69);
 
-		this.addLane(19,20);
-		this.addLane(19,21);
-		this.addLane(19,22);
-		this.addLane(22,23);
-		this.addLane(22,24);
-		this.addLane(24,25);
-		this.addLane(25,26);
+		this.addLane(19, 20);
+		this.addLane(19, 21);
+		this.addLane(19, 22);
+		this.addLane(22, 23);
+		this.addLane(22, 24);
+		this.addLane(24, 25);
+		this.addLane(25, 26);
 
-		this.addLane(25,27);
+		this.addLane(25, 27);
 		this.addLane(24, 27);
-		this.addLane(25,28);
+		this.addLane(25, 28);
 		this.addLane(27, 28);
-		this.addLane(24,29);
-		this.addLane(24,29);
+		this.addLane(24, 29);
+		this.addLane(24, 29);
 		this.addLane(29, 28);
 		this.addLane(30, 28);
 		this.addLane(31, 30);
@@ -295,7 +295,7 @@ public class GVSUMap {
 		this.addLane(36, 31);
 		this.addLane(37, 36);
 		this.addLane(38, 37);
-		this.addLane(39,37);
+		this.addLane(39, 37);
 		this.addLane("Edward J. Frey LC", "39");
 
 		this.addLane(41, 42);
@@ -347,6 +347,114 @@ public class GVSUMap {
 		this.addLane(74, 73);
 		this.addLane(75, 73);
 
-
+		/**
+		 * Add Nodes 
+		 * Class Room loactions
+		 */
+		
+		this.addNode(584, 334, "Mackinaw");
+		
+		this.addNode(550, 360, "Manitou");
+		
+		this.addNode(578, 390, "Fresh Food Dinning");
+		
+		this.addNode(547, 418, "Padnos");
+		
+		this.addNode(514, 419, "Loutit");
+		
+		this.addNode(511, 438, "Henry Hall");
+		
+		this.addNode(499, 553, "Student Services");
+		
+		this.addNode(507, 483, "Cook-Dewitt Center");
+		
+		this.addNode(501, 504, "Clocktower");
+		
+		this.addNode(500, 523, "Kirkoff");
+		
+		this.addNode(471, 515, "Library");
+		
+		this.addNode(521, 578, "Preforming Arts");
+		
+		this.addNode(612, 511, "Au Sable Hall");
+		
+		this.addNode(617, 546, "Lake Huron Hall");
+		
+		this.addNode(604, 571, "Seidman house");
+		
+		this.addNode(573, 578, "Lake Superior");
+		
+		this.addNode(584, 604, "Lake Michigan");
+		
+		this.addNode(612, 608, "Lake Ontario");
+		
+		this.addNode(699, 611, "Calder");
+		
+		
+		/**
+		 * Add Paths from calder to Mackinaw
+		 */
+		
+		
+		this.addNode(658, 603, 84); 
+		
+		this.addLane("84", "Calder");
+		
+		this.addLane("84", "Lake Ontario");
+		
+		this.addNode(587, 592, 85);
+		
+		this.addLane("Lake Ontario", "85");
+		
+		this.addLane("Lake Michigan", "85");
+		
+		this.addNode(587, 571, 86);
+		
+		this.addLane("Seidman house", "86");
+		
+		this.addLane("Lake Superior", "86");
+		
+		this.addNode(586, 557, 87);
+		
+		this.addLane("86", "87");
+		
+		this.addNode(625, 562, 88);
+		
+		this.addLane("87", "88");
+		
+		this.addNode(586, 528, 89);
+		
+		this.addLane("87", "89");
+		
+		//this.addLane("Zumberge", "89");
+		
+		this.addNode(587, 514, 90);
+		
+		this.addLane("89", "90");
+		
+		this.addLane("Au Sable Hall", "90");
+		
+		this.addNode(582, 454, 91);
+		
+		this.addNode(558, 398, 93);
+		
+		this.addLane(91, 92);
+		
+		this.addLane(91, 90);
+		
+		this.addLane("93", "Padnos");
+		
+		this.addLane("93", "Fresh Food Dinning");
+		
+		this.addNode(561, 417, 92);
+		
+		this.addNode(599, 385, 94);
+		
+		this.addNode(598, 361, 95);
+		
+		this.addNode(609, 361, "Holden Hocker");
+		
+		this.addLane("95", "Holden Hocker");
+		
 	}
 }

@@ -12,23 +12,23 @@ public class Edge {
 	 * style of "idOfSourceNode idOfDestinationNode" */
 	private final String id;
 	
-	/**	A double to represent the edge's weight	*/
+	/**	A double to represent the edge's weight.	*/
 	private final double edgeWeight;
 	
-	/**	The source MapNode */
+	/**	The source MapNode. */
 	private final MapNode source;
 	
-	/**	The destination MapNode	*/
+	/**	The destination MapNode. */
 	private final MapNode destination;
 	
 	/***************************************************************************
 	 * A constructor for an Edge that takes a node the edge will originate from
-	 * and a node the edge will end at
+	 * and a node the edge will end at.
 	 * 
 	 * @param source MapNode: The origin MapNode
 	 * @param destination MapNode: The destination MapNode
 	 **************************************************************************/
-	public Edge(final MapNode source, final MapNode destination){
+	public Edge(final MapNode source, final MapNode destination) {
 		this.source = source;
 		this.destination = destination;
 		this.edgeWeight = getDistance(source, destination);
@@ -37,23 +37,24 @@ public class Edge {
 	
 	/***************************************************************************
 	 * Takes two nodes and calculates and returns the distance between them
-	 * using the distance formula
+	 * using the distance formula.
 	 * 
-	 * @param source: The origin node
-	 * @param destination: The destination node
+	 * @param source MapNode: The origin node
+	 * @param destination MapNode: The destination node
 	 * @return double: The edge weight
 	 **************************************************************************/
-	private double getDistance(MapNode source, MapNode destination){
-		double distance = Math.sqrt(Math.pow((source.getX() -
-				destination.getX()), 2) + Math.pow((source.getY() -
-				destination.getY()), 2));
+	private double getDistance(final MapNode source,
+			final MapNode destination) {
+		double distance = Math.sqrt(Math.pow((source.getX()
+				- destination.getX()), 2) + Math.pow((source.getY()
+				- destination.getY()), 2));
 		return distance;
 	}
 
 	/***************************************************************************
 	 * @return String: id
 	 **************************************************************************/
-	public String getId(){
+	public String getId() {
 		return id;
 	}
 	

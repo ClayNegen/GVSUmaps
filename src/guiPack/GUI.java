@@ -111,6 +111,8 @@ public class GUI extends JPanel implements ActionListener {
 		
 		if (source == classes){
 			output = selectClasses();
+			classSchedule c = new classSchedule();
+			c.setVisible(true);
 			
 			try {
 				directionsController.reset();

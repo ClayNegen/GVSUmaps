@@ -36,9 +36,6 @@ public class GUI extends JPanel implements ActionListener {
 	/** Controller to talk to the model. */
 	private EngineController directionsController;
 
-	/** Controller to handle User information. */
-	public UserController userController;
-
 	/** JPanel to represent a background to add all other components to. */
 	private JPanel background = new JPanel();
 
@@ -70,6 +67,12 @@ public class GUI extends JPanel implements ActionListener {
 
 	/** JFrame to display the application. */
 	private JFrame frame;
+	
+	/** List of Strings that represents the users saved classes */
+	private String[] loadedClassList;
+	
+	/** Login screen Object */
+	private LoginMenu tempMenu;
 
 	/***************************************************************************
 	 * Constructor for our GUI. Loads the user into the mainMenu
@@ -80,11 +83,13 @@ public class GUI extends JPanel implements ActionListener {
 		this.initBorderLayoutEast();
 		directionsController = new EngineController(ImageIO.read(
 				new File("src/gvsuMaps.jpg")));
-		userController = new UserController();
 
 
 		background.setLayout(new BorderLayout());
 		background.setBackground(Color.DARK_GRAY);
+		
+		tempMenu = new LoginMenu();
+		tempMenu.setVisibility(false);
 
 		initFrame();
 		frame.setVisible(true);
@@ -103,46 +108,33 @@ public class GUI extends JPanel implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
-		SubMenu tempMenu;
-
 		System.out.println("Test1");
 		
 		Tuple<String, String> output;
 		
 		if (source == classes){
 			output = selectClasses();
-			classSchedule c = new classSchedule();
-			c.setVisible(true);
-			
+
 			try {
 				directionsController.reset();
 			} catch (IOException e1) {
 			}
-			
+
 			directionsController.getDirections(output.getElement1(),
 					output.getElemnt2());
-			
+
 			reDrawMap();
 			System.out.println("Supposedly working, probs not though");
 		}
 
-		if (source == foods){
-			tempMenu = new SubMenu(this, "foods");
-		}
-
-		if (source == busStops){
-			tempMenu = new SubMenu(this, "busStops");
-		}
-
-		if (source == favorites){
-			tempMenu = new SubMenu(this, "favorites");
-		}
 		
+		
+		//the solution here is probably to reimplement a more basic submenu
+		// concept with two 
+		//actually no....i dont know
 		if (source == loadUser) {
-			tempMenu = new SubMenu(this, "login");
-			
 		}
-		
+
 		System.out.println("Test2");
 	}
 
@@ -152,8 +144,8 @@ public class GUI extends JPanel implements ActionListener {
 	 * @return Tuple<String, String>
 	 **************************************************************************/
 	public Tuple<String, String> selectClasses() {
-		String[] sourceList = userController.getUserClassList();
-        String[] destinationList = userController.getUserClassList();
+		String[] sourceList = loadedClassList;
+        String[] destinationList = loadedClassList;
 
         String source = (String) JOptionPane.showInputDialog(
         		frame,
@@ -283,13 +275,6 @@ public class GUI extends JPanel implements ActionListener {
 		g2.dispose();
 
 		return resizedImg;
-	}
-
-	/***************************************************************************
-	 * @return gvLogo
-	 **************************************************************************/
-	public JLabel getLogo() {
-		return gvLogo;
 	}
 
 	/***************************************************************************

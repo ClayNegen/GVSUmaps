@@ -1,18 +1,25 @@
 package guiPack;
 
-import java.util.Vector;
-
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
-public class SubMenu implements ActionListener {
+public class LoginMenu implements ActionListener {
 
 	private JFrame subFrame = new JFrame();
 
@@ -21,22 +28,40 @@ public class SubMenu implements ActionListener {
 	private JButton signUp = new JButton("Sign up");
 
 	private JButton signOn = new JButton("Sign On");
+	
+	private UserController controller;
+	
+	private boolean hasUser = false;
 
-	private GUI gui;
-
-	private Vector<String> selections = new Vector<String>();
-
-	public SubMenu(GUI instance, String type) {
-		gui = instance;
+	public LoginMenu() {
 		subFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		subFrame.setBounds(500, 100, 400, 200);;
 		subFrame.setResizable(false);
 		subFrame.setVisible(true);
 
+		try {
+			controller = new UserController();
+		} catch (Exception dontCare) {
+		}
 
-		initLoginPanel();
+		try {
+			initLoginPanel();
+		} catch (IOException e) {
+		}
 	}	
 
+	public void setVisibility(final boolean flag) {
+		subFrame.setVisible(flag);
+	}
+	
+	public boolean hasUser() {
+		return hasUser;
+	}
+	
+	public String[] getUserClassList() {
+		return controller.getUserClassList();
+	}
+	
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
 
@@ -49,7 +74,7 @@ public class SubMenu implements ActionListener {
 				try {
 					name = JOptionPane.showInputDialog(subFrame,
 							"Enter the desired username");
-					if (gui.userController.loadUser(name, null, 1)) {
+					if (controller.loadUser(name, null, 1)) {
 						throw new Exception();
 					} else if (name != null) {
 						flag = false;
@@ -65,7 +90,7 @@ public class SubMenu implements ActionListener {
 								"Enter the desired password");
 					}
 					try {
-						gui.userController.newUser(name, pass);
+						controller.newUser(name, pass);
 					} catch (Exception l) {
 					}
 					JOptionPane.showMessageDialog(subFrame,
@@ -87,7 +112,7 @@ public class SubMenu implements ActionListener {
 					pass = JOptionPane.showInputDialog(subFrame,
 							"Enter your password");
 
-					if (!gui.userController.loadUser(name, pass, 0)) {
+					if (!controller.loadUser(name, pass, 0)) {
 						throw new Exception();
 					} else if (name != null) {
 						flag = false;
@@ -98,8 +123,8 @@ public class SubMenu implements ActionListener {
 				}
 				if (!flag) {
 					try {
-						gui.userController.loadUser(name, pass, 0);
-						gui.enableButtons();
+						controller.loadUser(name, pass, 0);
+						hasUser = true;
 					} catch (Exception l) {
 					}
 
@@ -111,7 +136,7 @@ public class SubMenu implements ActionListener {
 		}
 	}
 
-	private void initLoginPanel() {
+	private void initLoginPanel() throws IOException {
 		mainPanel.setLayout(new BorderLayout());
 		mainPanel.setBackground(new Color(51, 51, 255));
 
@@ -122,6 +147,25 @@ public class SubMenu implements ActionListener {
 
 		subFrame.add(signOn);
 		subFrame.add(signUp);
-		subFrame.add(gui.getLogo());
+		
+		// This is probably going to break everything
+		// TODO Make it not do that xD
+		BufferedImage logo = ImageIO.read(new File("src/GVMaps.png"));
+		
+		subFrame.add(new JLabel(new ImageIcon(getScaledImage(logo, 245, 126))));
+	}
+	
+	private Image getScaledImage(final Image img, final int width,
+			final int height) {
+		BufferedImage resizedImg = new BufferedImage(width, height,
+				BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2 = resizedImg.createGraphics();
+
+		g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
+				RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+		g2.drawImage(img, 0, 0, width, height, null);
+		g2.dispose();
+
+		return resizedImg;
 	}
 }

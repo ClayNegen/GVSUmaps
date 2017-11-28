@@ -10,7 +10,7 @@ import java.util.List;
  * @author Louis Sullivan
  ******************************************************************************/
 public class User {
-	/** List of mapNodes to represent the users classes as saved by the user. */
+	/** List of MapNodes to represent the users classes as saved by the user. */
 	private List<MapNode> classList;
 	
 	/** String to hold the username of this User object. */

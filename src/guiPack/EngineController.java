@@ -3,6 +3,7 @@ package guiPack;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.List;
 
 /*******************************************************************************
  * Controller class based off the MVC design principle. Takes input from the
@@ -17,19 +18,19 @@ public class EngineController {
 	 * the BufferedImage */
 	private LineModeller lineModel;
 	
-	/**	Instance of the Map Engine. Handles all algorithm work in determining the
-	 * shortest path to a destination requested by the view. */
+	/**	Instance of the Map Engine. Handles all algorithm work in determining
+	 *  the shortest path to a destination requested by the view. */
 	private MapEngine algorithm;
 	
-	/**	A hardcoded graphical representation of the GVSU Allendale campus */
-	public final GVSUMap map;
+	/**	A hard-coded graphical representation of the GVSU Allendale campus. */
+	private final GVSUMap map;
 	
 	/***************************************************************************
 	 * This constructor instantiates each of the engine components.
 	 * 
 	 * @param img BufferedImage: The picture to have directions drawn on
 	 **************************************************************************/
-	public EngineController(BufferedImage img) {
+	public EngineController(final BufferedImage img) {
 		lineModel = new LineModeller(img);
 		map = new GVSUMap();
 		algorithm = new MapEngine(map);
@@ -39,7 +40,7 @@ public class EngineController {
 	 * This is one of two primarily used methods from the view. This draws the
 	 * directions between two nodes that are specified by the nodeInfo entered.
 	 * 
-	 * @param sourceNodeInfo String: The nodeInfo member of the node desired for
+	 * @param srcNodeInfo String: The nodeInfo member of the node desired for
 	 * the source node
 	 * @param destNodeInfo String: The nodeInfo member of the node desired for
 	 * the source node
@@ -48,16 +49,17 @@ public class EngineController {
 	 * it to correspond to the shortest path between the source and destination
 	 * node
 	 **************************************************************************/
-	public BufferedImage getDirections(String srcNodeInfo, String destNodeInfo) {
+	public BufferedImage getDirections(final String srcNodeInfo,
+			final String destNodeInfo) {
 		MapNode srceNode = map.getNode(srcNodeInfo);
-		MapNode destNode =map.getNode(destNodeInfo);
+		MapNode destNode = map.getNode(destNodeInfo);
 		
 		algorithm.execute(srceNode);
 		LinkedList<MapNode> path = algorithm.getPath(destNode);
 		
 		drawPath(path);
 		
-		return getImage() ;
+		return getImage();
 	}
 	
 	/***************************************************************************
@@ -90,5 +92,12 @@ public class EngineController {
 		algorithm.reset();
 		
 		return lineModel.getCanvas();
+	}
+	
+	/***************************************************************************
+	 * @return List<MapNode>: A list of all nodes in the GVSU map
+	 **************************************************************************/
+	public List<MapNode> getNodeList() {
+		return map.getNodeList();
 	}
 }

@@ -15,10 +15,10 @@ import java.util.LinkedList;
  ******************************************************************************/
 public class MapNode {
 	
-	/** The x coordinate (pixel) */
+	/** The x coordinate (pixel). */
 	private int x;
 	
-	/**	The y coordinate (pixel) */
+	/**	The y coordinate (pixel). */
 	private int y;
 	
 	/**	This stores information which will be used to lookup nodes with null

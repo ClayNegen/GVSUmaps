@@ -19,10 +19,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 
 /*******************************************************************************
@@ -31,6 +33,7 @@ import java.io.IOException;
  * 
  * @author Douglas Wallin
  ******************************************************************************/
+@SuppressWarnings("serial")
 public class GUI extends JPanel implements ActionListener {
 
 	/** Controller to talk to the model. */
@@ -68,18 +71,23 @@ public class GUI extends JPanel implements ActionListener {
 	/** JFrame to display the application. */
 	private JFrame frame;
 	
-	/** List of Strings that represents the users saved classes */
+	/** List of Strings that represents the users saved classes. */
 	private String[] loadedClassList;
 	
-	/** JFrame for the login menu */
-	private JFrame subFrame = new JFrame();
+	/** JFrame for the login menu. */
+	private JFrame loginFrame = new JFrame();
 
+	/** JButton to create an account. */
 	private JButton signUp = new JButton("Sign up");
 
+	/** JButton to login to an existing account. */
 	private JButton signOn = new JButton("Sign On");
 	
-	/** Controller to be used in the login menu */
+	/** Controller to be used in the login menu. */
 	private UserController controller = new UserController();
+	
+	/** List of all buildings that can be navigated to. */
+	private String[] allLocations;
 	
 	/***************************************************************************
 	 * Constructor for our GUI. Loads the user into the mainMenu
@@ -97,33 +105,40 @@ public class GUI extends JPanel implements ActionListener {
 
 		initFrame();
 		initLoginFrame();
+		getAllLocations();
 		
 		frame.setVisible(true);
-		subFrame.setVisible(false);
+		loginFrame.setVisible(false);
 		
 		disableButtons();
 	}
 
 	/***************************************************************************
-	 * Main method for testing of GUI
+	 * Main method for testing of GUI.
 	 * 
-	 * @param args
-	 * @throws IOException
+	 * @param args String[]: An array of input commands for main. Not yet used
+	 * @throws IOException Exception
 	 **************************************************************************/
-	
 	@SuppressWarnings("unused")
-	public static void main(String args[]) throws IOException {
+	public static void main(final String[] args) throws IOException {
 		GUI gooy = new GUI();
 	}
 
-	public void actionPerformed(ActionEvent e) {
+	/***************************************************************************
+	 * The action performed method is an override of a method to capture all
+	 * button presses and other actions in the GUI.
+	 * 
+	 * @param event ActionEvent: The event captured
+	 **************************************************************************/
+	@Override
+	public void actionPerformed(final ActionEvent event) {
 		try {
-			Object source = e.getSource();
+			Object source = event.getSource();
 			System.out.println("Test1");
 
 			Tuple<String, String> output = null;
 
-			if (source == classes){
+			if (source == classes) {
 				output = selectClasses();
 
 				directionsController.reset();
@@ -135,7 +150,7 @@ public class GUI extends JPanel implements ActionListener {
 			}
 
 			if (source == loadUser) {
-				subFrame.setVisible(true);
+				loginFrame.setVisible(true);
 				frame.setVisible(false);
 			}
 
@@ -145,26 +160,24 @@ public class GUI extends JPanel implements ActionListener {
 
 				boolean validUserName = false;
 				while (true) {
-					name = JOptionPane.showInputDialog(subFrame,
+					name = JOptionPane.showInputDialog(loginFrame,
 							"Enter the desired username");
 					if (controller.loadUser(name, null, 1)) {
-						JOptionPane.showMessageDialog(subFrame,
+						JOptionPane.showMessageDialog(loginFrame,
 								"Username is already taken");
-					} 
-					
-					else if (name != null) {
+					}  else if (name != null) {
 						validUserName = true;
 					}
 
 					if (validUserName) {
 						while (pass == null || pass.equals("")) {
-							pass = JOptionPane.showInputDialog(subFrame,
+							pass = JOptionPane.showInputDialog(loginFrame,
 									"Enter the desired password");
 						}
 
 						controller.newUser(name, pass);
 
-						JOptionPane.showMessageDialog(subFrame,
+						JOptionPane.showMessageDialog(loginFrame,
 								"Account for " + name + " has been created.");
 						break;
 					}
@@ -177,27 +190,26 @@ public class GUI extends JPanel implements ActionListener {
 
 				boolean flag = true;
 				while (flag) {
-					name = JOptionPane.showInputDialog(subFrame,
+					name = JOptionPane.showInputDialog(loginFrame,
 							"Enter your username");
-					pass = JOptionPane.showInputDialog(subFrame,
+					pass = JOptionPane.showInputDialog(loginFrame,
 							"Enter your password");
 
 					if (!controller.loadUser(name, pass, 0)) {
-						JOptionPane.showMessageDialog(subFrame,
+						JOptionPane.showMessageDialog(loginFrame,
 								"Either the username or password is inccorect");
 
-					} 
-					else if (name != null) {
+					} else if (name != null) {
 						flag = false;
 					}
 
 					if (!flag) {
 						controller.loadUser(name, pass, 0);
 
-						JOptionPane.showMessageDialog(subFrame,
+						JOptionPane.showMessageDialog(loginFrame,
 								"Succesful login " + name);
 						
-						subFrame.setVisible(false);
+						loginFrame.setVisible(false);
 						frame.setVisible(true);
 						enableButtons();
 						
@@ -217,7 +229,7 @@ public class GUI extends JPanel implements ActionListener {
 	 **************************************************************************/
 	public Tuple<String, String> selectClasses() {
 		String[] sourceList = loadedClassList;
-        String[] destinationList = loadedClassList;
+        String[] destinationList = allLocations;
 
         String source = (String) JOptionPane.showInputDialog(
         		frame,
@@ -229,6 +241,7 @@ public class GUI extends JPanel implements ActionListener {
         				sourceList,
         				null);
 
+        
         String dest = (String) JOptionPane.showInputDialog(
         		frame,
         		"Please Select a destination class\n"
@@ -301,29 +314,28 @@ public class GUI extends JPanel implements ActionListener {
 	}
 	
 	/***************************************************************************
-	 * @throws IOException
+	 * This method initializes the login subFrame(loginFrame).
+	 * 
+	 * @throws IOException Exception
 	 **************************************************************************/
 	private void initLoginFrame() throws IOException {
-		subFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		subFrame.setBounds(500, 100, 400, 200);;
-		subFrame.setResizable(false);
-		subFrame.setVisible(true);
-		
-		
-//		mainPanel.setLayout(new BorderLayout());
-//		mainPanel.setBackground(new Color(51, 51, 255));
+		loginFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		loginFrame.setBounds(500, 100, 400, 200);
+		loginFrame.setResizable(false);
+		loginFrame.setVisible(true);
 
 		signUp.addActionListener(this);
 		signOn.addActionListener(this);
 		signUp.setBounds(50, 60, 100, 30);
 		signOn.setBounds(250, 60, 100, 30);
 
-		subFrame.add(signOn);
-		subFrame.add(signUp);
+		loginFrame.add(signOn);
+		loginFrame.add(signUp);
 		
 		BufferedImage logo = ImageIO.read(new File("src/GVMaps.png"));
 		
-		subFrame.add(new JLabel(new ImageIcon(getScaledImage(logo, 245, 126))));
+		loginFrame.add(new JLabel(new ImageIcon(getScaledImage(
+				logo, 245, 126))));
 		frame.setVisible(false);
 	}
 
@@ -375,7 +387,7 @@ public class GUI extends JPanel implements ActionListener {
 	/***************************************************************************
 	 * Simply put, sets all buttons to be able to be clicked.
 	 **************************************************************************/
-	public void enableButtons() {
+	private void enableButtons() {
 		classes.setEnabled(true);
 		busStops.setEnabled(true);
 		foods.setEnabled(true);
@@ -385,11 +397,46 @@ public class GUI extends JPanel implements ActionListener {
 	/***************************************************************************
 	 * Sets all buttons to be disabled.
 	 **************************************************************************/
-	public void disableButtons() {
+	private void disableButtons() {
 		classes.setEnabled(false);
 		busStops.setEnabled(false);
 		foods.setEnabled(false);
 		favorites.setEnabled(false);
 	}
+	
+	/***************************************************************************
+	 * 
+	 **************************************************************************/
+	private void getAllLocations() {
+		List<MapNode> allNodes = directionsController.getNodeList();
+		
+		int count = 0;
+		
+		for (int i = 0; i < allNodes.size(); i++) {
+			MapNode temp = allNodes.get(i);
+			if (temp.getNodeInfo().length() > 2) {
+				count++;
+			}
+		}
+		
+		
+		allLocations = new String[count];
+		
+		count = 0;
+		
+		for (int i = 0; i < allNodes.size(); i++) {
+			MapNode temp = allNodes.get(i);
+			if (temp.getNodeInfo().length() > 2) {
+				allLocations[count] = temp.getNodeInfo();
+				count++;
+			}
+		}
+		
+		
+		for (int i = 0; i < allLocations.length; i++) {
+			System.out.println(allLocations[i]);
+		}
+	}
+	
 }
 

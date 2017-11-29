@@ -424,13 +424,13 @@ public class GVSUMap {
 		
 		this.addNode(586, 528, 89);
 		
-		this.addLane("87", "89");
+		this.addLane(87, 89);
 		
 		//this.addLane("Zumberge", "89");
 		
 		this.addNode(587, 514, 90);
 		
-		this.addLane("89", "90");
+		this.addLane(89, 90);
 		
 		this.addLane("Au Sable Hall", "90");
 		
@@ -454,7 +454,7 @@ public class GVSUMap {
 		
 		this.addNode(609, 361, "Holten Hooker");
 					
-		this.addLane("94", "95");
+		this.addLane(94, 95);
 		
 		this.addLane("95", "Holten Hooker");
 		
@@ -462,7 +462,7 @@ public class GVSUMap {
 		**Connect south campus to north campus
 		**/
 		
-		this.addLane("72", "94");
+		this.addLane(72, 94);
 		
 	}
 }

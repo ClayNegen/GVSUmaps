@@ -416,11 +416,11 @@ public class GVSUMap {
 		
 		this.addNode(586, 557, 87);
 		
-		this.addLane("86", "87");
+		this.addLane(86, 87);
 		
 		this.addNode(625, 562, 88);
 		
-		this.addLane("87", "88");
+		this.addLane(87, 88);
 		
 		this.addNode(586, 528, 89);
 		

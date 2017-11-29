@@ -16,14 +16,8 @@ public class LineModeller {
 	
 	private final String original = "src/gvsuMaps.jpg";
 	
-	private final int width;
-	
-	private final int height;
-	
 	public LineModeller (BufferedImage image) {
 		canvas = image;
-		width = canvas.getWidth();
-		height = canvas.getHeight();
 	}
 	
 	public void drawDiagonal (MapNode node1, MapNode node2){
@@ -31,23 +25,42 @@ public class LineModeller {
 		int x2 = node2.getX();
 		int y1 = node1.getY();
 		int y2 = node2.getY();
+		
 		List<Tuple<Integer, Integer>> pointsList;
 		
+		String drawType = null;
 		
 		if (Math.abs(y2 - y1) < Math.abs(x2 - x1)) {
 			pointsList  = getYPoints(x1, x2, y1, y2);
+			drawType = "HorizontalLine";
 		} else {
 			pointsList  = getXPoints(x1, x2, y1, y2);
+			drawType = "VerticalLine";
 		}
-		
-		for (Tuple<Integer, Integer> coordinatePair: pointsList) {
-			canvas.setRGB(coordinatePair.getElement1(), coordinatePair.getElemnt2(),
-					Color.BLUE.getRGB());
+		if (drawType.equals("HorizontalLine")) {
+			for (Tuple<Integer, Integer> coordinatePair: pointsList) {
+				canvas.setRGB(coordinatePair.getElement1(), coordinatePair.getElemnt2(),
+						Color.BLUE.getRGB());
+				canvas.setRGB(coordinatePair.getElement1(), coordinatePair.getElemnt2() + 1,
+						Color.BLUE.getRGB());
+				canvas.setRGB(coordinatePair.getElement1(), coordinatePair.getElemnt2() - 1,
+						Color.BLUE.getRGB());
+			}
+		}
+		else {
+			for (Tuple<Integer, Integer> coordinatePair: pointsList) {
+				canvas.setRGB(coordinatePair.getElement1(), coordinatePair.getElemnt2(),
+						Color.BLUE.getRGB());
+				canvas.setRGB(coordinatePair.getElement1() + 1, coordinatePair.getElemnt2(),
+						Color.BLUE.getRGB());
+				canvas.setRGB(coordinatePair.getElement1() - 1, coordinatePair.getElemnt2(),
+						Color.BLUE.getRGB());
+			}
 		}
 	}
-	
-	
-	
+
+
+
 	private List<Tuple<Integer, Integer>> getYPoints(int x1, int x2,
 			int y1, int y2) {		
 		List<Tuple<Integer, Integer>> line = 

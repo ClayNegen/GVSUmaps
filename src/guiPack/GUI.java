@@ -71,9 +71,16 @@ public class GUI extends JPanel implements ActionListener {
 	/** List of Strings that represents the users saved classes */
 	private String[] loadedClassList;
 	
-	/** Login screen Object */
-	private LoginMenu tempMenu;
+	/** JFrame for the login menu */
+	private JFrame subFrame = new JFrame();
 
+	private JButton signUp = new JButton("Sign up");
+
+	private JButton signOn = new JButton("Sign On");
+	
+	/** Controller to be used in the login menu */
+	private UserController controller = new UserController();
+	
 	/***************************************************************************
 	 * Constructor for our GUI. Loads the user into the mainMenu
 	 * 
@@ -87,12 +94,13 @@ public class GUI extends JPanel implements ActionListener {
 
 		background.setLayout(new BorderLayout());
 		background.setBackground(Color.DARK_GRAY);
-		
-		tempMenu = new LoginMenu();
-		tempMenu.setVisibility(false);
 
 		initFrame();
+		initLoginFrame();
+		
 		frame.setVisible(true);
+		subFrame.setVisible(false);
+		
 		disableButtons();
 	}
 
@@ -102,40 +110,104 @@ public class GUI extends JPanel implements ActionListener {
 	 * @param args
 	 * @throws IOException
 	 **************************************************************************/
+	
+	@SuppressWarnings("unused")
 	public static void main(String args[]) throws IOException {
 		GUI gooy = new GUI();
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		Object source = e.getSource();
-		System.out.println("Test1");
-		
-		Tuple<String, String> output;
-		
-		if (source == classes){
-			output = selectClasses();
+		try {
+			Object source = e.getSource();
+			System.out.println("Test1");
 
-			try {
+			Tuple<String, String> output = null;
+
+			if (source == classes){
+				output = selectClasses();
+
 				directionsController.reset();
-			} catch (IOException e1) {
+
+				directionsController.getDirections(output.getElement1(),
+						output.getElemnt2());
+
+				reDrawMap();
 			}
 
-			directionsController.getDirections(output.getElement1(),
-					output.getElemnt2());
+			if (source == loadUser) {
+				subFrame.setVisible(true);
+				frame.setVisible(false);
+			}
 
-			reDrawMap();
-			System.out.println("Supposedly working, probs not though");
+			if (source == signUp) {
+				String name = null;
+				String pass = null;
+
+				boolean validUserName = false;
+				while (true) {
+					name = JOptionPane.showInputDialog(subFrame,
+							"Enter the desired username");
+					if (controller.loadUser(name, null, 1)) {
+						JOptionPane.showMessageDialog(subFrame,
+								"Username is already taken");
+					} 
+					
+					else if (name != null) {
+						validUserName = true;
+					}
+
+					if (validUserName) {
+						while (pass == null || pass.equals("")) {
+							pass = JOptionPane.showInputDialog(subFrame,
+									"Enter the desired password");
+						}
+
+						controller.newUser(name, pass);
+
+						JOptionPane.showMessageDialog(subFrame,
+								"Account for " + name + " has been created.");
+						break;
+					}
+				}
+			}
+
+			if (source == signOn) {
+				String name = null;
+				String pass = null;
+
+				boolean flag = true;
+				while (flag) {
+					name = JOptionPane.showInputDialog(subFrame,
+							"Enter your username");
+					pass = JOptionPane.showInputDialog(subFrame,
+							"Enter your password");
+
+					if (!controller.loadUser(name, pass, 0)) {
+						JOptionPane.showMessageDialog(subFrame,
+								"Either the username or password is inccorect");
+
+					} 
+					else if (name != null) {
+						flag = false;
+					}
+
+					if (!flag) {
+						controller.loadUser(name, pass, 0);
+
+						JOptionPane.showMessageDialog(subFrame,
+								"Succesful login " + name);
+						
+						subFrame.setVisible(false);
+						frame.setVisible(true);
+						enableButtons();
+						
+						loadedClassList = controller.getUserClassList();
+					}
+				}
+			}
+			System.out.println("Test2");
+		} catch (Exception iAcceptMyFateHere) {
 		}
-
-		
-		
-		//the solution here is probably to reimplement a more basic submenu
-		// concept with two 
-		//actually no....i dont know
-		if (source == loadUser) {
-		}
-
-		System.out.println("Test2");
 	}
 
 	/***************************************************************************
@@ -227,6 +299,33 @@ public class GUI extends JPanel implements ActionListener {
 		eastPanel.add(favorites);
 		eastPanel.add(userSettingsBox);
 	}
+	
+	/***************************************************************************
+	 * @throws IOException
+	 **************************************************************************/
+	private void initLoginFrame() throws IOException {
+		subFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		subFrame.setBounds(500, 100, 400, 200);;
+		subFrame.setResizable(false);
+		subFrame.setVisible(true);
+		
+		
+//		mainPanel.setLayout(new BorderLayout());
+//		mainPanel.setBackground(new Color(51, 51, 255));
+
+		signUp.addActionListener(this);
+		signOn.addActionListener(this);
+		signUp.setBounds(50, 60, 100, 30);
+		signOn.setBounds(250, 60, 100, 30);
+
+		subFrame.add(signOn);
+		subFrame.add(signUp);
+		
+		BufferedImage logo = ImageIO.read(new File("src/GVMaps.png"));
+		
+		subFrame.add(new JLabel(new ImageIcon(getScaledImage(logo, 245, 126))));
+		frame.setVisible(false);
+	}
 
 	/***************************************************************************
 	 * This method reDraws the map to reflect or not reflect directions
@@ -234,20 +333,16 @@ public class GUI extends JPanel implements ActionListener {
 	 * @throws IOException 
 	 **************************************************************************/
 	public void reDrawMap() {
-		JPanel temp = new JPanel();
-
+		frame.getContentPane().removeAll();
+		
 		background.removeAll();
 
-		JLabel imgHolder = new JLabel(new ImageIcon(
+		JLabel tempImage = new JLabel(new ImageIcon(
 				directionsController.getImage()));
-		
-		temp.add(imgHolder);
-		
 
-		background.add(temp, BorderLayout.WEST);	
+		background.add(tempImage, BorderLayout.WEST);	
 		background.add(eastPanel, BorderLayout.EAST);
 
-		frame.getContentPane().removeAll();
 		frame.getContentPane().add(background);
 		frame.revalidate();
 		frame.repaint();
@@ -276,7 +371,7 @@ public class GUI extends JPanel implements ActionListener {
 
 		return resizedImg;
 	}
-
+	
 	/***************************************************************************
 	 * Simply put, sets all buttons to be able to be clicked.
 	 **************************************************************************/
@@ -288,7 +383,7 @@ public class GUI extends JPanel implements ActionListener {
 	}
 
 	/***************************************************************************
-	 * Sets all buttons to be disabled (unclickable).
+	 * Sets all buttons to be disabled.
 	 **************************************************************************/
 	public void disableButtons() {
 		classes.setEnabled(false);

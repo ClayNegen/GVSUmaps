@@ -452,9 +452,17 @@ public class GVSUMap {
 		
 		this.addNode(598, 361, 95);
 		
-		this.addNode(609, 361, "Holden Hocker");
+		this.addNode(609, 361, "Holten Hooker");
+					
+		this.addLane("94", "95");
 		
-		this.addLane("95", "Holden Hocker");
+		this.addLane("95", "Holten Hooker");
+		
+		/**
+		**Connect south campus to north campus
+		**/
+		
+		this.addLane("72", "94");
 		
 	}
 }

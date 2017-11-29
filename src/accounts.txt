@@ -3,7 +3,16 @@
 |ClassList|,
 |Username|,wallind
 |Password|,password
+<<<<<<< HEAD
+|ClassList|,
+<<<<<<< HEAD
+|Username|,Clay
+|Password|,Negen
+=======
+=======
 |ClassList|,William Kill Patrick LC,Edward J. Frey LC,Robert Kliener Commons,Alumni House
+>>>>>>> branch 'master' of https://github.com/ClayNegen/GVSUmaps.git
 |Username|,test2
 |Password|,morejokes
+>>>>>>> branch 'master' of https://github.com/ClayNegen/GVSUmaps.git
 |ClassList|,

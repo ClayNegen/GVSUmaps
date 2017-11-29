@@ -36,7 +36,7 @@ public class MapNode {
 	 * @param x int: The x coordinate of the node
 	 * @param y int: The y coordinate of the node
 	 **************************************************************************/
-	public MapNode(int x, int y){
+	public MapNode(final int x, final  int y) {
 		this.x = x;
 		this.y = y;
 		nodeId = Integer.toString(x) + "," + Integer.toString(y);
@@ -52,7 +52,7 @@ public class MapNode {
 	 * @param y int: The y coordinate of the node
 	 * @param nodeInfo String: Short describing information about the node
 	 **************************************************************************/
-	public MapNode(int x, int y, String nodeInfo){
+	public MapNode(final int x, final int y, final String nodeInfo) {
 		this.x = x;
 		this.y = y;
 		nodeId = Integer.toString(x) + "," + Integer.toString(y);
@@ -62,14 +62,14 @@ public class MapNode {
 	/***************************************************************************
 	 * @return String: nodeInfo
 	 **************************************************************************/
-	public String getNodeInfo(){
+	public String getNodeInfo() {
 		return nodeInfo;
 	}
 
 	/***************************************************************************
 	 * @return String: nodeId
 	 **************************************************************************/
-	public String getNodeId(){
+	public String getNodeId() {
 		return nodeId;
 	}
 
@@ -83,7 +83,7 @@ public class MapNode {
 	/***************************************************************************
 	 * @param x int
 	 **************************************************************************/
-	public void setX(int x) {
+	public void setX(final int x) {
 		this.x = x;
 	}
 
@@ -97,12 +97,9 @@ public class MapNode {
 	/***************************************************************************
 	 * @param y int
 	 **************************************************************************/
-	public void setY(int y) {
+	public void setY(final int y) {
 		this.y = y;
 	}
-	
-	
-	
 
 	@Override
     public int hashCode() {
@@ -113,19 +110,24 @@ public class MapNode {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
+    public boolean equals(final Object obj) {
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         MapNode other = (MapNode) obj;
         if (nodeId == null) {
-            if (other.nodeId != null)
+            if (other.nodeId != null) {
                 return false;
-        } else if (!nodeId.equals(other.nodeId))
+            }
+        } else if (!nodeId.equals(other.nodeId)) {
             return false;
+        }
         return true;
     }
 

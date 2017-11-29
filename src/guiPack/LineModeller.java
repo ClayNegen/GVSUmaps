@@ -10,17 +10,41 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * This class is an engine component to our program that does all the math to
+ * determine where to draw on the map given the path provided by the
+ * EngineController.
+ * 
+ * @author Douglas Wallin
+ ******************************************************************************/
 public class LineModeller {
-	
+	/** This BufferedImage is representative of the state of the map image in 
+	 * the program. */
 	private BufferedImage canvas;
 	
+	/** This is where the original map is stored in the file system. This
+	 * String is used to revert back to it. */
 	private final String original = "src/gvsuMaps.jpg";
 	
-	public LineModeller (BufferedImage image) {
+	/***************************************************************************
+	 * Constructor for the LineModeller. Sets the canvas equal to the image
+	 * passed as a parameter.
+	 * 
+	 * @param image BufferedImage: The image being passed to the LineModeller
+	 **************************************************************************/
+	public LineModeller(final BufferedImage image) {
 		canvas = image;
 	}
 	
-	public void drawDiagonal (MapNode node1, MapNode node2){
+	/***************************************************************************
+	 * This method uses all the helper functions to assemble a list of xy
+	 * coordinates on the map between two nodes. It then accordingly alters the
+	 * RGB of pixels on the map to give the effect of "drawing" on the map.
+	 * 
+	 * @param node1 MapNode: The first of the two nodes
+	 * @param node2 MapNode: The second of the two nodes
+	 **************************************************************************/
+	public void drawDiagonal(final MapNode node1, final MapNode node2) {
 		int x1 = node1.getX();
 		int x2 = node2.getX();
 		int y1 = node1.getY();
@@ -39,30 +63,38 @@ public class LineModeller {
 		}
 		if (drawType.equals("HorizontalLine")) {
 			for (Tuple<Integer, Integer> coordinatePair: pointsList) {
-				canvas.setRGB(coordinatePair.getElement1(), coordinatePair.getElemnt2(),
-						Color.BLUE.getRGB());
-				canvas.setRGB(coordinatePair.getElement1(), coordinatePair.getElemnt2() + 1,
-						Color.BLUE.getRGB());
-				canvas.setRGB(coordinatePair.getElement1(), coordinatePair.getElemnt2() - 1,
-						Color.BLUE.getRGB());
+				canvas.setRGB(coordinatePair.getElement1(),
+						coordinatePair.getElemnt2(), Color.BLUE.getRGB());
+				canvas.setRGB(coordinatePair.getElement1(),
+						coordinatePair.getElemnt2() + 1, Color.BLUE.getRGB());
+				canvas.setRGB(coordinatePair.getElement1(),
+						coordinatePair.getElemnt2() - 1, Color.BLUE.getRGB());
 			}
-		}
-		else {
+		} else {
 			for (Tuple<Integer, Integer> coordinatePair: pointsList) {
-				canvas.setRGB(coordinatePair.getElement1(), coordinatePair.getElemnt2(),
-						Color.BLUE.getRGB());
-				canvas.setRGB(coordinatePair.getElement1() + 1, coordinatePair.getElemnt2(),
-						Color.BLUE.getRGB());
-				canvas.setRGB(coordinatePair.getElement1() - 1, coordinatePair.getElemnt2(),
-						Color.BLUE.getRGB());
+				canvas.setRGB(coordinatePair.getElement1(),
+						coordinatePair.getElemnt2(), Color.BLUE.getRGB());
+				canvas.setRGB(coordinatePair.getElement1() + 1,
+						coordinatePair.getElemnt2(), Color.BLUE.getRGB());
+				canvas.setRGB(coordinatePair.getElement1() - 1,
+						coordinatePair.getElemnt2(), Color.BLUE.getRGB());
 			}
 		}
 	}
 
 
-
-	private List<Tuple<Integer, Integer>> getYPoints(int x1, int x2,
-			int y1, int y2) {		
+	/***************************************************************************
+	 * The method returns a list of points between two points using some other
+	 * helper methods.
+	 * 
+	 * @param x1 int: The x value of the first point
+	 * @param x2 int: The x value of the second point
+	 * @param y1 int: The y value of the first point
+	 * @param y2 int: The y value of the second point
+	 * @return List<Tuple<Integer, Integer>> A list of points
+	 **************************************************************************/
+	private List<Tuple<Integer, Integer>> getYPoints(int x1,  int x2,
+			 int y1,  int y2) {		
 		List<Tuple<Integer, Integer>> line = 
 				new ArrayList<Tuple<Integer, Integer>>();
 		
@@ -88,8 +120,18 @@ public class LineModeller {
 		return line;
 	}
 	
-	private List<Tuple<Integer, Integer>> getXPoints(int x1, int x2,
-			int y1, int y2) {		
+	/***************************************************************************
+	 * The method returns a list of points between two points using some other
+	 * helper methods.
+	 * 
+	 * @param x1 int: The x value of the first point
+	 * @param x2 int: The x value of the second point
+	 * @param y1 int: The y value of the first point
+	 * @param y2 int: The y value of the second point
+	 * @return List<Tuple<Integer, Integer>> A list of points
+	 **************************************************************************/
+	private List<Tuple<Integer, Integer>> getXPoints(int x1,  int x2,
+			 int y1,  int y2) {		
 		List<Tuple<Integer, Integer>> line = 
 				new ArrayList<Tuple<Integer, Integer>>();
 		
@@ -115,7 +157,21 @@ public class LineModeller {
 		return line;
 	}
 	
-	private int getXValue(int y, double slope, int xRef, int yRef) {
+	/***************************************************************************
+	 * This method finds the f(y) of the y parameter passed in using the point
+	 * slope formula.
+	 * 
+	 * @param y int: The y value for which we want to find the f(y)
+	 * @param slope double: The slope variable for the equation
+	 * @param xRef int: The x value for the point to be referenced in the
+	 * equation.
+	 * @param yRef int: The y value for the point to be referenced in the
+	 * equation.
+	 * 
+	 * @return int The f(y) value
+	 **************************************************************************/
+	private int getXValue(final int y, final double slope, final int xRef,
+			final int yRef) {
 		int xVal;
 		double xIntercept;
 		
@@ -126,7 +182,21 @@ public class LineModeller {
 		return xVal;
 	}
 	
-	private int getYValue(int x, double slope, int xRef, int yRef) {
+	/***************************************************************************
+	 * This method finds the f(x) of the x parameter passed in using the point
+	 * slope formula.
+	 * 
+	 * @param x int: The x value for which we want to find the f(x)
+	 * @param slope double: The slope variable for the equation
+	 * @param xRef int: The x value for the point to be referenced in the
+	 * equation.
+	 * @param yRef int: The y value for the point to be referenced in the
+	 * equation.
+	 * 
+	 * @return int The f(x) value
+	 **************************************************************************/
+	private int getYValue(final int x, final double slope, final int xRef,
+			final int yRef) {
 		int yVal;
 		double yIntercept;
 		
@@ -137,23 +207,38 @@ public class LineModeller {
 		return yVal;
 	}
 	
-	private int round(double d) {
-		double dAbs = Math.abs(d);
+	/***************************************************************************
+	 * Method to round values.
+	 * 
+	 * @param value double: The value to be rounded
+	 * @return int An integer that represents value rounded to the nearest int
+	 **************************************************************************/
+	private int round(final double value) {
+		double dAbs = Math.abs(value);
 		int i = (int) dAbs;
 		double result = dAbs - (double) i;
 		
-		if(result < 0.5){
-			return d < 0 ? -i : i;            
+		if (result < 0.5) {
+			return value < 0 ? -i : i;            
 			} else {
-				return d < 0 ? -(i+1) : i+1;          
-				}
+				return value < 0 ? - (i + 1) : i + 1;          
+			}
 	}
-	
-	public BufferedImage reset() throws IOException  {
-		canvas = ImageIO.read(new File(original));
-		return canvas;
+
+	/***************************************************************************
+	 * Resets the canvas to the original map image.
+	 **************************************************************************/
+	public void reset() {
+		try {
+			canvas = ImageIO.read(new File(original));
+		} catch (IOException e) {
+			System.out.println("It happened here lol. Who woulda thought. 0_0");
+		}
 	}
-	
+
+	/***************************************************************************
+	 * @return BufferedImage Getter for the canvas
+	 **************************************************************************/
 	public BufferedImage getCanvas() {
 		return canvas;
 	}

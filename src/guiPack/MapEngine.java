@@ -1,6 +1,5 @@
 package guiPack;
 
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -21,9 +20,6 @@ public class MapEngine {
 	
 	/** This is an unchanged copy of the original map to reset to. */
 	private final GVSUMap original;
-	
-	/** Instance variable to hold all the nodes in the graph. */
-    private List<MapNode> nodes;
     
     /** Instance variable to hold all the edges in the graph. */
     private  List<Edge> edges;
@@ -51,7 +47,6 @@ public class MapEngine {
      * @param graph GVSUMap: The map on which the algorithm is going to be run
      **************************************************************************/
     public MapEngine(final GVSUMap graph) {
-        this.nodes = new ArrayList<MapNode>(graph.getNodeList());
         this.edges = new ArrayList<Edge>(graph.getEdgeList());
 
         original = graph;
@@ -61,8 +56,7 @@ public class MapEngine {
      * This method runs Djikstras algorithm from the source node to all other 
      * nodes in the map loading the results into the predecessors HashMap.
      * 
-     * @param name String: This string is nodeInfo member of the source node
-     * desired
+     * @param source MapNode: The source node
      **************************************************************************/
     public void execute(final MapNode source) {
         settledNodes = new HashSet<MapNode>();
@@ -170,7 +164,7 @@ public class MapEngine {
      * @param node MapNode: The node to be checked
      * 
      * @return boolean: A boolean representing whether a node has been settled
-     **************************************************************************/ 
+     **************************************************************************/
     private boolean isSettled(final MapNode node) {
         return settledNodes.contains(node);
     }
@@ -222,7 +216,6 @@ public class MapEngine {
      * instance variable to null sets the node and edge lists to the originals
      **************************************************************************/
     public void reset() {
-    	this.nodes = original.getNodeList();
     	this.edges = original.getEdgeList();
     	settledNodes = null;
         unSettledNodes = null;

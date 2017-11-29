@@ -9,6 +9,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/*******************************************************************************
+ * This class creates the hard copy of the graph of GVSU Allendale.
+ * 
+ * @author Douglas Wallin
+ ******************************************************************************/
 public class GVSUMap {
 	
 	private List<MapNode> nodeList;

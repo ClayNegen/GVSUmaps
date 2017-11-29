@@ -44,12 +44,8 @@ public class EngineController {
 	 * the source node
 	 * @param destNodeInfo String: The nodeInfo member of the node desired for
 	 * the source node
-	 * 
-	 * @return BufferedImage: Returns a BufferedImage with directions drawn on
-	 * it to correspond to the shortest path between the source and destination
-	 * node
 	 **************************************************************************/
-	public BufferedImage getDirections(final String srcNodeInfo,
+	public void getDirections(final String srcNodeInfo,
 			final String destNodeInfo) {
 		MapNode srceNode = map.getNode(srcNodeInfo);
 		MapNode destNode = map.getNode(destNodeInfo);
@@ -58,8 +54,23 @@ public class EngineController {
 		LinkedList<MapNode> path = algorithm.getPath(destNode);
 		
 		drawPath(path);
+	}
+	
+	
+	//TODO Get rid of this
+	/***************************************************************************
+	 * test method. Will stay for now.
+	 **************************************************************************/
+	public void drawAllLines() {
+		List<Edge>	tempVar = map.getEdgeList();
+		LinkedList<MapNode> tempPath = new LinkedList<MapNode>();
 		
-		return getImage();
+		for (Edge e: tempVar) {
+			tempPath.add(e.getSource());
+			tempPath.add(e.getDestination());
+			drawPath(tempPath);
+			tempPath.clear();
+		}
 	}
 	
 	/***************************************************************************
@@ -85,9 +96,8 @@ public class EngineController {
 	 * Resets all engine components to be used once again.
 	 * 
 	 * @return BufferedImage: An original copy of the map without altered pixels
-	 * @throws IOException
 	 **************************************************************************/
-	public BufferedImage reset() throws IOException {
+	public BufferedImage reset() {
 		lineModel.reset();
 		algorithm.reset();
 		

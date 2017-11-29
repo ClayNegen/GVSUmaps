@@ -63,8 +63,9 @@ public class UserController {
 	
 	/***************************************************************************
 	 * This method attempts to load an User from the accounts.txt file via
-	 * the FileHandler. Returns one of two bools; the first is whether the user
-	 * was fully matched, the second is whether the username only was matched.
+	 * the FileHandler. Returns one of two booleans; the first is whether the
+	 * user was fully matched, the second is whether the username only was
+	 * matched.
 	 * 
 	 * @param name String: The username of the user desired to be loaded
 	 * @param pass String: The password
@@ -85,9 +86,9 @@ public class UserController {
 	
 	/***************************************************************************
 	 * This method returns an array of strings representing the users saved
-	 * classes
+	 * classes.
 	 * 
-	 * @return
+	 * @return String[]
 	 **************************************************************************/
 	public String[] getUserClassList() {
 		List<MapNode> classes = loadedUser.getClassList();

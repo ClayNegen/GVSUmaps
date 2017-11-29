@@ -37,7 +37,7 @@ import java.util.List;
 public class GUI extends JPanel implements ActionListener {
 
 	/** Controller to talk to the model. */
-	private EngineController directionsController;
+	public EngineController directionsController;
 
 	/** JPanel to represent a background to add all other components to. */
 	private JPanel background = new JPanel();
@@ -122,6 +122,8 @@ public class GUI extends JPanel implements ActionListener {
 	@SuppressWarnings("unused")
 	public static void main(final String[] args) throws IOException {
 		GUI gooy = new GUI();
+		//gooy.directionsController.drawAllLines();
+		//gooy.reDrawMap();
 	}
 
 	/***************************************************************************
@@ -134,7 +136,6 @@ public class GUI extends JPanel implements ActionListener {
 	public void actionPerformed(final ActionEvent event) {
 		try {
 			Object source = event.getSource();
-			System.out.println("Test1");
 
 			Tuple<String, String> output = null;
 
@@ -217,7 +218,6 @@ public class GUI extends JPanel implements ActionListener {
 					}
 				}
 			}
-			System.out.println("Test2");
 		} catch (Exception iAcceptMyFateHere) {
 		}
 	}

@@ -356,118 +356,159 @@ public class GVSUMap {
 		 * Add Nodes 
 		 * Class Room loactions
 		 */
-		
-		this.addNode(584, 334, "Mackinaw");
-		
-		this.addNode(550, 360, "Manitou");
-		
-		this.addNode(578, 390, "Fresh Food Dinning");
-		
-		this.addNode(547, 418, "Padnos");
-		
-		this.addNode(514, 419, "Loutit");
-		
-		this.addNode(511, 438, "Henry Hall");
-		
-		this.addNode(499, 553, "Student Services");
-		
-		this.addNode(507, 483, "Cook-Dewitt Center");
-		
-		this.addNode(501, 504, "Clocktower");
-		
-		this.addNode(500, 523, "Kirkoff");
-		
-		this.addNode(471, 515, "Library");
-		
-		this.addNode(521, 578, "Preforming Arts");
-		
-		this.addNode(612, 511, "Au Sable Hall");
-		
-		this.addNode(617, 546, "Lake Huron Hall");
-		
-		this.addNode(604, 571, "Seidman house");
-		
-		this.addNode(573, 578, "Lake Superior");
-		
-		this.addNode(584, 604, "Lake Michigan");
-		
-		this.addNode(612, 608, "Lake Ontario");
-		
 		this.addNode(699, 611, "Calder");
+
+		this.addNode(660, 598, 100);
+
+		this.addLane("100", "Calder");
+
+		this.addNode(660, 598, 101);
+
+		this.addLane(100, 101);
+
+		this.addNode(660, 598, 101);
+
+		this.addNode(641, 623, 101);
+
+		this.addLane(101, 102);
+
+		this.addNode(598, 623, 103);
+
+		this.addNode(599, 606, 104);
+
+		this.addNode(608, 603, "Lake Ontario");
+
+		this.addNode(584, 604, "Lake Michigan");
+
+		this.addLane(102, 103);
+
+		this.addLane(103, 104);
+
+		this.addLane("104", "Lake Michigan");
+
+		this.addLane("104", "Lake Ontario");
+
+		this.addNode(593, 589, 105);
+
+		this.addNode(585, 577, 106);
+
+		this.addNode(585, 591, 107);
+
+		this.addNode(565, 589, 108);
+
+		this.addNode(549, 583, 109);
+
+		this.addNode(547, 574, 110);
+
+		this.addLane(104, 105);
+
+		this.addLane(105, 106);
+
+		this.addLane(106, 107);
+
+		this.addLane(105, 107);
+
+		this.addLane(107, 108);
+
+		this.addLane(108, 109);
+
+		this.addLane(109, 110);
+
+		this.addNode(561, 574, "Lake Superior");
+
+		this.addLane(110, "Lake Superior");
+
+		this.addNode(586, 555, 111);
+
+		this.addLane(106, 111);
+
+		this.addNode(611, 554, 112);
+
+		this.addNode(624, 560, 113);
+
+		this.addNode(611, 527, 114);
+
+		this.addNode(586, 526, 115);
+
+		this.addNode(567, 552, 116);
+
+		this.addLane(111, 112);
+
+		this.addLane(111, 116);
+
+		this.addLane(111, 115);
+
+		this.addLane(112, 113);
+
+		this.addNode(625, 544, "Lake Huron");
+
+		this.addLane(113, "Lake Superior");
+
+		this.addLane(112, 114);
+
+		this.addLane(114, 115);
+
+		this.addNode(612, 511, "Au Sable Hall");
+
+		this.addLane(115, "Au Sable Hall");
+
+		this.addLane(110, 116);
+
+		this.addLane(115, 116);
+
+		this.addNode(587, 447, 117);
+
+		this.addLane(115, 117);
+
+		this.addNode(585, 456, 118);
+
+		this.addLane(117, 118);
+
+		this.addNode(566, 424, 119);
+
+		this.addLane(118, 119);
+
+		this.addNode(491, 450, "Student Services");
+
+		this.addNode(515, 450, 121);
+
+		this.addNode(537, 434, 120);
+
+		this.addLane(119, 120);
+
+		this.addLane(120, 121);
+
+		this.addLane(121, "Au Sable Hall");
+
+		this.addNode(560, 406, 122);
+
+		this.addNode(590, 395, 123);
+
+		this.addNode(589, 385, 124);
+
+		this.addNode(598, 373, 125);
+
+		this.addNode(598, 372, 126);
+
+		this.addLane(119, 122);
+
+		this.addLane(122, 123);
+
+		this.addLane(123, 124);
+
+		this.addLane(124, 126);
+
+		this.addLane(126, 125);
 		
+		this.addNode(584, 362, "Mackinaw");
 		
-		/**
-		 * Add Paths from calder to Mackinaw
-		 */
+		this.addLane(126, "Mackinaw");
 		
+		this.addNode(576, 385, "Fresh");
 		
-		this.addNode(658, 603, 84); 
+		this.addLane(124, "Fresh");
 		
-		this.addLane("84", "Calder");
-		
-		this.addLane("84", "Lake Ontario");
-		
-		this.addNode(587, 592, 85);
-		
-		this.addLane("Lake Ontario", "85");
-		
-		this.addLane("Lake Michigan", "85");
-		
-		this.addNode(587, 571, 86);
-		
-		this.addLane("Seidman house", "86");
-		
-		this.addLane("Lake Superior", "86");
-		
-		this.addNode(586, 557, 87);
-		
-		this.addLane(86, 87);
-		
-		this.addNode(625, 562, 88);
-		
-		this.addLane(87, 88);
-		
-		this.addNode(586, 528, 89);
-		
-		this.addLane(87, 89);
-		
-		//this.addLane("Zumberge", "89");
-		
-		this.addNode(587, 514, 90);
-		
-		this.addLane(89, 90);
-		
-		this.addLane("Au Sable Hall", "90");
-		
-		this.addNode(582, 454, 91);
-		
-		this.addNode(558, 398, 93);
-		
-		this.addLane(91, 92);
-		
-		this.addLane(91, 90);
-		
-		this.addLane("93", "Padnos");
-		
-		this.addLane("93", "Fresh Food Dinning");
-		
-		this.addNode(561, 417, 92);
-		
-		this.addNode(599, 385, 94);
-		
-		this.addNode(598, 361, 95);
-		
-		this.addNode(609, 361, "Holten Hooker");
-					
-		this.addLane(94, 95);
-		
-		this.addLane("95", "Holten Hooker");
-		
-		/**
-		**Connect south campus to north campus
-		**/
-		
-		this.addLane(72, 94);
+		this.addLane(125, 72); //should connect upper and lower campus
 		
 	}
 }

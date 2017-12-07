@@ -458,7 +458,7 @@ public class GVSUMap {
 
 		this.addNode(587, 447, 117);
 
-		this.addLane(115, 117);
+		
 
 		this.addNode(585, 456, 118);
 
@@ -507,6 +507,56 @@ public class GVSUMap {
 		this.addNode(576, 385, "Fresh");
 				
 		this.addLane(125, 72); //should connect upper and lower campus
+		
+		this.addNode(625, 341, 128);
+			
+		this.addNode(643, 341, 129);
+			
+		this.addNode(653, 371, 130);
+			
+		this.addNode(642, 376, 131);
+			
+		this.addNode(615, 378, 132);
+			
+		this.addNode(641, 384, "Ott LC");
+		
+		this.addNode(662, 370, "Johnson LC");
+		
+		this.addLane(130, "Johnson LC");
+		
+		this.addNode(524, 566, 133);
+		
+		this.addNode(525, 590, "Preforming Art Center");
+		
+		this.addNode(527, 566, 139);
+		
+		this.addLane(139, "Preforming Art Center");
+		
+		this.addLane(125,139);
+		
+		this.addNode(500, 528, "Kirkoff");
+		
+		this.addNode(511, 525, 134);
+		
+		this.addLane(134, "Kirkoff");
+		
+		this.addNode(533, 511, 135);
+		
+		this.addNode(520, 501, 136);
+		
+		this.addNode(497, 500, 137);
+		
+		this.addNode(497, 469, 138);
+		
+		this.addLane(138, 121);
+		
+		this.addNode(586, 510, 139);
+		
+		this.addLane(117, 139);
+		
+		this.addLane(115, 139);
+		
+		
 		
 	}
 }

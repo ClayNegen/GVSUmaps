@@ -1,3 +1,3 @@
-|Username|,louisS
-|Password|,hi1
-|ClassList|,William Kill Patrick LC,Edward J. Frey LC,Robert Kliener Commons
+|Username|,wallind
+|Password|,paco
+|ClassList|,Alumni House,Fresh

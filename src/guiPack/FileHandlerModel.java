@@ -103,6 +103,7 @@ public class FileHandlerModel {
 	    List<String> tokens;
 	    boolean foundUser = false;
 	    boolean matchedUsername = false;
+	    boolean done = false;
 	    
 	    while (scanner.hasNextLine()) {
 	    	line = scanner.nextLine();
@@ -120,9 +121,10 @@ public class FileHandlerModel {
 	    		}
 	    	}
 	    	
- 	    	if (tokens.get(0).equals("|ClassList|") && foundUser) {
+ 	    	if (tokens.get(0).equals("|ClassList|") && foundUser && !done) {
 	    		for (int i = 1; i < tokens.size(); i++) {
 	    			user.addClass(map.getNode(tokens.get(i)));
+	    			done = true;
 	    		}
 	    	}
 	    	
@@ -193,6 +195,61 @@ public class FileHandlerModel {
 	    src.close();
 	    dest.close();
 	}
+	
+	/***************************************************************************
+	 * Method to insert information into an users saved profile.
+	 * 
+	 * @param name String: The username of the user to have information added
+	 *
+	 * @throws IOException Exception
+	 **************************************************************************/
+	public void clearClassList(final String name) throws IOException {
+	    clearFile(tempFile);
+		Scanner scanner = new Scanner(new FileInputStream(accountsFile));
+	    String newLine = System.getProperty("line.separator");
+	    String line;
+	    boolean foundUser = false;
+	    boolean done = false;
+	    List<String> tokens;
+
+
+	    while (scanner.hasNextLine()) {
+	    	line = scanner.nextLine();
+
+	    	if (foundUser && !done) {
+	    		tokens = getTokens(line);
+	    		
+	    		if (tokens.get(0).equals("|ClassList|")) {
+	    			tokens = tokens.subList(0, 1);
+	    			done = true;
+	    			line = deTokenize(tokens) + ",";
+	    		} else {
+	    			line = deTokenize(tokens);
+	    		}
+	    	}	 
+	    	appendToFile(line, tempFile);
+	    	appendToFile(newLine, tempFile);
+
+	    	String searchKey = ("|Username|," + name);
+	        
+	        if (line.equals(searchKey)) {
+	            foundUser = true;
+	        }
+	    }
+
+	    FileInputStream fileInput = new FileInputStream(tempFile);
+	    FileOutputStream fileOutput = new FileOutputStream(accountsFile);
+	    FileChannel src = fileInput.getChannel();
+	    FileChannel dest = fileOutput.getChannel();
+	    dest.transferFrom(src, 0, src.size());
+	    
+	    scanner.close();
+	    fileOutput.close();
+	    fileInput.close();
+	    src.close();
+	    dest.close();
+	}
+	
 	
 	/***************************************************************************
 	 * This method resets the passed file to be empty. Should only be called

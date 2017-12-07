@@ -1,5 +1,6 @@
 package guiPack;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -99,5 +100,23 @@ public class UserController {
 		}
 		
 		return result;
+	}
+	
+	/***************************************************************************
+	 * This method will reset an user's saved class list.
+	 * 
+	 * @throws IOException Exception
+	 **************************************************************************/
+	public void resetClasses() throws IOException {
+		fileHandler.clearClassList(loadedUser.getUsername());
+	}
+	
+	/***************************************************************************
+	 * This method will reset the users file.
+	 * 
+	 * @throws IOException Exception
+	 **************************************************************************/
+	public void resetUsers() throws IOException {
+		fileHandler.clearFile(new File("src/accounts.txt"));
 	}
 }

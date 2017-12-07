@@ -3,6 +3,7 @@ package guiPack;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -15,6 +16,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -48,34 +50,42 @@ public class GUI extends JPanel implements ActionListener {
 	/** JLabel to hold the logo image. */
 	private JLabel gvLogo;
 
+	/** JComboBox for the user to add classes to their favorites. */
+	private JComboBox<String> addClasses;
+	
 	/** JButton to take the user to a submenu to choose a class to navigate 
 	 * to. */
-	private JButton classes = new JButton("Go to Class");;
-
-	/** JButton to take the user to a submenu to choose a food spot to navigate
-	 * to. */
-	private JButton foods = new JButton("Find Food");
+	private JButton classes = new JButton("All Classes");;
 
 	/** JButton to take the user to a a page of favorites for quick access. */
 	private JButton favorites = new JButton("Favorites");
-
-	/** JButton to take the user to a submenu to find bus stops. */
-	private JButton busStops = new JButton("Bus Stops");
 
 	/** JButton to take the user to a settings submenu. */
 	private JButton settings = new JButton("Settings");
 
 	/** JButton to allow to user to log in or create an account. */
 	private JButton loadUser = new JButton("Sign In/Create Account");
+	
+	/** JButton to reset the users saved classes. */
+	private JButton resetClasses = new JButton("Reset Saved Classes");
+	
+	/** JButton to reset the list of users for the application. */
+	private JButton resetUsers = new JButton("Reset Saved Users");
+	
+	/** JButton to add a class to the users saved classes. */
+	private JButton addClass = new JButton("Add Class");
 
 	/** JFrame to display the application. */
-	private JFrame frame;
-	
-	/** List of Strings that represents the users saved classes. */
-	private String[] loadedClassList;
+	private JFrame mainFrame;
 	
 	/** JFrame for the login menu. */
 	private JFrame loginFrame = new JFrame();
+	
+	/** JFrame for the login menu. */
+	private JFrame settingsFrame = new JFrame();
+	
+	/** List of Strings that represents the users saved classes. */
+	private String[] loadedClassList;
 
 	/** JButton to create an account. */
 	private JButton signUp = new JButton("Sign up");
@@ -84,7 +94,7 @@ public class GUI extends JPanel implements ActionListener {
 	private JButton signOn = new JButton("Sign On");
 	
 	/** Controller to be used in the login menu. */
-	private UserController controller = new UserController();
+	private UserController userController = new UserController();
 	
 	/** List of all buildings that can be navigated to. */
 	private String[] allLocations;
@@ -103,12 +113,13 @@ public class GUI extends JPanel implements ActionListener {
 		background.setLayout(new BorderLayout());
 		background.setBackground(Color.DARK_GRAY);
 
-		initFrame();
-		initLoginFrame();
 		getAllLocations();
 		
-		frame.setVisible(true);
-		loginFrame.setVisible(false);
+		initFrame();
+		initLoginFrame();
+		initSettingsFrame();
+	
+		mainFrame.setVisible(true);
 		
 		disableButtons();
 	}
@@ -122,8 +133,8 @@ public class GUI extends JPanel implements ActionListener {
 	@SuppressWarnings("unused")
 	public static void main(final String[] args) throws IOException {
 		GUI gooy = new GUI();
-		//gooy.directionsController.drawAllLines();
-		//gooy.reDrawMap();
+		gooy.directionsController.drawAllLines();
+		gooy.reDrawMap();
 	}
 
 	/***************************************************************************
@@ -140,8 +151,19 @@ public class GUI extends JPanel implements ActionListener {
 			Tuple<String, String> output = null;
 
 			if (source == classes) {
-				output = selectClasses();
+				output = selectClasses(allLocations);
+		
+				directionsController.reset();
 
+				directionsController.getDirections(output.getElement1(),
+						output.getElemnt2());
+
+				reDrawMap();
+			}
+			
+			if (source == favorites) {
+				output = selectClasses(userController.getUserClassList());
+				
 				directionsController.reset();
 
 				directionsController.getDirections(output.getElement1(),
@@ -152,7 +174,7 @@ public class GUI extends JPanel implements ActionListener {
 
 			if (source == loadUser) {
 				loginFrame.setVisible(true);
-				frame.setVisible(false);
+				mainFrame.setVisible(false);
 			}
 
 			if (source == signUp) {
@@ -163,7 +185,7 @@ public class GUI extends JPanel implements ActionListener {
 				while (true) {
 					name = JOptionPane.showInputDialog(loginFrame,
 							"Enter the desired username");
-					if (controller.loadUser(name, null, 1)) {
+					if (userController.loadUser(name, null, 1)) {
 						JOptionPane.showMessageDialog(loginFrame,
 								"Username is already taken");
 					}  else if (name != null) {
@@ -176,7 +198,7 @@ public class GUI extends JPanel implements ActionListener {
 									"Enter the desired password");
 						}
 
-						controller.newUser(name, pass);
+						userController.newUser(name, pass);
 
 						JOptionPane.showMessageDialog(loginFrame,
 								"Account for " + name + " has been created.");
@@ -196,7 +218,7 @@ public class GUI extends JPanel implements ActionListener {
 					pass = JOptionPane.showInputDialog(loginFrame,
 							"Enter your password");
 
-					if (!controller.loadUser(name, pass, 0)) {
+					if (!userController.loadUser(name, pass, 0)) {
 						JOptionPane.showMessageDialog(loginFrame,
 								"Either the username or password is inccorect");
 
@@ -205,18 +227,76 @@ public class GUI extends JPanel implements ActionListener {
 					}
 
 					if (!flag) {
-						controller.loadUser(name, pass, 0);
+						userController.loadUser(name, pass, 0);
 
 						JOptionPane.showMessageDialog(loginFrame,
 								"Succesful login " + name);
 						
 						loginFrame.setVisible(false);
-						frame.setVisible(true);
+						mainFrame.setVisible(true);
 						enableButtons();
 						
-						loadedClassList = controller.getUserClassList();
+						loadedClassList = userController.getUserClassList();
 					}
 				}
+			}
+			
+			if (source == settings) {
+				settingsFrame.setVisible(true);
+				mainFrame.setVisible(false);
+			}
+			
+			if (source == addClass) {
+				String tempClass = addClasses.getSelectedItem().toString();
+				boolean alreadyHas = false;
+				
+				for (String clss: loadedClassList) {
+					if (clss.equals(tempClass)) {
+						alreadyHas = true;
+					}
+				}
+				
+				if (!alreadyHas) {
+					userController.addClass(tempClass);
+					loadedClassList = userController.getUserClassList();
+					JOptionPane.showMessageDialog(loginFrame,
+							"Class Added: " + tempClass);
+					mainFrame.setVisible(true);
+					settingsFrame.setVisible(false);
+					
+				} else {
+					JOptionPane.showMessageDialog(loginFrame,
+							"You already have that class");
+				}
+				
+			}
+			
+			if (source == resetClasses) {
+				int confirm = JOptionPane.showOptionDialog(
+			             null,
+			             "Are you sure you want to reset your saved classes", 
+			             "Reset Confirmation", JOptionPane.YES_NO_OPTION, 
+			             JOptionPane.QUESTION_MESSAGE, null, null, null);
+			        if (confirm == 0) {
+			        	userController.resetClasses();
+						mainFrame.setVisible(true);
+						settingsFrame.setVisible(false);
+			        }
+			}
+			
+			if (source == resetUsers) {
+				int confirm = JOptionPane.showOptionDialog(
+			             null,
+			             "Are you sure you want to reset the user File (WARNING"
+			             + " THIS WILL ERASE ALL USERS)", 
+			             "Reset Confirmation", JOptionPane.YES_NO_OPTION, 
+			             JOptionPane.QUESTION_MESSAGE, null, null, null);
+			        if (confirm == 0) {
+			        	userController.resetUsers();
+						mainFrame.setVisible(true);
+						settingsFrame.setVisible(false);
+						disableButtons();
+			        }
 			}
 		} catch (Exception iAcceptMyFateHere) {
 		}
@@ -226,33 +306,36 @@ public class GUI extends JPanel implements ActionListener {
 	 * Creates a JOptionPane for the user to enter classes.
 	 * 
 	 * @return Tuple<String, String>
+	 * @param selections String[]: The choices to be provided
 	 **************************************************************************/
-	public Tuple<String, String> selectClasses() {
-		String[] sourceList = loadedClassList;
-        String[] destinationList = allLocations;
-
+	public Tuple<String, String> selectClasses(final String[] selections) {
         String source = (String) JOptionPane.showInputDialog(
-        		frame,
+        		mainFrame,
         		"Please Select an origin class\n"
         				+ "Press Ok when finished",
         				"Directions",
         				JOptionPane.PLAIN_MESSAGE,
         				null,
-        				sourceList,
+        				selections,
         				null);
 
         
-        String dest = (String) JOptionPane.showInputDialog(
-        		frame,
-        		"Please Select a destination class\n"
-        				+ "Press Ok when finished",
-        				"Directions",
-        				JOptionPane.PLAIN_MESSAGE,
-        				null,
-        				destinationList,
-        				null);
-        Tuple<String, String> result = new Tuple<String, String>(source, dest);
-        return result;
+        if (source != null) {
+        	String dest = (String) JOptionPane.showInputDialog(
+        			mainFrame,
+        			"Please Select a destination class\n"
+        					+ "Press Ok when finished",
+        					"Directions",
+        					JOptionPane.PLAIN_MESSAGE,
+        					null,
+        					selections,
+        					null);
+        	Tuple<String, String> result =
+        			new Tuple<String, String>(source, dest);
+        	return result;
+        } else {
+        	return null;
+        }
 	}
 
 	/***************************************************************************
@@ -260,18 +343,18 @@ public class GUI extends JPanel implements ActionListener {
 	 * frame, sets up bounds and other options, and adds necessary panels.
 	 **************************************************************************/
 	private void initFrame() {
-		frame = new JFrame("GVSU Maps");
+		mainFrame = new JFrame("GVSU Maps");
 
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setBounds(100, 100, 1050, 770);
-		frame.setResizable(false);
-		frame.setVisible(true);
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainFrame.setBounds(100, 100, 1050, 770);
+		mainFrame.setResizable(false);
+		mainFrame.setVisible(true);
 
 		JLabel westLabel = new JLabel(new ImageIcon(
 				directionsController.getImage()));
 		background.add(westLabel, BorderLayout.WEST);		
 		background.add(eastPanel, BorderLayout.EAST);
-		frame.add(background);		
+		mainFrame.add(background);		
 	}
 
 	/***************************************************************************
@@ -281,7 +364,7 @@ public class GUI extends JPanel implements ActionListener {
 	 * @throws IOException Exception
 	 **************************************************************************/
 	private void initBorderLayoutEast() throws IOException {
-		eastPanel.setLayout(new GridLayout(6, 1, 0, 3));
+		eastPanel.setLayout(new GridLayout(4, 1, 0, 3));
 		eastPanel.setBackground(Color.DARK_GRAY);
 
 		BufferedImage logo = ImageIO.read(new File("src/GVMaps.png"));
@@ -296,19 +379,19 @@ public class GUI extends JPanel implements ActionListener {
 		loadUser.setMaximumSize(new Dimension(180, 30));
 		settings.setMaximumSize(new Dimension(180, 30));
 
-		userSettingsBox.add(Box.createRigidArea(new Dimension(0, 30)));
+		userSettingsBox.add(Box.createRigidArea(new Dimension(0, 50)));
 		userSettingsBox.add(settings);
 		userSettingsBox.add(Box.createRigidArea(new Dimension(0, 5)));
 		userSettingsBox.add(loadUser);
 
 		classes.addActionListener(this);
+		favorites.addActionListener(this);
+		
 		settings.addActionListener(this);
 		loadUser.addActionListener(this);
 
 		eastPanel.add(gvLogo);
 		eastPanel.add(classes);
-		eastPanel.add(foods);
-		eastPanel.add(busStops);
 		eastPanel.add(favorites);
 		eastPanel.add(userSettingsBox);
 	}
@@ -319,10 +402,11 @@ public class GUI extends JPanel implements ActionListener {
 	 * @throws IOException Exception
 	 **************************************************************************/
 	private void initLoginFrame() throws IOException {
-		loginFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		loginFrame.setDefaultCloseOperation(
+				WindowConstants.DO_NOTHING_ON_CLOSE);
 		loginFrame.setBounds(500, 100, 400, 200);
 		loginFrame.setResizable(false);
-		loginFrame.setVisible(true);
+		loginFrame.setVisible(false);
 
 		signUp.addActionListener(this);
 		signOn.addActionListener(this);
@@ -336,8 +420,42 @@ public class GUI extends JPanel implements ActionListener {
 		
 		loginFrame.add(new JLabel(new ImageIcon(getScaledImage(
 				logo, 245, 126))));
-		frame.setVisible(false);
 	}
+	/***************************************************************************
+	 * This method initializes the settings subFrame(settingsFrame).
+	 * 
+	 * @throws IOException Exception
+	 **************************************************************************/
+	private void initSettingsFrame() throws IOException {
+		settingsFrame.setDefaultCloseOperation(
+				WindowConstants.DO_NOTHING_ON_CLOSE);
+		settingsFrame.setBounds(500, 100, 350, 240);
+		settingsFrame.setResizable(false);
+		settingsFrame.setVisible(false);
+		
+		addClasses = new JComboBox<>(allLocations);
+
+		addClass.addActionListener(this);
+		resetClasses.addActionListener(this);
+		resetUsers.addActionListener(this);
+		
+		addClass.setBounds(20, 30, 160, 30);
+		resetClasses.setBounds(20, 115, 160, 30);
+		resetUsers.setBounds(20, 150, 160, 30);
+		addClasses.setBounds(200, 30, 130, 20);
+
+		settingsFrame.add(addClass);
+		settingsFrame.add(addClasses);
+		settingsFrame.add(resetUsers);
+		settingsFrame.add(resetClasses);
+		
+		BufferedImage logo = ImageIO.read(new File("src/GVMaps.png"));
+		
+		
+		settingsFrame.add(new JLabel(new ImageIcon(getScaledImage(
+				logo, 245, 126))));
+	}
+
 
 	/***************************************************************************
 	 * This method reDraws the map to reflect or not reflect directions
@@ -345,7 +463,7 @@ public class GUI extends JPanel implements ActionListener {
 	 * @throws IOException 
 	 **************************************************************************/
 	public void reDrawMap() {
-		frame.getContentPane().removeAll();
+		mainFrame.getContentPane().removeAll();
 		
 		background.removeAll();
 
@@ -355,9 +473,9 @@ public class GUI extends JPanel implements ActionListener {
 		background.add(tempImage, BorderLayout.WEST);	
 		background.add(eastPanel, BorderLayout.EAST);
 
-		frame.getContentPane().add(background);
-		frame.revalidate();
-		frame.repaint();
+		mainFrame.getContentPane().add(background);
+		mainFrame.revalidate();
+		mainFrame.repaint();
 	}
 
 	/***************************************************************************
@@ -389,9 +507,9 @@ public class GUI extends JPanel implements ActionListener {
 	 **************************************************************************/
 	private void enableButtons() {
 		classes.setEnabled(true);
-		busStops.setEnabled(true);
-		foods.setEnabled(true);
 		favorites.setEnabled(true);
+		addClass.setEnabled(true);
+		settings.setEnabled(true);
 	}
 
 	/***************************************************************************
@@ -399,13 +517,13 @@ public class GUI extends JPanel implements ActionListener {
 	 **************************************************************************/
 	private void disableButtons() {
 		classes.setEnabled(false);
-		busStops.setEnabled(false);
-		foods.setEnabled(false);
 		favorites.setEnabled(false);
+		addClass.setEnabled(false);
+		settings.setEnabled(false);
 	}
 	
 	/***************************************************************************
-	 * 
+	 *TODO
 	 **************************************************************************/
 	private void getAllLocations() {
 		List<MapNode> allNodes = directionsController.getNodeList();
@@ -414,11 +532,10 @@ public class GUI extends JPanel implements ActionListener {
 		
 		for (int i = 0; i < allNodes.size(); i++) {
 			MapNode temp = allNodes.get(i);
-			if (temp.getNodeInfo().length() > 2) {
+			if (temp.getNodeInfo().length() > 3) {
 				count++;
 			}
 		}
-		
 		
 		allLocations = new String[count];
 		
@@ -426,17 +543,11 @@ public class GUI extends JPanel implements ActionListener {
 		
 		for (int i = 0; i < allNodes.size(); i++) {
 			MapNode temp = allNodes.get(i);
-			if (temp.getNodeInfo().length() > 2) {
+			if (temp.getNodeInfo().length() > 3) {
 				allLocations[count] = temp.getNodeInfo();
 				count++;
 			}
 		}
-		
-		
-		for (int i = 0; i < allLocations.length; i++) {
-			System.out.println(allLocations[i]);
-		}
 	}
-	
 }
 

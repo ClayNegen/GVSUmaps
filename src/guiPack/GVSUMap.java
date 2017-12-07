@@ -416,7 +416,7 @@ public class GVSUMap {
 
 		this.addNode(561, 574, "Lake Superior");
 
-		this.addLane(110, "Lake Superior");
+		this.addLane("110", "Lake Superior");
 
 		this.addNode(586, 555, 111);
 
@@ -442,7 +442,7 @@ public class GVSUMap {
 
 		this.addNode(625, 544, "Lake Huron");
 
-		this.addLane(113, "Lake Superior");
+		this.addLane("113", "Lake Superior");
 
 		this.addLane(112, 114);
 
@@ -450,7 +450,7 @@ public class GVSUMap {
 
 		this.addNode(612, 511, "Au Sable Hall");
 
-		this.addLane(115, "Au Sable Hall");
+		this.addLane("115", "Au Sable Hall");
 
 		this.addLane(110, 116);
 
@@ -478,7 +478,7 @@ public class GVSUMap {
 
 		this.addLane(120, 121);
 
-		this.addLane(121, "Au Sable Hall");
+		this.addLane("121", "Au Sable Hall");
 
 		this.addNode(560, 406, 122);
 
@@ -502,12 +502,10 @@ public class GVSUMap {
 		
 		this.addNode(584, 362, "Mackinaw");
 		
-		this.addLane(126, "Mackinaw");
+		this.addLane("126", "Mackinaw");
 		
 		this.addNode(576, 385, "Fresh");
-		
-		this.addLane(124, "Fresh");
-		
+				
 		this.addLane(125, 72); //should connect upper and lower campus
 		
 	}

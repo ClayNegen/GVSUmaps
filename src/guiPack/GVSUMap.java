@@ -522,7 +522,7 @@ public class GVSUMap {
 		
 		this.addNode(662, 370, "Johnson LC");
 		
-		this.addLane(130, "Johnson LC");
+		this.addLane("130", "Johnson LC");
 		
 		this.addNode(524, 566, 133);
 		
@@ -530,15 +530,15 @@ public class GVSUMap {
 		
 		this.addNode(527, 566, 139);
 		
-		this.addLane(139, "Preforming Art Center");
+		this.addLane("139", "Preforming Art Center");
 		
-		this.addLane(125,139);
+//		this.addLane(125,139);
 		
 		this.addNode(500, 528, "Kirkoff");
 		
 		this.addNode(511, 525, 134);
 		
-		this.addLane(134, "Kirkoff");
+		this.addLane("134", "Kirkoff");
 		
 		this.addNode(533, 511, 135);
 		

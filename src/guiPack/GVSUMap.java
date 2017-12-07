@@ -1,13 +1,7 @@
 package guiPack;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /*******************************************************************************
  * This class creates the hard copy of the graph of GVSU Allendale.
@@ -16,23 +10,43 @@ import java.util.Set;
  ******************************************************************************/
 public class GVSUMap {
 	
+	/** A list of all nodes in the graph. Used by the engine controller.*/
 	private List<MapNode> nodeList;
 	
+	/**	A list of all edges in the graph. Used by the engine controller. */
 	private List<Edge> edgeList;
 
-	public GVSUMap(){
+	/***************************************************************************
+	 * Constructor for the hard-coded graph(map) of the GVSU Allendale campus.
+	 * Creates an edge list and a node list
+	 **************************************************************************/
+	public GVSUMap() {
 		nodeList = new ArrayList<MapNode>();
 		edgeList = new ArrayList<Edge>();
 		this.initialize();
 	}
 
 
-	private void addNode(int x, int y, String info){
+	/***************************************************************************
+	 * Creates and adds a MapNode to this GVSUMap.
+	 * 
+	 * @param x int: The x coordinate of the node
+	 * @param y int: The y coordinate of the node
+	 * @param info String: A building name
+	 **************************************************************************/
+	private void addNode(final int x, final int y, final String info) {
 		MapNode temp = new MapNode(x, y, info);
 		nodeList.add(temp);
 	}
 	
-	private void addNode(int x, int y, int info) {
+	/***************************************************************************
+	 * Creates and adds a MapNode to this GVSUMap.
+	 * 
+	 * @param x int: The x coordinate of the node
+	 * @param y int: The y coordinate of the node
+	 * @param info int: A numeric identifier
+	 **************************************************************************/
+	private void addNode(final int x, final int y, final int info) {
 		MapNode temp = new MapNode(x, y, Integer.toString(info));
 		nodeList.add(temp);
 	}
@@ -41,14 +55,14 @@ public class GVSUMap {
 	/***************************************************************************
 	 * @return nodeList: List<MapNode>
 	 **************************************************************************/
-	public List<MapNode> getNodeList(){
+	public List<MapNode> getNodeList() {
 		return nodeList;
 	}
 	
 	/***************************************************************************
 	 * @return edgeList: List<Edge>
 	 **************************************************************************/
-	public List<Edge> getEdgeList(){
+	public List<Edge> getEdgeList() {
 		return edgeList;
 	}
 	
@@ -59,7 +73,7 @@ public class GVSUMap {
      * 
      * @return MapNode: The node desired
      **************************************************************************/
-	public MapNode getNode(int info) {
+	public MapNode getNode(final int info) {
 		for (MapNode node: nodeList) {
 			if (node.getNodeInfo().equals(Integer.toString(info))) {
 				return node;
@@ -87,7 +101,15 @@ public class GVSUMap {
 		return null;
 	}
 	
-	public void addLane(int srcNodeInfo, int destNodeInfo) {
+	/***************************************************************************
+	 * This method is used by initialize to create an edge in both directions
+	 * between two nodes. It looks up the nodes by the nodeInfo field. Looks
+	 * up by int instead of String
+	 * 
+	 * @param srcNodeInfo int: The nodeInfo of the source node.
+	 * @param destNodeInfo int: The nodeInfo of the destination node
+	 **************************************************************************/
+	public void addLane(final int srcNodeInfo, final int destNodeInfo) {
 		MapNode sourceNode = null;
 		MapNode destinationNode = null;
 		for (MapNode node : nodeList) {
@@ -113,7 +135,14 @@ public class GVSUMap {
 		}
 	}
 	
-	public void addLane(String srcNodeInfo, String destNodeInfo) {
+	/***************************************************************************
+	 * This method is used by initialize to create an edge in both directions
+	 * between two nodes. It looks up the nodes by the nodeInfo field.
+	 * 
+	 * @param srcNodeInfo String: The nodeInfo of the source node.
+	 * @param destNodeInfo String: The nodeInfo of the destination node
+	 **************************************************************************/
+	public void addLane(final String srcNodeInfo, final String destNodeInfo) {
 		MapNode sourceNode = null;
 		MapNode destinationNode = null;
 		for (MapNode node : nodeList) {
@@ -138,10 +167,11 @@ public class GVSUMap {
 		throw new RuntimeException();
 	}
 
+	/***************************************************************************
+	 * This method creates a hard-coded copy of the Allendale campus. Adds all
+	 * nodes and edges manually.
+	 **************************************************************************/
 	private void initialize() {
-		//TODO rewrite edges between path points and buildings
-		
-		
 		this.addNode(388, 62, 77);
 		this.addNode(390, 101, 78);
 		this.addNode(402, 123, 79);
@@ -224,7 +254,7 @@ public class GVSUMap {
 		this.addNode(594, 165, 26);
 		this.addNode(582, 187, 27);
 		this.addNode(591, 198, 28);
-		this.addNode(577, 190, 29);
+		this.addNode(577, 198, 29);
 		this.addNode(599, 199, 30);
 		this.addNode(607, 197, 31);
 		this.addNode(607, 154, 32);
@@ -257,22 +287,10 @@ public class GVSUMap {
 		this.addNode(665, 266, "William Packard LC");
 		this.addNode(653, 253, 60);
 		this.addNode(634, 236, 61);
-		this.addNode(620, 230, 62);
+		this.addNode(620, 236, 62);
 		this.addNode(617, 218, "Robert Kliener Commons");
 		this.addNode(602, 229, 64);
 		this.addNode(577, 231, 65);
-		this.addNode(592, 255, 66);
-		this.addNode(620, 254, "Greg Olsin Kisler LC");
-		this.addNode(583, 279, 68);
-		this.addNode(592, 279, 69);
-		this.addNode(587, 320, 70);
-		this.addNode(610, 320, 71);
-		this.addNode(598, 376, 72);
-		this.addNode(612, 378, 73);
-		this.addNode(614, 390, 74);
-		
-		//this.addNode(641, 376, 69);
-
 		this.addLane(19, 20);
 		this.addLane(19, 21);
 		this.addLane(19, 22);
@@ -334,229 +352,204 @@ public class GVSUMap {
 		
 		this.addLane(60, 57);
 		this.addLane(64, 62);
-		this.addLane(66, 62);
-		this.addLane(66, 65);
-
+		
+		this.addNode(583, 249, 66);
 		this.addLane(65, 64);
-		this.addLane("Robert Kliener Commons", "62");
-		this.addLane("Greg Olsin Kisler LC", "62");
+		this.addLane(66, 65);
+		this.addLane(66, 64);
+		this.addNode(573, 229, "Paul A Johnson Living Center");
+		this.addLane("65", "Paul A Johnson Living Center");
+		this.addLane(50, 51);
+		this.addLane("62", "Robert Kliener Commons");
+		this.addNode(593, 257, 68);
+		this.addNode(608, 248, 69);
 		this.addLane(68, 66);
-		this.addLane(69, 66);
-
-		this.addLane(69,68);
+		this.addLane(68, 69);
+		this.addLane(69, 62);
+		this.addNode(583, 259, 70);
 		this.addLane(70, 68);
+		this.addLane(70, 66);
+		this.addNode(575, 264, 71);
 		this.addLane(71, 70);
-		this.addLane(72, 70);
+		this.addNode(566, 261, 72);
+		this.addLane(72, 71);
+		this.addNode(566, 240, 73);
 		this.addLane(73, 72);
-
+		this.addNode(565, 221, 74);
 		this.addLane(74, 73);
-		this.addLane(75, 73);
-
-		/**
-		 * Add Nodes 
-		 * Class Room loactions
-		 */
-		this.addNode(699, 611, "Calder");
-
-		this.addNode(660, 598, 100);
-
-		this.addLane("100", "Calder");
-
-		this.addNode(660, 598, 101);
-
-		this.addLane(100, 101);
-
-		this.addNode(660, 598, 101);
-
-		this.addNode(641, 623, 101);
-
-		this.addLane(101, 102);
-
-		this.addNode(598, 623, 103);
-
-		this.addNode(599, 606, 104);
-
-		this.addNode(608, 603, "Lake Ontario");
-
-		this.addNode(584, 604, "Lake Michigan");
-
-		this.addLane(102, 103);
-
-		this.addLane(103, 104);
-
-		this.addLane("104", "Lake Michigan");
-
-		this.addLane("104", "Lake Ontario");
-
-		this.addNode(593, 589, 105);
-
-		this.addNode(585, 577, 106);
-
-		this.addNode(585, 591, 107);
-
-		this.addNode(565, 589, 108);
-
-		this.addNode(549, 583, 109);
-
-		this.addNode(547, 574, 110);
-
+		this.addNode(560, 203, 75);
+		this.addLane(75, 21);
+		this.addLane(75, 20);
+		this.addLane(75, 74);
+		this.addLane(9, 16);
+		this.addNode(534, 227, 76);
+		this.addLane(76, 16);
+		this.addLane(76, 74);
+		this.addNode(535, 244, 85);
+		this.addLane(85, 76);
+		this.addNode(533, 294, 86);
+		this.addLane(86, 85);
+		this.addNode(566, 290, 87);
+		this.addLane(87, 70);
+		this.addLane(87, 86);
+		this.addLane(29, 27);
+		this.addNode(450, 221, 88);
+		this.addLane(88, 14);
+		this.addNode(418, 229, 89);
+		this.addLane(89, 88);
+		this.addNode(410, 204, 90);
+		this.addLane(90, 89);
+		this.addNode(384, 192, 91);
+		this.addLane(91, 90);
+		this.addNode(377, 200, "Ravine Center");
+		this.addLane("91", "Ravine Center");
+		this.addNode(578, 295, 92);
+		this.addLane(92, 87);
+		this.addNode(592, 283, "James M Copeland Living Center");
+		this.addLane("92", "James M Copeland Living Center");
+		this.addNode(586, 309, 93);
+		this.addLane(93, 92);
+		this.addNode(590, 327, 94);
+		this.addLane(94, 93);
+		this.addNode(605, 320, "Kenneth W Robinson Living Center");
+		this.addLane("94", "Kenneth W Robinson Living Center");
+		this.addNode(599, 334, 95);
+		this.addLane(95, 94);
+		this.addNode(609, 338, 96);
+		this.addLane(96, 95);
+		this.addNode(598, 345, 97);
+		this.addLane(97, 96);
+		this.addLane(97, 95);
+		this.addNode(631, 342, 98);
+		this.addLane(98, 96);
+		this.addNode(644, 343, 99);
+		this.addLane(99, 98);
+		this.addNode(646, 357, 100);
+		this.addLane(100, 99);
+		this.addNode(651, 370, 101);
+		this.addLane(101, 100);
+		this.addNode(663, 369, "Maple Living Center");
+		this.addLane("101", "Maple Living Center");
+		this.addNode(649, 376, 102);
+		this.addLane(102, 101);
+		this.addNode(641, 377, 103);
+		this.addLane(103, 102);
+		this.addNode(640, 385, "Oak Living Center");
+		this.addLane("103", "Oak Living Center");
+		this.addNode(626, 375, 104);
+		this.addLane(104, 103);
+		this.addNode(614, 379, 105);
 		this.addLane(104, 105);
-
+		this.addNode(611, 389, "Pine Living Center");
+		this.addLane("105", "Pine Living Center");
+		this.addNode(599, 379, 106);
 		this.addLane(105, 106);
-
+		this.addLane(105, 97);
+		this.addNode(595, 386, 107);
 		this.addLane(106, 107);
-
-		this.addLane(105, 107);
-
-		this.addLane(107, 108);
-
-		this.addLane(108, 109);
-
-		this.addLane(109, 110);
-
-		this.addNode(561, 574, "Lake Superior");
-
-		this.addLane("110", "Lake Superior");
-
-		this.addNode(586, 555, 111);
-
-		this.addLane(106, 111);
-
-		this.addNode(611, 554, 112);
-
-		this.addNode(624, 560, 113);
-
-		this.addNode(611, 527, 114);
-
-		this.addNode(586, 526, 115);
-
-		this.addNode(567, 552, 116);
-
-		this.addLane(111, 112);
-
-		this.addLane(111, 116);
-
-		this.addLane(111, 115);
-
-		this.addLane(112, 113);
-
-		this.addNode(625, 544, "Lake Huron");
-
-		this.addLane("113", "Lake Superior");
-
-		this.addLane(112, 114);
-
-		this.addLane(114, 115);
-
-		this.addNode(612, 511, "Au Sable Hall");
-
-		this.addLane("115", "Au Sable Hall");
-
-		this.addLane(110, 116);
-
-		this.addLane(115, 116);
-
-		this.addNode(587, 447, 117);
-
-		
-
-		this.addNode(585, 456, 118);
-
-		this.addLane(117, 118);
-
-		this.addNode(566, 424, 119);
-
-		this.addLane(118, 119);
-
-		this.addNode(491, 450, "Student Services");
-
-		this.addNode(515, 450, 121);
-
-		this.addNode(537, 434, 120);
-
-		this.addLane(119, 120);
-
-		this.addLane(120, 121);
-
-		this.addLane("121", "Au Sable Hall");
-
-		this.addNode(560, 406, 122);
-
-		this.addNode(590, 395, 123);
-
-		this.addNode(589, 385, 124);
-
-		this.addNode(598, 373, 125);
-
-		this.addNode(598, 372, 126);
-
-		this.addLane(119, 122);
-
-		this.addLane(122, 123);
-
-		this.addLane(123, 124);
-
-		this.addLane(124, 126);
-
+		this.addNode(569, 385, "The Commons");
+		this.addLane("107", "The Commons");
+		this.addNode(590, 374, 108);
+		this.addLane(108, 106);
+		this.addNode(570, 371, 109);
+		this.addLane(109, 108);
+		this.addNode(573, 349, 110);
+		this.addLane(110, 109);
+		this.addNode(572, 343, "Mackinaw Hall");
+		this.addLane("110", "Mackinaw Hall");
+		this.addNode(560, 349, 111);
+		this.addLane(111, 110);
+		this.addLane(111, 109);
+		this.addNode(558, 370, 112);
+		this.addLane(112, 111);
+		this.addLane(112, 110);
+		this.addLane(112, 109);
+		this.addNode(528, 346, 113);
+		this.addLane(113, 111);
+		this.addLane(113, 86);
+		this.addNode(520, 365, 114);
+		this.addLane(113, 114);
+		this.addLane(114, 112);
+		this.addNode(497, 400, 115);
+		this.addLane(115, 114);
+		this.addNode(529, 401, "Seymour & Esther Padnos Hall of Science");
+		this.addLane("115", "Seymour & Esther Padnos Hall of Science");
+		this.addNode(559, 402, 116);
+		this.addLane(116, 112);
+		this.addNode(582, 402, 117);
+		this.addLane(117, 107);
+		this.addNode(497, 422, 118);
+		this.addLane(118, 115);
+		this.addNode(513, 419, "Loutit Lecture Hall");
+		this.addLane("Loutit Lecture Hall", "118");
+		this.addNode(471, 420, 119);
+		this.addLane(119, 115);
+		this.addLane(119, 118);
+		this.addNode(470, 448, 120);
+		this.addLane(120, 119);
+		this.addNode(485, 448, "Student Services Building");
+		this.addLane("120", "Student Services Building");
+		this.addNode(560, 414, 121);
+		this.addLane(121, 116);
+		this.addLane(121, 117);
+		this.addNode(557, 423, 122);
+		this.addLane(122, 121);
+		this.addNode(565, 423, 123);
+		this.addLane(123, 121);
+		this.addLane(123, 122);
+		this.addNode(583, 454, 124);
+		this.addLane(124, 123);
+		this.addNode(524, 441, 125);
+		this.addLane(125, 122);
+		this.addNode(513, 447, 126);
 		this.addLane(126, 125);
-		
-		this.addNode(584, 362, "Mackinaw");
-		
-		this.addLane("126", "Mackinaw");
-		
-		this.addNode(576, 385, "Fresh");
-				
-		this.addLane(125, 72); //should connect upper and lower campus
-		
-		this.addNode(625, 341, 128);
-			
-		this.addNode(643, 341, 129);
-			
-		this.addNode(653, 371, 130);
-			
-		this.addNode(642, 376, 131);
-			
-		this.addNode(615, 378, 132);
-			
-		this.addNode(641, 384, "Ott LC");
-		
-		this.addNode(662, 370, "Johnson LC");
-		
-		this.addLane("130", "Johnson LC");
-		
-		this.addNode(524, 566, 133);
-		
-		this.addNode(525, 590, "Preforming Art Center");
-		
-		this.addNode(527, 566, 139);
-		
-		this.addLane("139", "Preforming Art Center");
-		
-//		this.addLane(125,139);
-		
-		this.addNode(500, 528, "Kirkoff");
-		
-		this.addNode(511, 525, 134);
-		
-		this.addLane("134", "Kirkoff");
-		
-		this.addNode(533, 511, 135);
-		
-		this.addNode(520, 501, 136);
-		
-		this.addNode(497, 500, 137);
-		
-		this.addNode(497, 469, 138);
-		
-		this.addLane(138, 121);
-		
-		this.addNode(586, 510, 139);
-		
-		this.addLane(117, 139);
-		
-		this.addLane(115, 139);
-		
-		
-		
+		this.addNode(497, 449, 128);
+		this.addLane(128, 126);
+		this.addNode(496, 478, 127);
+		this.addLane(127, 128);
+		this.addLane("128", "Student Services Building");
+		this.addLane(127, 126);
+		this.addNode(482, 382, 129);
+		this.addLane(129, 115);
+		this.addNode(469, 373, 130);
+		this.addLane(130, 129);
+		this.addNode(450, 341, "Field House");
+		this.addLane("130", "Field House");
+		this.addNode(514, 288, 131);
+		this.addLane(131, 86);
+		this.addNode(467, 266, 132);
+		this.addLane(132, 131);
+		this.addNode(441, 257, 133);
+		this.addLane(133, 132);
+		this.addNode(418, 258, 134);
+		this.addLane(134, 133);
+		this.addLane(134, 89);
+		this.addNode(444, 446, 135);
+		this.addLane(135, 119);
+		this.addLane(135, 120);
+		this.addNode(469, 467, 136);
+		this.addLane(136, 135);
+		this.addNode(477, 486, 137);
+		this.addLane(137, 136);
+		this.addLane(137, 127);
+		this.addNode(497, 500, 138);
+		this.addLane(138, 127);
+		this.addNode(484, 499, 139);
+		this.addLane(139, 137);
+		this.addLane(139, 138);
+		this.addNode(450, 499, 140);
+		this.addLane(140, 137);
+		this.addLane(140, 139);
+		this.addNode(438, 498, 141);
+		this.addLane(141, 140);
+		this.addNode(433, 492, 142);
+		this.addLane(142, 141);
+		this.addNode(422, 490, 143);
+		this.addLane(143, 142);
+		this.addNode(429, 462, 144);
+		this.addLane(144, 143);
+		this.addLane(144, 135);
+		this.addNode(506, 481, "Cook-DeWitt Center");
+		this.addLane("127", "Cook-DeWitt Center");
 	}
 }

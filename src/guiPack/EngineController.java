@@ -1,7 +1,6 @@
 package guiPack;
 
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -56,10 +55,8 @@ public class EngineController {
 		drawPath(path);
 	}
 	
-	
-	//TODO Get rid of this
 	/***************************************************************************
-	 * test method. Will stay for now.
+	 * Method to test completeness of hardcoded map.
 	 **************************************************************************/
 	public void drawAllLines() {
 		List<Edge>	tempVar = map.getEdgeList();
@@ -79,7 +76,7 @@ public class EngineController {
 	 * 
 	 * @param path LinkedList<MapNode>: A path from node to node (the solution)
 	 **************************************************************************/
-	private void drawPath(LinkedList<MapNode> path) {
+	private void drawPath(final LinkedList<MapNode> path) {
 		for (int i = 0; i < path.size() - 1; i++) {
 			lineModel.drawDiagonal(path.get(i), path.get(i + 1));
 		}

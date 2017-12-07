@@ -197,7 +197,9 @@ public class FileHandlerModel {
 	}
 	
 	/***************************************************************************
-	 * Method to insert information into an users saved profile.
+	 * Method to reset an users class list. Uses a similar methodology to the
+	 * writeMidFile method. But instead of adding content it deletes all saved
+	 * classes
 	 * 
 	 * @param name String: The username of the user to have information added
 	 *

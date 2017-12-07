@@ -1,12 +1,5 @@
 package guiPack;
 
-import java.awt.List;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.HashSet;
-import java.util.LinkedList;
-
 /*******************************************************************************
  * A MapNode based on a node in graph theory. A MapNode can be a point along the
  * path or a building depending on how nodeInfo is assigned.
@@ -33,13 +26,13 @@ public class MapNode {
 	 * Constructs a MapNode taking the x and y coordinates as parameters. Will
 	 * automatically build the String nodeId using this information
 	 * 
-	 * @param x int: The x coordinate of the node
-	 * @param y int: The y coordinate of the node
+	 * @param xCoordx int: The x coordinate of the node
+	 * @param yCoord int: The y coordinate of the node
 	 **************************************************************************/
-	public MapNode(final int x, final  int y) {
-		this.x = x;
-		this.y = y;
-		nodeId = Integer.toString(x) + "," + Integer.toString(y);
+	public MapNode(final int xCoordx, final  int yCoord) {
+		this.x = xCoordx;
+		this.y = yCoord;
+		nodeId = Integer.toString(xCoordx) + "," + Integer.toString(yCoord);
 		nodeInfo = null;
 	}
 
@@ -48,15 +41,15 @@ public class MapNode {
 	 * building or important point. Requires nodeInfo (usually the building
 	 * name or a short description, i.e. "Police HQ").
 	 * 
-	 * @param x int: The x coordinate of the node
-	 * @param y int: The y coordinate of the node
-	 * @param nodeInfo String: Short describing information about the node
+	 * @param xCoord int: The x coordinate of the node
+	 * @param yCoord int: The y coordinate of the node
+	 * @param nodeInf String: Short describing information about the node
 	 **************************************************************************/
-	public MapNode(final int x, final int y, final String nodeInfo) {
-		this.x = x;
-		this.y = y;
-		nodeId = Integer.toString(x) + "," + Integer.toString(y);
-		this.nodeInfo = nodeInfo;
+	public MapNode(final int xCoord, final int yCoord, final String nodeInf) {
+		this.x = xCoord;
+		this.y = yCoord;
+		nodeId = Integer.toString(xCoord) + "," + Integer.toString(yCoord);
+		this.nodeInfo = nodeInf;
 	}
 
 	/***************************************************************************
@@ -81,10 +74,10 @@ public class MapNode {
 	}
 
 	/***************************************************************************
-	 * @param x int
+	 * @param xCoord int
 	 **************************************************************************/
-	public void setX(final int x) {
-		this.x = x;
+	public void setX(final int xCoord) {
+		this.x = xCoord;
 	}
 
 	/***************************************************************************
@@ -95,10 +88,10 @@ public class MapNode {
 	}
 
 	/***************************************************************************
-	 * @param y int
+	 * @param yCoord int
 	 **************************************************************************/
-	public void setY(final int y) {
-		this.y = y;
+	public void setY(final int yCoord) {
+		this.y = yCoord;
 	}
 
 	@Override

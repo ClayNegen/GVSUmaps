@@ -25,29 +25,28 @@ public class Edge {
 	 * A constructor for an Edge that takes a node the edge will originate from
 	 * and a node the edge will end at.
 	 * 
-	 * @param source MapNode: The origin MapNode
-	 * @param destination MapNode: The destination MapNode
+	 * @param src MapNode: The origin MapNode
+	 * @param dest MapNode: The destination MapNode
 	 **************************************************************************/
-	public Edge(final MapNode source, final MapNode destination) {
-		this.source = source;
-		this.destination = destination;
-		this.edgeWeight = getDistance(source, destination);
-		id = source.getNodeId() + " " + destination.getNodeId();
+	public Edge(final MapNode src, final MapNode dest) {
+		this.source = src;
+		this.destination = dest;
+		this.edgeWeight = getDistance(src, dest);
+		id = src.getNodeId() + " " + dest.getNodeId();
 	}
 	
 	/***************************************************************************
 	 * Takes two nodes and calculates and returns the distance between them
 	 * using the distance formula.
 	 * 
-	 * @param source MapNode: The origin node
-	 * @param destination MapNode: The destination node
+	 * @param src MapNode: The origin node
+	 * @param dest MapNode: The destination node
 	 * @return double: The edge weight
 	 **************************************************************************/
-	private double getDistance(final MapNode source,
-			final MapNode destination) {
-		double distance = Math.sqrt(Math.pow((source.getX()
-				- destination.getX()), 2) + Math.pow((source.getY()
-				- destination.getY()), 2));
+	private double getDistance(final MapNode src, final MapNode dest) {
+		double distance = Math.sqrt(Math.pow((src.getX()
+				- dest.getX()), 2) + Math.pow((src.getY()
+				- dest.getY()), 2));
 		return distance;
 	}
 

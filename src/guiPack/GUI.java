@@ -133,8 +133,8 @@ public class GUI extends JPanel implements ActionListener {
 	@SuppressWarnings("unused")
 	public static void main(final String[] args) throws IOException {
 		GUI gooy = new GUI();
-		gooy.directionsController.drawAllLines();
-		gooy.reDrawMap();
+		//gooy.directionsController.drawAllLines();
+		//gooy.reDrawMap();
 	}
 
 	/***************************************************************************

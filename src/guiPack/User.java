@@ -51,4 +51,11 @@ public class User {
 	public String getUsername() {
 		return username;
 	}
+	
+	/***************************************************************************
+	 * Empties the user's class list.
+	 **************************************************************************/
+	public void clearClassList() {
+		classList.clear();
+	}
 }

@@ -109,6 +109,7 @@ public class UserController {
 	 **************************************************************************/
 	public void resetClasses() throws IOException {
 		fileHandler.clearClassList(loadedUser.getUsername());
+		loadedUser.clearClassList();
 	}
 	
 	/***************************************************************************

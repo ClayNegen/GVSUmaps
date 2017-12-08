@@ -74,7 +74,8 @@ public class EngineController {
 	 * The getDirections method uses this to change pixels on the BufferedImage.
 	 * It does most of the interaction with the LineModeller component
 	 * 
-	 * @param path LinkedList<MapNode>: A path from node to node (the solution)
+	 * path:  Linked List of MapNode, a path from node to node (the solution)
+	 * @param path: a path from node to node
 	 **************************************************************************/
 	private void drawPath(final LinkedList<MapNode> path) {
 		for (int i = 0; i < path.size() - 1; i++) {
@@ -102,7 +103,8 @@ public class EngineController {
 	}
 	
 	/***************************************************************************
-	 * @return List<MapNode>: A list of all nodes in the GVSU map
+	 * List of MapNode: A list of all nodes in the GVSU map
+	 * @return List: List of MapNode
 	 **************************************************************************/
 	public List<MapNode> getNodeList() {
 		return map.getNodeList();
